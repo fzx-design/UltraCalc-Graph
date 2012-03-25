@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E41ED90E151F6DCC00F4D87F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41ED90D151F6DCC00F4D87F /* UIKit.framework */; };
+		E41ED910151F6DCC00F4D87F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41ED90F151F6DCC00F4D87F /* Foundation.framework */; };
+		E41ED912151F6DCC00F4D87F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41ED911151F6DCC00F4D87F /* CoreGraphics.framework */; };
+		E41ED918151F6DCC00F4D87F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E41ED916151F6DCC00F4D87F /* InfoPlist.strings */; };
+		E41ED91A151F6DCC00F4D87F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED919151F6DCC00F4D87F /* main.m */; };
+		E41ED91E151F6DCC00F4D87F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED91D151F6DCC00F4D87F /* AppDelegate.m */; };
+		E41ED921151F6DCC00F4D87F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E41ED91F151F6DCC00F4D87F /* MainStoryboard.storyboard */; };
+		E41ED924151F6DCC00F4D87F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED923151F6DCC00F4D87F /* ViewController.m */; };
+		E41ED92C151F6DCD00F4D87F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41ED92B151F6DCD00F4D87F /* SenTestingKit.framework */; };
+		E41ED92D151F6DCD00F4D87F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41ED90D151F6DCC00F4D87F /* UIKit.framework */; };
+		E41ED92E151F6DCD00F4D87F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41ED90F151F6DCC00F4D87F /* Foundation.framework */; };
+		E41ED936151F6DCD00F4D87F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E41ED934151F6DCD00F4D87F /* InfoPlist.strings */; };
+		E41ED939151F6DCD00F4D87F /* UltraCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED938151F6DCD00F4D87F /* UltraCalcTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E41ED92F151F6DCD00F4D87F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E41ED900151F6DCC00F4D87F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E41ED908151F6DCC00F4D87F;
+			remoteInfo = UltraCalc;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E41ED909151F6DCC00F4D87F /* UltraCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltraCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E41ED90D151F6DCC00F4D87F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E41ED90F151F6DCC00F4D87F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E41ED911151F6DCC00F4D87F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E41ED915151F6DCC00F4D87F /* UltraCalc-Info.plist */ = {isa = PBXFileReference; path = "UltraCalc-Info.plist"; sourceTree = "<group>"; };
+		E41ED917151F6DCC00F4D87F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E41ED919151F6DCC00F4D87F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E41ED91B151F6DCC00F4D87F /* UltraCalc-Prefix.pch */ = {isa = PBXFileReference; path = "UltraCalc-Prefix.pch"; sourceTree = "<group>"; };
+		E41ED91C151F6DCC00F4D87F /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		E41ED91D151F6DCC00F4D87F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E41ED920151F6DCC00F4D87F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		E41ED922151F6DCC00F4D87F /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		E41ED923151F6DCC00F4D87F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E41ED92A151F6DCD00F4D87F /* UltraCalcTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraCalcTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E41ED92B151F6DCD00F4D87F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		E41ED933151F6DCD00F4D87F /* UltraCalcTests-Info.plist */ = {isa = PBXFileReference; path = "UltraCalcTests-Info.plist"; sourceTree = "<group>"; };
+		E41ED935151F6DCD00F4D87F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E41ED937151F6DCD00F4D87F /* UltraCalcTests.h */ = {isa = PBXFileReference; path = UltraCalcTests.h; sourceTree = "<group>"; };
+		E41ED938151F6DCD00F4D87F /* UltraCalcTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UltraCalcTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E41ED906151F6DCC00F4D87F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E41ED90E151F6DCC00F4D87F /* UIKit.framework in Frameworks */,
+				E41ED910151F6DCC00F4D87F /* Foundation.framework in Frameworks */,
+				E41ED912151F6DCC00F4D87F /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E41ED926151F6DCD00F4D87F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E41ED92C151F6DCD00F4D87F /* SenTestingKit.framework in Frameworks */,
+				E41ED92D151F6DCD00F4D87F /* UIKit.framework in Frameworks */,
+				E41ED92E151F6DCD00F4D87F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E41ED8FE151F6DCC00F4D87F = {
+			isa = PBXGroup;
+			children = (
+				E41ED913151F6DCC00F4D87F /* UltraCalc */,
+				E41ED931151F6DCD00F4D87F /* UltraCalcTests */,
+				E41ED90C151F6DCC00F4D87F /* Frameworks */,
+				E41ED90A151F6DCC00F4D87F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E41ED90A151F6DCC00F4D87F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E41ED909151F6DCC00F4D87F /* UltraCalc.app */,
+				E41ED92A151F6DCD00F4D87F /* UltraCalcTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E41ED90C151F6DCC00F4D87F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E41ED90D151F6DCC00F4D87F /* UIKit.framework */,
+				E41ED90F151F6DCC00F4D87F /* Foundation.framework */,
+				E41ED911151F6DCC00F4D87F /* CoreGraphics.framework */,
+				E41ED92B151F6DCD00F4D87F /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E41ED913151F6DCC00F4D87F /* UltraCalc */ = {
+			isa = PBXGroup;
+			children = (
+				E41ED91C151F6DCC00F4D87F /* AppDelegate.h */,
+				E41ED91D151F6DCC00F4D87F /* AppDelegate.m */,
+				E41ED91F151F6DCC00F4D87F /* MainStoryboard.storyboard */,
+				E41ED922151F6DCC00F4D87F /* ViewController.h */,
+				E41ED923151F6DCC00F4D87F /* ViewController.m */,
+				E41ED914151F6DCC00F4D87F /* Supporting Files */,
+			);
+			path = UltraCalc;
+			sourceTree = "<group>";
+		};
+		E41ED914151F6DCC00F4D87F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E41ED915151F6DCC00F4D87F /* UltraCalc-Info.plist */,
+				E41ED916151F6DCC00F4D87F /* InfoPlist.strings */,
+				E41ED919151F6DCC00F4D87F /* main.m */,
+				E41ED91B151F6DCC00F4D87F /* UltraCalc-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E41ED931151F6DCD00F4D87F /* UltraCalcTests */ = {
+			isa = PBXGroup;
+			children = (
+				E41ED937151F6DCD00F4D87F /* UltraCalcTests.h */,
+				E41ED938151F6DCD00F4D87F /* UltraCalcTests.m */,
+				E41ED932151F6DCD00F4D87F /* Supporting Files */,
+			);
+			path = UltraCalcTests;
+			sourceTree = "<group>";
+		};
+		E41ED932151F6DCD00F4D87F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E41ED933151F6DCD00F4D87F /* UltraCalcTests-Info.plist */,
+				E41ED934151F6DCD00F4D87F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E41ED908151F6DCC00F4D87F /* UltraCalc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E41ED93C151F6DCD00F4D87F /* Build configuration list for PBXNativeTarget "UltraCalc" */;
+			buildPhases = (
+				E41ED905151F6DCC00F4D87F /* Sources */,
+				E41ED906151F6DCC00F4D87F /* Frameworks */,
+				E41ED907151F6DCC00F4D87F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UltraCalc;
+			productName = UltraCalc;
+			productReference = E41ED909151F6DCC00F4D87F /* UltraCalc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E41ED929151F6DCD00F4D87F /* UltraCalcTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E41ED93F151F6DCD00F4D87F /* Build configuration list for PBXNativeTarget "UltraCalcTests" */;
+			buildPhases = (
+				E41ED925151F6DCD00F4D87F /* Sources */,
+				E41ED926151F6DCD00F4D87F /* Frameworks */,
+				E41ED927151F6DCD00F4D87F /* Resources */,
+				E41ED928151F6DCD00F4D87F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E41ED930151F6DCD00F4D87F /* PBXTargetDependency */,
+			);
+			name = UltraCalcTests;
+			productName = UltraCalcTests;
+			productReference = E41ED92A151F6DCD00F4D87F /* UltraCalcTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E41ED900151F6DCC00F4D87F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = E41ED903151F6DCC00F4D87F /* Build configuration list for PBXProject "UltraCalc" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E41ED8FE151F6DCC00F4D87F;
+			productRefGroup = E41ED90A151F6DCC00F4D87F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E41ED908151F6DCC00F4D87F /* UltraCalc */,
+				E41ED929151F6DCD00F4D87F /* UltraCalcTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E41ED907151F6DCC00F4D87F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E41ED918151F6DCC00F4D87F /* InfoPlist.strings in Resources */,
+				E41ED921151F6DCC00F4D87F /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E41ED927151F6DCD00F4D87F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E41ED936151F6DCD00F4D87F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E41ED928151F6DCD00F4D87F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E41ED905151F6DCC00F4D87F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E41ED91A151F6DCC00F4D87F /* main.m in Sources */,
+				E41ED91E151F6DCC00F4D87F /* AppDelegate.m in Sources */,
+				E41ED924151F6DCC00F4D87F /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E41ED925151F6DCD00F4D87F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E41ED939151F6DCD00F4D87F /* UltraCalcTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E41ED930151F6DCD00F4D87F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E41ED908151F6DCC00F4D87F /* UltraCalc */;
+			targetProxy = E41ED92F151F6DCD00F4D87F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E41ED916151F6DCC00F4D87F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E41ED917151F6DCC00F4D87F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E41ED91F151F6DCC00F4D87F /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E41ED920151F6DCC00F4D87F /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		E41ED934151F6DCD00F4D87F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E41ED935151F6DCD00F4D87F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E41ED93A151F6DCD00F4D87F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		E41ED93B151F6DCD00F4D87F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E41ED93D151F6DCD00F4D87F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UltraCalc/UltraCalc-Prefix.pch";
+				INFOPLIST_FILE = "UltraCalc/UltraCalc-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E41ED93E151F6DCD00F4D87F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UltraCalc/UltraCalc-Prefix.pch";
+				INFOPLIST_FILE = "UltraCalc/UltraCalc-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E41ED940151F6DCD00F4D87F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UltraCalc.app/UltraCalc";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UltraCalc/UltraCalc-Prefix.pch";
+				INFOPLIST_FILE = "UltraCalcTests/UltraCalcTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		E41ED941151F6DCD00F4D87F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UltraCalc.app/UltraCalc";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UltraCalc/UltraCalc-Prefix.pch";
+				INFOPLIST_FILE = "UltraCalcTests/UltraCalcTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E41ED903151F6DCC00F4D87F /* Build configuration list for PBXProject "UltraCalc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E41ED93A151F6DCD00F4D87F /* Debug */,
+				E41ED93B151F6DCD00F4D87F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E41ED93C151F6DCD00F4D87F /* Build configuration list for PBXNativeTarget "UltraCalc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E41ED93D151F6DCD00F4D87F /* Debug */,
+				E41ED93E151F6DCD00F4D87F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E41ED93F151F6DCD00F4D87F /* Build configuration list for PBXNativeTarget "UltraCalcTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E41ED940151F6DCD00F4D87F /* Debug */,
+				E41ED941151F6DCD00F4D87F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E41ED900151F6DCC00F4D87F /* Project object */;
+}
