@@ -7,7 +7,49 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MultipleButtonDataSource.h"
+#import "MultipleButtonViewController.h"
 
-@interface ViewController : UIViewController
+@class DDMathEvaluator;
+
+@interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource>
+{
+    DDMathEvaluator *evaluator;
+    __weak IBOutlet UIImageView *backgroundImageView;
+    __weak IBOutlet UIView *leftView;
+    __weak IBOutlet UIView *rightView;
+    
+    __weak IBOutlet UIView *logView;
+    MultipleButtonViewController *logMultipleButton;
+    
+    __weak IBOutlet UIView *sqrtView;
+    MultipleButtonViewController *sqrtMultipleButton;
+    
+    __weak IBOutlet UIView *sinView;
+    MultipleButtonViewController *sinMultipleButton;
+    
+    __weak IBOutlet UIView *arcsinView;
+    MultipleButtonViewController *arcsinMultipleButton;
+    
+    __weak IBOutlet UIView *sinhView;
+    MultipleButtonViewController *sinhMultipleButton;
+    
+    __weak IBOutlet UIView *xyView;
+    MultipleButtonViewController *xyMultipleButton;
+    
+    __weak IBOutlet UILabel *inputLabel;
+    
+    __weak IBOutlet UITableView *answerTableView;
+    
+    
+}
+
+-(IBAction)digitPressed:(id)sender;
+-(IBAction)delPressed:(id)sender;
+-(IBAction)allClearPressed:(id)sender;
+-(IBAction)operatorPressed:(id)sender;
+-(IBAction)positiveMinusPressed:(id)sender;
+-(IBAction)dotPressed:(id)sender;
+-(IBAction)goPressed:(id)sender;
 
 @end
