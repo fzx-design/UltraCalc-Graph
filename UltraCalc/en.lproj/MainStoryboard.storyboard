@@ -101,6 +101,13 @@
                                         <rect key="frame" x="5" y="10" width="1009" height="734"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WqZ-Hy-zRl" userLabel="anwerlabel">
+                                        <rect key="frame" x="46" y="123" width="248" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <color key="textColor" red="0.34592425310000002" green="0.91290625209999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" id="faM-AZ-DoD">
                                         <rect key="frame" x="319" y="71" width="220" height="645"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -533,21 +540,18 @@
                                             <action selector="digitPressed:" destination="2" eventType="touchUpInside" id="jez-aR-nWJ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="LBO-TC-yTy">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="LBO-TC-yTy" userLabel="inputlabel">
                                         <rect key="frame" x="44" y="63" width="248" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                         <color key="textColor" red="0.34592425312917452" green="0.91290625213789778" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WqZ-Hy-zRl">
-                                        <rect key="frame" x="46" y="123" width="248" height="38"/>
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" image="button_selected_bg.png" id="vos-mZ-xcj" userLabel="answerEditBtnPressedIndicator">
+                                        <rect key="frame" x="354" y="27" width="49" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                        <color key="textColor" red="0.34592425310000002" green="0.91290625209999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SlV-DH-KfY">
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SlV-DH-KfY" userLabel="edit answer btn">
                                         <rect key="frame" x="357" y="33" width="43" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -574,6 +578,7 @@
                         <outlet property="answerTableView" destination="faM-AZ-DoD" id="n7z-x8-ipZ"/>
                         <outlet property="arcsinView" destination="0Tw-Pm-bQR" id="wZO-nA-xIJ"/>
                         <outlet property="backgroundImageView" destination="yrY-Ci-Ht6" id="inC-Zp-Sid"/>
+                        <outlet property="editAnswerPressedIndicator" destination="vos-mZ-xcj" id="MSf-0m-3zc"/>
                         <outlet property="editAnswerTableBtn" destination="SlV-DH-KfY" id="3sm-9Y-X6f"/>
                         <outlet property="inputLabel" destination="LBO-TC-yTy" id="sZN-I9-62w"/>
                         <outlet property="leftView" destination="LJo-qm-ooJ" id="B5N-wC-OtV"/>
@@ -594,6 +599,7 @@
         <image name="button_drawer.png" width="110" height="188"/>
         <image name="button_edit.png" width="22" height="16"/>
         <image name="button_hover.png" width="66" height="58"/>
+        <image name="button_selected_bg.png" width="40" height="42"/>
         <image name="button_shownote.png" width="33" height="33"/>
         <image name="button_sin.png" width="23" height="15"/>
         <image name="button_tan.png" width="27" height="14"/>
@@ -629,6 +635,7 @@
                 <relationship kind="outlet" name="answerTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="arcsinView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="editAnswerPressedIndicator" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="editAnswerTableBtn" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="inputLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="leftView" candidateClass="UIView"/>

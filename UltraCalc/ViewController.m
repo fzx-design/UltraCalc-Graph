@@ -265,6 +265,7 @@
     answerTableView = nil;
     editAnswerTableBtn = nil;
     resultLabel = nil;
+    editAnswerPressedIndicator = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -541,8 +542,12 @@
 
 -(IBAction)editAnswerTable:(id)sender
 {
-    [answerTableView setEditing:!answerTableView.editing animated:YES];
-    
+    BOOL isEditing = answerTableView.editing;
+    [answerTableView setEditing:!isEditing animated:YES];
+    float expectAlpha = isEditing?0:1;
+    [UIView animateWithDuration:0.1f animations:^{
+        editAnswerPressedIndicator.alpha = expectAlpha;
+    }];
 }
 
 

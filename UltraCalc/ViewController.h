@@ -45,6 +45,7 @@
     __weak IBOutlet UITableView *answerTableView;
     
     __weak IBOutlet UIButton *editAnswerTableBtn;
+    __weak IBOutlet UIImageView *editAnswerPressedIndicator;
     
 }
 
