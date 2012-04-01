@@ -39,8 +39,12 @@
     
     __weak IBOutlet UILabel *inputLabel;
     
+    __weak IBOutlet UILabel *resultLabel;
+    
+    
     __weak IBOutlet UITableView *answerTableView;
     
+    __weak IBOutlet UIButton *editAnswerTableBtn;
     
 }
 
@@ -52,4 +56,5 @@
 -(IBAction)dotPressed:(id)sender;
 -(IBAction)goPressed:(id)sender;
 
+-(IBAction)editAnswerTable:(id)sender;
 @end

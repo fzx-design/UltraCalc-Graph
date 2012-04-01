@@ -28,30 +28,30 @@
 }
 
 - (void) evaluate {
-//    DDMathEvaluator *eval = [self evaluator];
-//    NSMutableDictionary * variables = [NSMutableDictionary dictionary];//useless
-//    
-//	NSString * string = [inputTextField text];
-//	NSError *error = nil;
-//	if ([string length] > 0) {
-//		DDExpression * expression = [DDExpression expressionFromString:string error:&error];
-//		if (error == nil) {
-//			NSLog(@"parsed: %@", expression);
-//			//[self updateVariablesWithExpression:expression];
-//			NSNumber * result = [expression evaluateWithSubstitutions:variables evaluator:eval error:&error];
-//			if (error == nil) {
-//				[resultLabel setTextColor:[UIColor blackColor]];
-//				[resultLabel setText:[result description]];
-//			}
-//		}
-//	} else {
-//		[resultLabel setText:@""];
-//		[variables removeAllObjects];
-//	}
-//	if (error != nil) {
-//		NSLog(@"error: %@", error);
-//		[resultLabel setTextColor:[UIColor redColor]];
-//	}
+    DDMathEvaluator *eval = [self evaluator];
+    NSMutableDictionary * variables = [NSMutableDictionary dictionary];//useless
+    
+	NSString * string = [inputLabel text];
+	NSError *error = nil;
+	if ([string length] > 0) {
+		DDExpression * expression = [DDExpression expressionFromString:string error:&error];
+		if (error == nil) {
+			NSLog(@"parsed: %@", expression);
+			//[self updateVariablesWithExpression:expression];
+			NSNumber * result = [expression evaluateWithSubstitutions:variables evaluator:eval error:&error];
+			if (error == nil) {
+				[resultLabel setTextColor:[UIColor whiteColor]];
+				[resultLabel setText:[result description]];
+			}
+		}
+	} else {
+		[resultLabel setText:@""];
+		[variables removeAllObjects];
+	}
+	if (error != nil) {
+		NSLog(@"error: %@", error);
+		[resultLabel setTextColor:[UIColor redColor]];
+	}
 	
 	//[variableList reloadData];		
 }
@@ -132,8 +132,9 @@
     [logMultipleButton setDataSource:self];
     
     CGRect rect= logView.frame;
-    rect.origin.x = 10;
-    rect.origin.y = 23;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
     [[logMultipleButton view] setFrame:rect];
     
     [logView addSubview: logMultipleButton.view];
@@ -145,8 +146,10 @@
     [sqrtMultipleButton setDataSource:self];
     
     rect= sqrtView.frame;
-    rect.origin.x = 10;
-    rect.origin.y = 23;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+
     [[sqrtMultipleButton view] setFrame:rect];
     
     [sqrtView addSubview: sqrtMultipleButton.view];
@@ -159,8 +162,10 @@
     [sinMultipleButton setDataSource:self];
     
     rect= sinView.frame;
-    rect.origin.x = 10;
-    rect.origin.y = 23;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+
     [[sinMultipleButton view] setFrame:rect];
     
     [sinView addSubview: sinMultipleButton.view];
@@ -172,8 +177,10 @@
     [arcsinMultipleButton setDataSource:self];
     
     rect= arcsinView.frame;
-    rect.origin.x = 10;
-    rect.origin.y = 23;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+
     [[arcsinMultipleButton view] setFrame:rect];
     
     [arcsinView addSubview: arcsinMultipleButton.view];
@@ -187,8 +194,10 @@
     [sinhMultipleButton setDataSource:self];
     
     rect= sinhView.frame;
-    rect.origin.x = 10;
-    rect.origin.y = 23;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+
     [[sinhMultipleButton view] setFrame:rect];
     
     [sinhView addSubview: sinhMultipleButton.view];
@@ -200,8 +209,10 @@
     [xyMultipleButton setDataSource:self];
     
     rect= xyView.frame;
-    rect.origin.x = 10;
-    rect.origin.y = 23;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+
     [[xyMultipleButton view] setFrame:rect];
     
     [xyView addSubview: xyMultipleButton.view];
@@ -212,6 +223,9 @@
     [super viewDidLoad];
         
     [self loadMultipleButtons];
+    
+    
+    answerTableView.allowsMultipleSelectionDuringEditing = YES;
     
     
     for( NSString *familyName in [UIFont familyNames] ) {
@@ -249,6 +263,8 @@
     xyView = nil;
     inputLabel = nil;
     answerTableView = nil;
+    editAnswerTableBtn = nil;
+    resultLabel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -256,19 +272,52 @@
 -(IBAction)digitPressed:(id)sender
 {
     NSLog(@"digitPressed");
+    UIButton *btn = (UIButton*) sender;
+    if([inputLabel.text isEqualToString:@"0"])
+    {
+        inputLabel.text = [NSString stringWithFormat:@"%d",btn.tag];
+    }
+    else {
+        inputLabel.text = [inputLabel.text stringByAppendingFormat:@"%d",btn.tag];
+    }
 }
 
 -(IBAction)delPressed:(id)sender
 {
     NSLog(@"delPressed");
+    if([inputLabel.text length] <= 1)
+    {
+        inputLabel.text = @"0";
+    }
+    else {
+        inputLabel.text = [inputLabel.text stringByPaddingToLength:inputLabel.text.length - 1 withString:nil startingAtIndex:0];
+    }
 }
 -(IBAction)allClearPressed:(id)sender
 {
     NSLog(@"allClearPressed");
+    inputLabel.text = @"0";
 }
 -(IBAction)operatorPressed:(id)sender
 {
     NSLog(@"operatorPressed");
+    UIButton *btn = (UIButton*) sender;
+    switch (btn.tag) {
+        case 1:
+            inputLabel.text = [inputLabel.text stringByAppendingFormat:@"+"];
+            break;
+        case 2:
+            inputLabel.text = [inputLabel.text stringByAppendingFormat:@"-"];
+            break;
+        case 3:
+            inputLabel.text = [inputLabel.text stringByAppendingFormat:@"*"];
+            break;
+        case 4:
+            inputLabel.text = [inputLabel.text stringByAppendingFormat:@"/"];
+            break;
+        default:
+            break;
+    }
 }
 -(IBAction)positiveMinusPressed:(id)sender
 {
@@ -276,11 +325,13 @@
 }
 -(IBAction)dotPressed:(id)sender
 {
+    inputLabel.text = [inputLabel.text stringByAppendingFormat:@"."];
     NSLog(@"dotPressed");
 }
 -(IBAction)goPressed:(id)sender
 {
     NSLog(@"goPressed");
+    [self evaluate];
 }
 
 -(BOOL)MultipleButtonNeedSendBackAfterTouch:(MultipleButtonViewController*)button
@@ -488,9 +539,11 @@
 }
 
 
--(void)viewWillAppear:(BOOL)animated
+-(IBAction)editAnswerTable:(id)sender
 {
+    [answerTableView setEditing:!answerTableView.editing animated:YES];
     
 }
+
 
 @end

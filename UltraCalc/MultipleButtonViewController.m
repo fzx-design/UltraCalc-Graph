@@ -64,24 +64,43 @@
 
 -(void)showOtherBtn
 {
-    background.hidden = NO;
-    appendixBtn2.hidden = NO;
-    appendixBtn1.hidden = NO;
+    [UIView animateWithDuration:0.1 animations:^{
+        //background.hidden = NO;
+        //appendixBtn2.hidden = NO;
+        //appendixBtn1.hidden = NO;
+        background.alpha = 1.0;
+        appendixBtn1.alpha = 1.0;
+        appendixBtn2.alpha = 1.0f;
+        
+    }];
+    
+    background.userInteractionEnabled = YES;
+    appendixBtn1.userInteractionEnabled = YES;
+    appendixBtn2.userInteractionEnabled = YES;
     
     [[[self.view superview] superview] bringSubviewToFront:[self.view superview]];
 }
 
 -(void)dismissOtherBtn
 {
-    background.hidden = YES;
-    appendixBtn2.hidden = YES;
-    appendixBtn1.hidden = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        background.alpha = 0.0;
+        appendixBtn1.alpha = 0.0;
+        appendixBtn2.alpha = 0.0f;
+    } completion:^(BOOL finish){
+        if([datasource MultipleButtonNeedSendBackAfterTouch:self])[[[self.view superview] superview] sendSubviewToBack:[self.view superview]];
+    }];
+    
+    background.userInteractionEnabled = NO;
+    appendixBtn1.userInteractionEnabled = NO;
+    appendixBtn2.userInteractionEnabled = NO;
+    
     
     [mainBtn setHighlighted:NO];
     [appendixBtn1 setHighlighted:NO];
     [appendixBtn2 setHighlighted:NO];
     
-    if([datasource MultipleButtonNeedSendBackAfterTouch:self])[[[self.view superview] superview] sendSubviewToBack:[self.view superview]];
+    
 }
 
 
@@ -206,9 +225,13 @@
 {
     [super viewDidLoad];
     
-    background.hidden = YES;
-    appendixBtn2.hidden = YES;
-    appendixBtn1.hidden = YES;
+    background.alpha = 0.0;
+    appendixBtn1.alpha = 0.0;
+    appendixBtn2.alpha = 0.0f;
+
+    background.userInteractionEnabled = NO;
+    appendixBtn1.userInteractionEnabled = NO;
+    appendixBtn2.userInteractionEnabled = NO;
     
     [self updateViewContent];
 	// Do any additional setup after loading the view.
