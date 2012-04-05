@@ -223,7 +223,10 @@
     [super viewDidLoad];
         
     [self loadMultipleButtons];
-    
+
+    //self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundPattern.png"]];
+    answerTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell_bg.png"]];
+
     
     answerTableView.allowsMultipleSelectionDuringEditing = YES;
     

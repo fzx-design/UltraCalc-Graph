@@ -19,12 +19,12 @@
     return self;
 }
 
-- (void)setFrame:(CGRect)frame {
-    float inset = 33;
-    frame.origin.x += inset;
-    frame.size.width -= inset + 4;
-    [super setFrame:frame];
-}
+//- (void)setFrame:(CGRect)frame {
+//    float inset = 33;
+//    frame.origin.x += inset;
+//    frame.size.width -= inset + 4;
+//    [super setFrame:frame];
+//}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
