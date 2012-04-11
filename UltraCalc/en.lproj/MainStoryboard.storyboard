@@ -6,6 +6,46 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
+        <!--Input Scroll View Controller-->
+        <scene sceneID="hh7-6y-9xQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wG3-wT-0dv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="InputScrollView" id="1eT-LA-pcP" customClass="InputScrollViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6XG-wp-xyA">
+                        <rect key="frame" x="0.0" y="0.0" width="248" height="38"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="QGW-6g-Irg">
+                                <rect key="frame" x="0.0" y="0.0" width="256" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="TyF-mN-tjd" userLabel="inputlabel">
+                                        <rect key="frame" x="-1" y="0.0" width="248" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="38"/>
+                                        <color key="textColor" red="0.34592425310000002" green="0.91290625209999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="inputLabel" destination="TyF-mN-tjd" id="x8z-PW-k0X"/>
+                        <outlet property="scrollView" destination="QGW-6g-Irg" id="Tcq-MV-JYY"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-200" y="-277"/>
+        </scene>
         <!--Multiple Button View Controller-->
         <scene sceneID="nkF-id-4Zh">
             <objects>
@@ -101,7 +141,7 @@
                                         <rect key="frame" x="5" y="10" width="1009" height="734"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WqZ-Hy-zRl" userLabel="anwerlabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WqZ-Hy-zRl" userLabel="anwerlabel">
                                         <rect key="frame" x="46" y="123" width="248" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
@@ -246,6 +286,11 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                     </button>
+                                                    <view contentMode="scaleToFill" id="4rV-a2-CUl">
+                                                        <rect key="frame" x="3.5" y="6.5" width="257.5" height="38"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
@@ -274,7 +319,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tEW-uN-s0A" userLabel="1">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tEW-uN-s0A" userLabel="1">
                                         <rect key="frame" x="33" y="554" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -288,7 +333,7 @@
                                             <action selector="digitPressed:" destination="2" eventType="touchUpInside" id="S9l-yd-nke"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="A0c-8Y-kcA" userLabel="2">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="A0c-8Y-kcA" userLabel="2">
                                         <rect key="frame" x="97" y="554" width="67" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -540,13 +585,6 @@
                                             <action selector="digitPressed:" destination="2" eventType="touchUpInside" id="jez-aR-nWJ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="LBO-TC-yTy" userLabel="inputlabel">
-                                        <rect key="frame" x="44" y="63" width="248" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                        <color key="textColor" red="0.34592425312917452" green="0.91290625213789778" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" image="button_selected_bg.png" id="vos-mZ-xcj" userLabel="answerEditBtnPressedIndicator">
                                         <rect key="frame" x="354" y="27" width="49" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -580,7 +618,7 @@
                         <outlet property="backgroundImageView" destination="yrY-Ci-Ht6" id="inC-Zp-Sid"/>
                         <outlet property="editAnswerPressedIndicator" destination="vos-mZ-xcj" id="MSf-0m-3zc"/>
                         <outlet property="editAnswerTableBtn" destination="SlV-DH-KfY" id="3sm-9Y-X6f"/>
-                        <outlet property="inputLabel" destination="LBO-TC-yTy" id="sZN-I9-62w"/>
+                        <outlet property="inputView" destination="4rV-a2-CUl" id="rWK-QV-vt2"/>
                         <outlet property="leftView" destination="LJo-qm-ooJ" id="B5N-wC-OtV"/>
                         <outlet property="logView" destination="rDJ-sE-HfB" id="mDx-D5-580"/>
                         <outlet property="resultLabel" destination="WqZ-Hy-zRl" id="dbq-DB-oTC"/>
@@ -612,6 +650,13 @@
         <class className="AnswerCellCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AnswerCellCell.h"/>
         </class>
+        <class className="InputScrollViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InputScrollViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="inputLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
         <class className="MultipleButtonViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MultipleButtonViewController.h"/>
             <relationships>
@@ -637,7 +682,7 @@
                 <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="editAnswerPressedIndicator" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="editAnswerTableBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="inputLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="inputView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="leftView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="logView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="resultLabel" candidateClass="UILabel"/>
@@ -651,7 +696,7 @@
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
-        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

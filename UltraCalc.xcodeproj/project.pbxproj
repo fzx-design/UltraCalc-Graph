@@ -41,8 +41,10 @@
 		E41ED9CA151F6E7800F4D87F /* DDParserTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED9B3151F6E7800F4D87F /* DDParserTypes.m */; };
 		E41ED9CB151F6E7800F4D87F /* DDTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED9B5151F6E7800F4D87F /* DDTypes.m */; };
 		E41ED9CC151F6E7800F4D87F /* NSString+DDMathParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED9B7151F6E7800F4D87F /* NSString+DDMathParsing.m */; };
-		E43FCA6A1524563B00D36B2E /* Eurostile.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E43FCA691524563B00D36B2E /* Eurostile.ttf */; };
+		E42AD39E152D2C2A0049546F /* Eurostile.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E42AD39D152D2C2A0049546F /* Eurostile.ttf */; };
 		E43FCA721524ABB700D36B2E /* AnswerCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCA711524ABB700D36B2E /* AnswerCellCell.m */; };
+		E45EF500152D56CF00E9F48A /* Eurostile.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E42AD39D152D2C2A0049546F /* Eurostile.ttf */; };
+		E48918A315356CC300398B17 /* InputScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48918A215356CC300398B17 /* InputScrollViewController.m */; };
 		E4AB2440152368CB005D2443 /* MultipleButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AB243F152368CB005D2443 /* MultipleButtonViewController.m */; };
 		E4CBDB79152C834B00521FB9 /* brashes_color_black.png in Resources */ = {isa = PBXBuildFile; fileRef = E4CBDB0B152C834B00521FB9 /* brashes_color_black.png */; };
 		E4CBDB7A152C834B00521FB9 /* brashes_color_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4CBDB0C152C834B00521FB9 /* brashes_color_black@2x.png */; };
@@ -233,9 +235,11 @@
 		E41ED9B5151F6E7800F4D87F /* DDTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTypes.m; sourceTree = "<group>"; };
 		E41ED9B6151F6E7800F4D87F /* NSString+DDMathParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDMathParsing.h"; sourceTree = "<group>"; };
 		E41ED9B7151F6E7800F4D87F /* NSString+DDMathParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDMathParsing.m"; sourceTree = "<group>"; };
-		E43FCA691524563B00D36B2E /* Eurostile.ttf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Eurostile.ttf; sourceTree = "<group>"; };
+		E42AD39D152D2C2A0049546F /* Eurostile.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Eurostile.ttf; sourceTree = "<group>"; };
 		E43FCA701524ABB700D36B2E /* AnswerCellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCellCell.h; sourceTree = "<group>"; };
 		E43FCA711524ABB700D36B2E /* AnswerCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCellCell.m; sourceTree = "<group>"; };
+		E48918A115356CC300398B17 /* InputScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputScrollViewController.h; sourceTree = "<group>"; };
+		E48918A215356CC300398B17 /* InputScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputScrollViewController.m; sourceTree = "<group>"; };
 		E4AB243E152368CB005D2443 /* MultipleButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleButtonViewController.h; sourceTree = "<group>"; };
 		E4AB243F152368CB005D2443 /* MultipleButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleButtonViewController.m; sourceTree = "<group>"; };
 		E4AB2441152368FC005D2443 /* MultipleButtonDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipleButtonDataSource.h; sourceTree = "<group>"; };
@@ -425,6 +429,8 @@
 				E4CBDBEA152C853C00521FB9 /* AnswerCellModel.m */,
 				E4CBDBEC152C862A00521FB9 /* AnswerTableModel.h */,
 				E4CBDBED152C862A00521FB9 /* AnswerTableModel.m */,
+				E48918A115356CC300398B17 /* InputScrollViewController.h */,
+				E48918A215356CC300398B17 /* InputScrollViewController.m */,
 				E41ED914151F6DCC00F4D87F /* Supporting Files */,
 			);
 			path = UltraCalc;
@@ -515,7 +521,7 @@
 		E4A4ADA51522062D006B5977 /* Resouces */ = {
 			isa = PBXGroup;
 			children = (
-				E43FCA691524563B00D36B2E /* Eurostile.ttf */,
+				E42AD39D152D2C2A0049546F /* Eurostile.ttf */,
 				E4CBDB0A152C834B00521FB9 /* Images */,
 			);
 			name = Resouces;
@@ -728,9 +734,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E45EF500152D56CF00E9F48A /* Eurostile.ttf in Resources */,
 				E41ED918151F6DCC00F4D87F /* InfoPlist.strings in Resources */,
 				E41ED921151F6DCC00F4D87F /* MainStoryboard.storyboard in Resources */,
-				E43FCA6A1524563B00D36B2E /* Eurostile.ttf in Resources */,
 				E4CBDB79152C834B00521FB9 /* brashes_color_black.png in Resources */,
 				E4CBDB7A152C834B00521FB9 /* brashes_color_black@2x.png in Resources */,
 				E4CBDB7B152C834B00521FB9 /* brashes_color_blue.png in Resources */,
@@ -849,6 +855,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E41ED936151F6DCD00F4D87F /* InfoPlist.strings in Resources */,
+				E42AD39E152D2C2A0049546F /* Eurostile.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,6 +910,7 @@
 				E43FCA721524ABB700D36B2E /* AnswerCellCell.m in Sources */,
 				E4CBDBEB152C853C00521FB9 /* AnswerCellModel.m in Sources */,
 				E4CBDBEE152C862A00521FB9 /* AnswerTableModel.m in Sources */,
+				E48918A315356CC300398B17 /* InputScrollViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

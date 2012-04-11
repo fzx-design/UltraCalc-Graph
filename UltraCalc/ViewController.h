@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MultipleButtonDataSource.h"
 #import "MultipleButtonViewController.h"
+#import "InputScrollViewController.h"
 
 @class DDMathEvaluator;
 
@@ -37,7 +38,11 @@
     __weak IBOutlet UIView *xyView;
     MultipleButtonViewController *xyMultipleButton;
     
-    __weak IBOutlet UILabel *inputLabel;
+
+    
+    __weak IBOutlet UIView *inputView;
+    InputScrollViewController *inputScrollViewController;
+    
     
     __weak IBOutlet UILabel *resultLabel;
     
