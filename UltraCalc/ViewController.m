@@ -33,27 +33,27 @@
     DDMathEvaluator *eval = [self evaluator];
     NSMutableDictionary * variables = [NSMutableDictionary dictionary];//useless
     
-//	NSString * string = [inputLabel text];
-//	NSError *error = nil;
-//	if ([string length] > 0) {
-//		DDExpression * expression = [DDExpression expressionFromString:string error:&error];
-//		if (error == nil) {
-//			NSLog(@"parsed: %@", expression);
-//			//[self updateVariablesWithExpression:expression];
-//			NSNumber * result = [expression evaluateWithSubstitutions:variables evaluator:eval error:&error];
-//			if (error == nil) {
-//				[resultLabel setTextColor:[UIColor whiteColor]];
-//				[resultLabel setText:[result description]];
-//			}
-//		}
-//	} else {
-//		[resultLabel setText:@""];
-//		[variables removeAllObjects];
-//	}
-//	if (error != nil) {
-//		NSLog(@"error: %@", error);
-//		[resultLabel setTextColor:[UIColor redColor]];
-//	}
+	NSString * string = [inputScrollViewController text];
+	NSError *error = nil;
+	if ([string length] > 0) {
+		DDExpression * expression = [DDExpression expressionFromString:string error:&error];
+		if (error == nil) {
+			NSLog(@"parsed: %@", expression);
+			//[self updateVariablesWithExpression:expression];
+			NSNumber * result = [expression evaluateWithSubstitutions:variables evaluator:eval error:&error];
+			if (error == nil) {
+				[resultLabel setTextColor:[UIColor whiteColor]];
+				[resultLabel setText:[result description]];
+			}
+		}
+	} else {
+		[resultLabel setText:@""];
+		[variables removeAllObjects];
+	}
+	if (error != nil) {
+		NSLog(@"error: %@", error);
+		[resultLabel setTextColor:[UIColor redColor]];
+	}
 	
 	//[variableList reloadData];		
 }
@@ -138,7 +138,6 @@
 
 - (void)loadMultipleButtons
 {
-    //[MultipleButtonViewController class];
     logMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
     
     [logMultipleButton setDataSource:self];
@@ -238,7 +237,7 @@
 
     [self loadInputScrollView];
     
-    //self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundPattern.png"]];
+    
     answerTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell_bg.png"]];
 
     
@@ -279,51 +278,51 @@
 {
     NSLog(@"digitPressed");
     UIButton *btn = (UIButton*) sender;
-//    if([inputLabel.text isEqualToString:@"0"])
-//    {
-//        inputLabel.text = [NSString stringWithFormat:@"%d",btn.tag];
-//    }
-//    else {
-//        inputLabel.text = [inputLabel.text stringByAppendingFormat:@"%d",btn.tag];
-//    }
+    if([[inputScrollViewController text] isEqualToString:@"0"])
+    {
+        [inputScrollViewController setText:[NSString stringWithFormat:@"%d",btn.tag]];
+    }
+    else {
+        [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"%d",btn.tag]];
+    }
 }
 
 -(IBAction)delPressed:(id)sender
 {
     NSLog(@"delPressed");
-//    if([inputLabel.text length] <= 1)
-//    {
-//        inputLabel.text = @"0";
-//    }
-//    else {
-//        inputLabel.text = [inputLabel.text stringByPaddingToLength:inputLabel.text.length - 1 withString:nil startingAtIndex:0];
-//    }
+    if([[inputScrollViewController text] length] <= 1)
+    {
+        [inputScrollViewController setText:@"0"];
+    }
+    else {
+        [inputScrollViewController setText:[[inputScrollViewController text] stringByPaddingToLength:[inputScrollViewController text].length - 1 withString:nil startingAtIndex:0]];
+    }
 }
 -(IBAction)allClearPressed:(id)sender
 {
     NSLog(@"allClearPressed");
-    //inputLabel.text = @"0";
+    [inputScrollViewController setText:@"0"];
 }
 -(IBAction)operatorPressed:(id)sender
 {
     NSLog(@"operatorPressed");
     UIButton *btn = (UIButton*) sender;
-//    switch (btn.tag) {
-//        case 1:
-//            inputLabel.text = [inputLabel.text stringByAppendingFormat:@"+"];
-//            break;
-//        case 2:
-//            inputLabel.text = [inputLabel.text stringByAppendingFormat:@"-"];
-//            break;
-//        case 3:
-//            inputLabel.text = [inputLabel.text stringByAppendingFormat:@"*"];
-//            break;
-//        case 4:
-//            inputLabel.text = [inputLabel.text stringByAppendingFormat:@"/"];
-//            break;
-//        default:
-//            break;
-//    }
+    switch (btn.tag) {
+        case 1:
+            [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"+"]];
+            break;
+        case 2:
+            [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"-"]];
+            break;
+        case 3:
+            [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"*"]];
+            break;
+        case 4:
+            [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"/"]];
+            break;
+        default:
+            break;
+    }
 }
 -(IBAction)positiveMinusPressed:(id)sender
 {
@@ -331,7 +330,7 @@
 }
 -(IBAction)dotPressed:(id)sender
 {
-    //inputLabel.text = [inputLabel.text stringByAppendingFormat:@"."];
+    [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"."]];
     NSLog(@"dotPressed");
 }
 -(IBAction)goPressed:(id)sender

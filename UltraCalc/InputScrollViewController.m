@@ -27,32 +27,50 @@
 
 -(void)setText:(NSString*)string
 {
-   
+    
     UIFont *myFont = font;
     // Get the width of a string ...
     CGSize size = [string sizeWithFont:myFont];
+        
+    
     
     CGRect rect= inputLabel.frame;
-    rect.size.width = 0;
+    rect.size.width = (size.width > minWidth) ? size.width  :  minWidth;
+    inputLabel.frame = rect;
+    inputLabel.text = string;
     
-    inputLabel.text = @"0123456789987654321001234567899876543210";
+    CGSize inputSize = inputLabel.bounds.size;;
+    //size.width += 300;
+    scrollView.contentSize = inputSize;
+
+    CGRect visibleRect = rect;
+    visibleRect.origin.x += rect.size.width - minWidth;
     
+    
+    [scrollView scrollRectToVisible:visibleRect animated:YES];
+}
+
+-(NSString*)text
+{
+    return inputLabel.text;
+}
+
+
+-(void)initLabel
+{
+    font = [UIFont fontWithName:@"Eurostile" size:38];
+    [inputLabel setFont:font];
+    CGRect rect= inputLabel.frame;
+    minWidth = rect.size.width;
+
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    font = [UIFont fontWithName:@"Eurostile" size:38];
-    [inputLabel setFont:font];
+    [self initLabel];
     
-    
-    inputLabel.text = @"0123456789987654321001234567899876543210";
-    
-    
-    CGSize size = inputLabel.bounds.size;;
-    size.width += 300;
-    scrollView.contentSize = size;
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 }
 
 - (void)viewDidUnload

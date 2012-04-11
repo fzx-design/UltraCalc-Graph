@@ -13,8 +13,10 @@
     __weak IBOutlet UIScrollView *scrollView;
     __weak IBOutlet UILabel *inputLabel;
     UIFont *font;
+    float minWidth;
 }
 
 -(void)setText:(NSString*)string;
+-(NSString*)text;
 
 @end
