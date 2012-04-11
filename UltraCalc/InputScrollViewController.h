@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FXLabel.h"
 @interface InputScrollViewController : UIViewController
 {
     __weak IBOutlet UIScrollView *scrollView;
-    __weak IBOutlet UILabel *inputLabel;
+    __weak IBOutlet FXLabel *inputLabel;
     UIFont *font;
     float minWidth;
 }

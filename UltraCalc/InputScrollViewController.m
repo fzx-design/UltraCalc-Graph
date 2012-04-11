@@ -58,8 +58,14 @@
 
 -(void)initLabel
 {
-    font = [UIFont fontWithName:@"Eurostile" size:38];
+    font = [UIFont fontWithName:@"Eurostile" size:20];
     [inputLabel setFont:font];
+    
+    inputLabel.shadowColor = nil;
+    inputLabel.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    inputLabel.shadowColor = [UIColor colorWithRed:158/255.0 green:1 blue:1 alpha:0.7];  
+    inputLabel.shadowBlur = 5.0f;
+    
     CGRect rect= inputLabel.frame;
     minWidth = rect.size.width;
 

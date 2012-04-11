@@ -42,6 +42,7 @@
 		E41ED9CB151F6E7800F4D87F /* DDTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED9B5151F6E7800F4D87F /* DDTypes.m */; };
 		E41ED9CC151F6E7800F4D87F /* NSString+DDMathParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED9B7151F6E7800F4D87F /* NSString+DDMathParsing.m */; };
 		E42AD39E152D2C2A0049546F /* Eurostile.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E42AD39D152D2C2A0049546F /* Eurostile.ttf */; };
+		E43B232D1535C74E00B7B52A /* FXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E43B232C1535C74E00B7B52A /* FXLabel.m */; };
 		E43FCA721524ABB700D36B2E /* AnswerCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCA711524ABB700D36B2E /* AnswerCellCell.m */; };
 		E45EF500152D56CF00E9F48A /* Eurostile.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E42AD39D152D2C2A0049546F /* Eurostile.ttf */; };
 		E48918A315356CC300398B17 /* InputScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48918A215356CC300398B17 /* InputScrollViewController.m */; };
@@ -236,6 +237,8 @@
 		E41ED9B6151F6E7800F4D87F /* NSString+DDMathParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDMathParsing.h"; sourceTree = "<group>"; };
 		E41ED9B7151F6E7800F4D87F /* NSString+DDMathParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDMathParsing.m"; sourceTree = "<group>"; };
 		E42AD39D152D2C2A0049546F /* Eurostile.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Eurostile.ttf; sourceTree = "<group>"; };
+		E43B232B1535C74E00B7B52A /* FXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXLabel.h; sourceTree = "<group>"; };
+		E43B232C1535C74E00B7B52A /* FXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXLabel.m; sourceTree = "<group>"; };
 		E43FCA701524ABB700D36B2E /* AnswerCellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCellCell.h; sourceTree = "<group>"; };
 		E43FCA711524ABB700D36B2E /* AnswerCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCellCell.m; sourceTree = "<group>"; };
 		E48918A115356CC300398B17 /* InputScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputScrollViewController.h; sourceTree = "<group>"; };
@@ -387,6 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				E4A4ADA51522062D006B5977 /* Resouces */,
+				E43B232A1535C74E00B7B52A /* FXLabel */,
 				E41ED98A151F6E7800F4D87F /* DDMathParser */,
 				E41ED913151F6DCC00F4D87F /* UltraCalc */,
 				E41ED931151F6DCD00F4D87F /* UltraCalcTests */,
@@ -516,6 +520,15 @@
 				E41ED9B7151F6E7800F4D87F /* NSString+DDMathParsing.m */,
 			);
 			path = DDMathParser;
+			sourceTree = "<group>";
+		};
+		E43B232A1535C74E00B7B52A /* FXLabel */ = {
+			isa = PBXGroup;
+			children = (
+				E43B232B1535C74E00B7B52A /* FXLabel.h */,
+				E43B232C1535C74E00B7B52A /* FXLabel.m */,
+			);
+			path = FXLabel;
 			sourceTree = "<group>";
 		};
 		E4A4ADA51522062D006B5977 /* Resouces */ = {
@@ -911,6 +924,7 @@
 				E4CBDBEB152C853C00521FB9 /* AnswerCellModel.m in Sources */,
 				E4CBDBEE152C862A00521FB9 /* AnswerTableModel.m in Sources */,
 				E48918A315356CC300398B17 /* InputScrollViewController.m in Sources */,
+				E43B232D1535C74E00B7B52A /* FXLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

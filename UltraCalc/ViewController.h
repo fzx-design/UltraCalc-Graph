@@ -10,6 +10,7 @@
 #import "MultipleButtonDataSource.h"
 #import "MultipleButtonViewController.h"
 #import "InputScrollViewController.h"
+#import "FXLabel.h"
 
 @class DDMathEvaluator;
 
@@ -44,7 +45,7 @@
     InputScrollViewController *inputScrollViewController;
     
     
-    __weak IBOutlet UILabel *resultLabel;
+    __weak IBOutlet FXLabel *resultLabel;
     
     
     __weak IBOutlet UITableView *answerTableView;

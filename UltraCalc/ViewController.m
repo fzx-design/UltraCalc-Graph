@@ -12,6 +12,7 @@
 #import "MultipleButtonViewController.h"
 #import "InputScrollViewController.h"
 
+#import "FXLabel.h"
 
 @interface ViewController ()
 
@@ -229,6 +230,15 @@
     [xyView addSubview: xyMultipleButton.view];
 }
 
+- (void)initResultLabel
+{
+    [resultLabel setFont:[UIFont fontWithName:@"Eurostile" size:32]];
+    resultLabel.shadowColor = nil;
+    resultLabel.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    resultLabel.shadowColor = [UIColor colorWithRed:158/255.0 green:1 blue:1 alpha:0.8];  
+    resultLabel.shadowBlur = 3.0f;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -237,6 +247,7 @@
 
     [self loadInputScrollView];
     
+    [self initResultLabel];
     
     answerTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell_bg.png"]];
 
