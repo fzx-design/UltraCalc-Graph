@@ -21,6 +21,16 @@
 @implementation ViewController
 
 
+- (void)syncInputLabel
+{
+    [inputScrollViewController setText:brain.displayString];
+    
+    [inputScrollViewController clearAllRect];
+    [inputScrollViewController showRectFromCharIndex:0 toIndex:5];
+    [inputScrollViewController showRectFromCharIndex:2 toIndex:4];
+}
+
+
 - (DDMathEvaluator *)evaluator {
     if (evaluator == nil) {
        
@@ -34,7 +44,11 @@
     DDMathEvaluator *eval = [self evaluator];
     NSMutableDictionary * variables = [NSMutableDictionary dictionary];//useless
     
-	NSString * string = [inputScrollViewController text];
+	NSString * string = brain.calculateString;
+    
+    [inputScrollViewController setText:string];
+    
+    
 	NSError *error = nil;
 	if ([string length] > 0) {
 		DDExpression * expression = [DDExpression expressionFromString:string error:&error];
@@ -254,6 +268,8 @@
     
     answerTableView.allowsMultipleSelectionDuringEditing = YES;
     
+    if(brain == nil)
+        brain = [Brain sharedBrain];
     
 //    for( NSString *familyName in [UIFont familyNames] ) {
 //        for( NSString *fontName in [UIFont fontNamesForFamilyName:familyName] ) {
@@ -285,65 +301,89 @@
     // Release any retained subviews of the main view.
 }
 
+
+
+
 -(IBAction)digitPressed:(id)sender
 {
     NSLog(@"digitPressed");
     UIButton *btn = (UIButton*) sender;
-    if([[inputScrollViewController text] isEqualToString:@"0"])
-    {
-        [inputScrollViewController setText:[NSString stringWithFormat:@"%d",btn.tag]];
-    }
-    else {
-        [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"%d",btn.tag]];
-    }
+    
+    [brain appendDigit:[NSString stringWithFormat:@"%d",btn.tag]];
+    
+    [self syncInputLabel];
 }
+
 
 -(IBAction)delPressed:(id)sender
 {
     NSLog(@"delPressed");
-    if([[inputScrollViewController text] length] <= 1)
-    {
-        [inputScrollViewController setText:@"0"];
-    }
-    else {
-        [inputScrollViewController setText:[[inputScrollViewController text] stringByPaddingToLength:[inputScrollViewController text].length - 1 withString:nil startingAtIndex:0]];
-    }
+    
+    [brain removeLastToken];
+    
+    [self syncInputLabel];
 }
+
 -(IBAction)allClearPressed:(id)sender
 {
     NSLog(@"allClearPressed");
-    [inputScrollViewController setText:@"0"];
+    [brain clearQueue];
+    
+    [self syncInputLabel];
 }
 -(IBAction)operatorPressed:(id)sender
 {
     NSLog(@"operatorPressed");
     UIButton *btn = (UIButton*) sender;
+    NSString *op;
     switch (btn.tag) {
         case 1:
-            [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"+"]];
+            op = @"+";
             break;
         case 2:
-            [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"-"]];
+            op = @"-";
             break;
         case 3:
-            [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"*"]];
+            op = @"*";
             break;
         case 4:
-            [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"/"]];
-            break;
+            op = @"/";
         default:
             break;
     }
+    [brain appendOperator:op];
+    
+    [self syncInputLabel];
+    
 }
 -(IBAction)positiveMinusPressed:(id)sender
 {
     NSLog(@"positiveMinusPressed");
+    
+    
 }
 -(IBAction)dotPressed:(id)sender
 {
-    [inputScrollViewController setText:[[inputScrollViewController text] stringByAppendingFormat:@"."]];
     NSLog(@"dotPressed");
+    [brain appendDot:@"."];
+    [self syncInputLabel];
 }
+
+-(IBAction)leftParenthesePressed:(id)sender
+{
+    [brain appendLeftParenthese];
+    
+    [self syncInputLabel];
+}
+
+-(IBAction)rightParenthesePressed:(id)sender
+{
+    [brain appendRightParenthese];
+    
+    [self syncInputLabel];
+
+}
+
 -(IBAction)goPressed:(id)sender
 {
     NSLog(@"goPressed");
@@ -530,6 +570,10 @@
 -(void)pressedButtonWithIdentifier:(NSString*)identifier
 {
     NSLog(@"%@",identifier);
+    
+    [brain appendFunction:[NSString stringWithFormat:@"%@",identifier]];
+    
+    [self syncInputLabel];
 }
 
 

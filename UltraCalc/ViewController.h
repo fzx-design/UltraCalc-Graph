@@ -11,12 +11,18 @@
 #import "MultipleButtonViewController.h"
 #import "InputScrollViewController.h"
 #import "FXLabel.h"
+#import "Brain.h"
+
 
 @class DDMathEvaluator;
 
 @interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource>
 {
     DDMathEvaluator *evaluator;
+    Brain *brain;
+    
+    
+    
     __weak IBOutlet UIImageView *backgroundImageView;
     __weak IBOutlet UIView *leftView;
     __weak IBOutlet UIView *rightView;
@@ -62,6 +68,9 @@
 -(IBAction)positiveMinusPressed:(id)sender;
 -(IBAction)dotPressed:(id)sender;
 -(IBAction)goPressed:(id)sender;
+-(IBAction)leftParenthesePressed:(id)sender;
+-(IBAction)rightParenthesePressed:(id)sender;
+
 
 -(IBAction)editAnswerTable:(id)sender;
 @end

@@ -14,9 +14,15 @@
     __weak IBOutlet FXLabel *inputLabel;
     UIFont *font;
     float minWidth;
+    
+    NSMutableArray *rectArray;
 }
 
 -(void)setText:(NSString*)string;
 -(NSString*)text;
+
+-(void)showRectFromCharIndex:(int)startIndex toIndex:(int)endIndex;
+
+-(void)clearAllRect;
 
 @end

@@ -252,6 +252,9 @@
                                                         <state key="highlighted" backgroundImage="button_hover.png">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="leftParenthesePressed:" destination="2" eventType="touchUpInside" id="h6k-NE-CH2"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rb3-cP-DVL" userLabel=")">
                                                         <rect key="frame" x="59.5" y="138" width="65" height="48"/>
@@ -263,6 +266,9 @@
                                                         <state key="highlighted" backgroundImage="button_hover.png">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="rightParenthesePressed:" destination="2" eventType="touchUpInside" id="ABQ-5u-YjH"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="915-Y2-HyI" userLabel="%">
                                                         <rect key="frame" x="-2" y="187" width="61" height="48"/>
@@ -646,57 +652,6 @@
         <image name="launchimage.png" width="1024" height="748"/>
         <image name="numpad_up.png" width="264" height="146"/>
     </resources>
-    <classes>
-        <class className="AnswerCellCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AnswerCellCell.h"/>
-        </class>
-        <class className="FXLabel" superclassName="UILabel">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FXLabel.h"/>
-        </class>
-        <class className="InputScrollViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InputScrollViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="inputLabel" candidateClass="FXLabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="MultipleButtonViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MultipleButtonViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="appendixBtn1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="appendixBtn2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mainBtn" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="allClearPressed:"/>
-                <relationship kind="action" name="delPressed:"/>
-                <relationship kind="action" name="digitPressed:"/>
-                <relationship kind="action" name="dotPressed:"/>
-                <relationship kind="action" name="editAnswerTable:"/>
-                <relationship kind="action" name="goPressed:"/>
-                <relationship kind="action" name="operatorPressed:"/>
-                <relationship kind="action" name="positiveMinusPressed:"/>
-                <relationship kind="outlet" name="answerTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="arcsinView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="editAnswerPressedIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="editAnswerTableBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="inputView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="leftView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="logView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="resultLabel" candidateClass="FXLabel"/>
-                <relationship kind="outlet" name="rightView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sinView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sinhView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sqrtView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="xyView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

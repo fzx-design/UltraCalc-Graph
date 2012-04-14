@@ -45,6 +45,13 @@
 		E43B232D1535C74E00B7B52A /* FXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E43B232C1535C74E00B7B52A /* FXLabel.m */; };
 		E43FCA721524ABB700D36B2E /* AnswerCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCA711524ABB700D36B2E /* AnswerCellCell.m */; };
 		E45EF500152D56CF00E9F48A /* Eurostile.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E42AD39D152D2C2A0049546F /* Eurostile.ttf */; };
+		E45F3A5915398923004CAC5B /* Brain.m in Sources */ = {isa = PBXBuildFile; fileRef = E45F3A5815398923004CAC5B /* Brain.m */; };
+		E45F3A6015399E27004CAC5B /* screen_bracket_body.png in Resources */ = {isa = PBXBuildFile; fileRef = E45F3A5A15399E27004CAC5B /* screen_bracket_body.png */; };
+		E45F3A6115399E27004CAC5B /* screen_bracket_body@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E45F3A5B15399E27004CAC5B /* screen_bracket_body@2x.png */; };
+		E45F3A6215399E27004CAC5B /* screen_bracket_left.png in Resources */ = {isa = PBXBuildFile; fileRef = E45F3A5C15399E27004CAC5B /* screen_bracket_left.png */; };
+		E45F3A6315399E27004CAC5B /* screen_bracket_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E45F3A5D15399E27004CAC5B /* screen_bracket_left@2x.png */; };
+		E45F3A6415399E27004CAC5B /* screen_bracket_right.png in Resources */ = {isa = PBXBuildFile; fileRef = E45F3A5E15399E27004CAC5B /* screen_bracket_right.png */; };
+		E45F3A6515399E27004CAC5B /* screen_bracket_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E45F3A5F15399E27004CAC5B /* screen_bracket_right@2x.png */; };
 		E48918A315356CC300398B17 /* InputScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48918A215356CC300398B17 /* InputScrollViewController.m */; };
 		E4AB2440152368CB005D2443 /* MultipleButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AB243F152368CB005D2443 /* MultipleButtonViewController.m */; };
 		E4CBDB79152C834B00521FB9 /* brashes_color_black.png in Resources */ = {isa = PBXBuildFile; fileRef = E4CBDB0B152C834B00521FB9 /* brashes_color_black.png */; };
@@ -241,6 +248,14 @@
 		E43B232C1535C74E00B7B52A /* FXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXLabel.m; sourceTree = "<group>"; };
 		E43FCA701524ABB700D36B2E /* AnswerCellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCellCell.h; sourceTree = "<group>"; };
 		E43FCA711524ABB700D36B2E /* AnswerCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCellCell.m; sourceTree = "<group>"; };
+		E45F3A5715398923004CAC5B /* Brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brain.h; sourceTree = "<group>"; };
+		E45F3A5815398923004CAC5B /* Brain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brain.m; sourceTree = "<group>"; };
+		E45F3A5A15399E27004CAC5B /* screen_bracket_body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_bracket_body.png; sourceTree = "<group>"; };
+		E45F3A5B15399E27004CAC5B /* screen_bracket_body@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screen_bracket_body@2x.png"; sourceTree = "<group>"; };
+		E45F3A5C15399E27004CAC5B /* screen_bracket_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_bracket_left.png; sourceTree = "<group>"; };
+		E45F3A5D15399E27004CAC5B /* screen_bracket_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screen_bracket_left@2x.png"; sourceTree = "<group>"; };
+		E45F3A5E15399E27004CAC5B /* screen_bracket_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_bracket_right.png; sourceTree = "<group>"; };
+		E45F3A5F15399E27004CAC5B /* screen_bracket_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screen_bracket_right@2x.png"; sourceTree = "<group>"; };
 		E48918A115356CC300398B17 /* InputScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputScrollViewController.h; sourceTree = "<group>"; };
 		E48918A215356CC300398B17 /* InputScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputScrollViewController.m; sourceTree = "<group>"; };
 		E4AB243E152368CB005D2443 /* MultipleButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleButtonViewController.h; sourceTree = "<group>"; };
@@ -435,6 +450,8 @@
 				E4CBDBED152C862A00521FB9 /* AnswerTableModel.m */,
 				E48918A115356CC300398B17 /* InputScrollViewController.h */,
 				E48918A215356CC300398B17 /* InputScrollViewController.m */,
+				E45F3A5715398923004CAC5B /* Brain.h */,
+				E45F3A5815398923004CAC5B /* Brain.m */,
 				E41ED914151F6DCC00F4D87F /* Supporting Files */,
 			);
 			path = UltraCalc;
@@ -543,6 +560,12 @@
 		E4CBDB0A152C834B00521FB9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E45F3A5A15399E27004CAC5B /* screen_bracket_body.png */,
+				E45F3A5B15399E27004CAC5B /* screen_bracket_body@2x.png */,
+				E45F3A5C15399E27004CAC5B /* screen_bracket_left.png */,
+				E45F3A5D15399E27004CAC5B /* screen_bracket_left@2x.png */,
+				E45F3A5E15399E27004CAC5B /* screen_bracket_right.png */,
+				E45F3A5F15399E27004CAC5B /* screen_bracket_right@2x.png */,
 				E4CBDB0B152C834B00521FB9 /* brashes_color_black.png */,
 				E4CBDB0C152C834B00521FB9 /* brashes_color_black@2x.png */,
 				E4CBDB0D152C834B00521FB9 /* brashes_color_blue.png */,
@@ -860,6 +883,12 @@
 				E4CBDBE4152C834B00521FB9 /* popover_brashes_shadow_up@2x.png in Resources */,
 				E4CBDBE5152C834B00521FB9 /* ruler_large.png in Resources */,
 				E4CBDBE6152C834B00521FB9 /* ruler_large@2x.png in Resources */,
+				E45F3A6015399E27004CAC5B /* screen_bracket_body.png in Resources */,
+				E45F3A6115399E27004CAC5B /* screen_bracket_body@2x.png in Resources */,
+				E45F3A6215399E27004CAC5B /* screen_bracket_left.png in Resources */,
+				E45F3A6315399E27004CAC5B /* screen_bracket_left@2x.png in Resources */,
+				E45F3A6415399E27004CAC5B /* screen_bracket_right.png in Resources */,
+				E45F3A6515399E27004CAC5B /* screen_bracket_right@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,6 +954,7 @@
 				E4CBDBEE152C862A00521FB9 /* AnswerTableModel.m in Sources */,
 				E48918A315356CC300398B17 /* InputScrollViewController.m in Sources */,
 				E43B232D1535C74E00B7B52A /* FXLabel.m in Sources */,
+				E45F3A5915398923004CAC5B /* Brain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
