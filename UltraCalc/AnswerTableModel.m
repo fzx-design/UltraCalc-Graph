@@ -10,8 +10,44 @@
 
 @implementation AnswerTableModel
 
+static AnswerTableModel* instance = nil;
 
++(AnswerTableModel*)sharedModel
+{
+    if(!instance)
+    {
+        instance = [[AnswerTableModel alloc] init];
+    }
+    return instance;
+}
 
+-(void)removeCellAtIndex:(int)index
+{
+    [cellArray removeObjectAtIndex:index];
+}
 
+- (id)init
+{
+   if(self = [super init])
+   {
+       cellArray = [NSMutableArray array];
+   }
+    return self;
+}
+
+-(void)addNewCell:(AnswerCellModel*) cell
+{
+    [cellArray insertObject:cell atIndex:0];
+}
+
+-(int)cellCount
+{
+    return [cellArray count];
+}
+
+-(AnswerCellModel*)cellModelAtIndex:(int)index
+{
+    return [cellArray objectAtIndex:index];
+}
 
 @end

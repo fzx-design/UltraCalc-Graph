@@ -18,11 +18,12 @@ typedef enum
 {
     NSString *expression;
     NSString *result;
+    NSString *note;
     CellType cellType;
 }
 
 @property (nonatomic,retain)  NSString *expression;
 @property (nonatomic,retain)  NSString *result;
-
+@property (nonatomic,retain)  NSString *note;
 
 @end

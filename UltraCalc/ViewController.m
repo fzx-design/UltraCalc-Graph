@@ -11,7 +11,6 @@
 #import "MultipleButtonDataSource.h"
 #import "MultipleButtonViewController.h"
 #import "InputScrollViewController.h"
-
 #import "FXLabel.h"
 
 @interface ViewController ()
@@ -59,6 +58,21 @@
 			if (error == nil) {
 				[resultLabel setTextColor:[UIColor whiteColor]];
 				[resultLabel setText:[result description]];
+                
+                //TODO add to answer table
+                AnswerCellModel *newCell = [[AnswerCellModel alloc] init];
+                newCell.result = resultLabel.text;
+                newCell.note = nil;
+                newCell.expression = brain.displayString;
+                
+                [[AnswerTableModel sharedModel] addNewCell:newCell];
+                //[answerTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
+                //[answerTableView reloadData];
+                NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+                
+                NSArray *indexArray = [NSArray arrayWithObjects:path1,nil];
+                
+                [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationLeft];
 			}
 		}
 	} else {
@@ -579,24 +593,56 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 50;
+    return [[AnswerTableModel sharedModel] cellCount];
 }
 
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString* AnswerCellIndentifier = @"answerCell";
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:AnswerCellIndentifier];
+    UITableViewCell *cell = [tableView
+                             dequeueReusableCellWithIdentifier:@"answerCell"];
+	AnswerCellModel *cellModel = [[AnswerTableModel sharedModel] cellModelAtIndex:indexPath.row];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AnswerCellIndentifier];
+    UILabel *cellResultLabel = (UILabel *)[cell viewWithTag:101];
+	cellResultLabel.text = cellModel.result;
+    
+	UILabel *cellExpressionLabel = (UILabel *)[cell viewWithTag:102];
+	cellExpressionLabel.text = cellModel.expression;
+    
+	UIImageView * noteImageView = (UIImageView *)[cell viewWithTag:103];
+    if(cellModel.note)
+    {
+        noteImageView.hidden = NO;
+    }
+    else {
+        noteImageView.hidden = YES;
     }
     
+	
     return cell;
-
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+-(void)tableView:(UITableView*)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (editingStyle == UITableViewCellEditingStyleDelete)
+	{
+		[[AnswerTableModel sharedModel] removeCellAtIndex:indexPath.row];
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	}
+}
+
 
 
 -(IBAction)editAnswerTable:(id)sender

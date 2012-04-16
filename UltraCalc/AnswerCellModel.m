@@ -10,7 +10,7 @@
 
 @implementation AnswerCellModel
 
-@synthesize result,expression;
+@synthesize result,expression,note;
 
 
 

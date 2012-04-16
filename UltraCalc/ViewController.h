@@ -12,7 +12,7 @@
 #import "InputScrollViewController.h"
 #import "FXLabel.h"
 #import "Brain.h"
-
+#import "AnswerTableModel.h"
 
 @class DDMathEvaluator;
 

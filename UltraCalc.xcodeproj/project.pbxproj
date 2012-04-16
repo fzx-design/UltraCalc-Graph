@@ -43,7 +43,6 @@
 		E41ED9CC151F6E7800F4D87F /* NSString+DDMathParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = E41ED9B7151F6E7800F4D87F /* NSString+DDMathParsing.m */; };
 		E42AD39E152D2C2A0049546F /* Eurostile.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E42AD39D152D2C2A0049546F /* Eurostile.ttf */; };
 		E43B232D1535C74E00B7B52A /* FXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E43B232C1535C74E00B7B52A /* FXLabel.m */; };
-		E43FCA721524ABB700D36B2E /* AnswerCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCA711524ABB700D36B2E /* AnswerCellCell.m */; };
 		E45EF500152D56CF00E9F48A /* Eurostile.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E42AD39D152D2C2A0049546F /* Eurostile.ttf */; };
 		E45F3A5915398923004CAC5B /* Brain.m in Sources */ = {isa = PBXBuildFile; fileRef = E45F3A5815398923004CAC5B /* Brain.m */; };
 		E45F3A6015399E27004CAC5B /* screen_bracket_body.png in Resources */ = {isa = PBXBuildFile; fileRef = E45F3A5A15399E27004CAC5B /* screen_bracket_body.png */; };
@@ -246,8 +245,6 @@
 		E42AD39D152D2C2A0049546F /* Eurostile.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Eurostile.ttf; sourceTree = "<group>"; };
 		E43B232B1535C74E00B7B52A /* FXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXLabel.h; sourceTree = "<group>"; };
 		E43B232C1535C74E00B7B52A /* FXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXLabel.m; sourceTree = "<group>"; };
-		E43FCA701524ABB700D36B2E /* AnswerCellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCellCell.h; sourceTree = "<group>"; };
-		E43FCA711524ABB700D36B2E /* AnswerCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCellCell.m; sourceTree = "<group>"; };
 		E45F3A5715398923004CAC5B /* Brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brain.h; sourceTree = "<group>"; };
 		E45F3A5815398923004CAC5B /* Brain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brain.m; sourceTree = "<group>"; };
 		E45F3A5A15399E27004CAC5B /* screen_bracket_body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_bracket_body.png; sourceTree = "<group>"; };
@@ -438,7 +435,6 @@
 			isa = PBXGroup;
 			children = (
 				E4CBDBE8152C850800521FB9 /* MultipleButton */,
-				E4CBDBE7152C84D800521FB9 /* Cell */,
 				E41ED91C151F6DCC00F4D87F /* AppDelegate.h */,
 				E41ED91D151F6DCC00F4D87F /* AppDelegate.m */,
 				E41ED91F151F6DCC00F4D87F /* MainStoryboard.storyboard */,
@@ -679,15 +675,6 @@
 			);
 			name = Images;
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		E4CBDBE7152C84D800521FB9 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				E43FCA701524ABB700D36B2E /* AnswerCellCell.h */,
-				E43FCA711524ABB700D36B2E /* AnswerCellCell.m */,
-			);
-			name = Cell;
 			sourceTree = "<group>";
 		};
 		E4CBDBE8152C850800521FB9 /* MultipleButton */ = {
@@ -949,7 +936,6 @@
 				E41ED9CB151F6E7800F4D87F /* DDTypes.m in Sources */,
 				E41ED9CC151F6E7800F4D87F /* NSString+DDMathParsing.m in Sources */,
 				E4AB2440152368CB005D2443 /* MultipleButtonViewController.m in Sources */,
-				E43FCA721524ABB700D36B2E /* AnswerCellCell.m in Sources */,
 				E4CBDBEB152C853C00521FB9 /* AnswerCellModel.m in Sources */,
 				E4CBDBEE152C862A00521FB9 /* AnswerTableModel.m in Sources */,
 				E48918A315356CC300398B17 /* InputScrollViewController.m in Sources */,

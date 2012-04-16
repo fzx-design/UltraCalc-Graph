@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c3bd87ed-f654-4741-922e-834c6285eff6" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UltraCalc/AnswerCellModel.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UltraCalc/AnswerCellModel.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UltraCalc/AnswerTableModel.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UltraCalc/AnswerTableModel.m" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Default-Landscape@2x~ipad.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Default-Landscape~ipad.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UltraCalc/ThinTableView.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/UltraCalc/ThinTableView.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_black.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_black@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_blue.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_blue@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_green.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_green@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_red.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_red@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_yellow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/brashes_color_yellow@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_arccos.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_arccos@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_arcsin.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_arcsin@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_arctan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_arctan@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_cos.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_cos@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_cosh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_cosh@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_drawer.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_drawer@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_edit.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_edit@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_eraser.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_eraser@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_hover.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_hover@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_ln.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_ln@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_log.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_log@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_logxy.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_logxy@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_marker.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_marker@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_move.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_move@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_notes.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_notes@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_pencil.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_pencil@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_root.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_root3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_root3@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_root@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_rootx.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_rootx@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_ruler.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_ruler@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_selected_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_selected_bg@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_share.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_share@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_shownote.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_shownote@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_sin.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_sin@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_sinh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_sinh@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_tan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_tan@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_tanh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_tanh@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_x2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_x2@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_x3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_x3@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_xy.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/button_xy@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cell_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cell_bg@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cell_seperator.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cell_seperator@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/emgx_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/emgx_bg@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/launchimage.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/launchimage@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/light_l.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/light_l@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/light_r.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/light_r@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_black.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_black@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_blue.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_blue@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_green.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_green@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_red.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_red@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_yellow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_head_yellow@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_large.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/marker_large@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/numpad_up.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/numpad_up@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pencil_large.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pencil_large@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/popover_brashes_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/popover_brashes_bg@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/popover_brashes_color_selected.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/popover_brashes_color_selected@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/popover_brashes_selected_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/popover_brashes_selected_bg@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/popover_brashes_shadow_up.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/popover_brashes_shadow_up@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ruler_large.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ruler_large@2x.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UltraCalc.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/UltraCalc.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UltraCalc/ViewController.m" afterPath="$PROJECT_DIR$/UltraCalc/ViewController.m" />
+    </list>
+    <ignored path="UltraCalc.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="UltraCalc" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="ViewController.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UltraCalc/ViewController.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="29" selection-start="628" selection-end="628" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewController.m" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/UltraCalc/ViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="228" column="53" selection-start="6813" selection-end="6813" vertical-scroll-proportion="1.2884616">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnswerCellModel.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UltraCalc/AnswerCellModel.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="30" selection-start="357" selection-end="357" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/UltraCalc/ViewController.m" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="38" />
+    <option name="y" value="125" />
+    <option name="width" value="768" />
+    <option name="height" value="464" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="DirectoryView.Xcode">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UltraCalc" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeDirectoryView$1$1" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UltraCalc" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UltraCalc" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UltraCalc" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UltraCalc" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resouces" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UltraCalc" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resouces" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Images" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="recentsLimit" value="5" />
+    <property name="FullScreen" value="false" />
+  </component>
+  <component name="RunManager" selected="Application.UltraCalc">
+    <configuration default="true" type="AppleRunConfiguration" factoryName="Application" PROJECT_NAME="UltraCalc" TARGET_NAME="UltraCalc" CONFIG_NAME="Debug" DESTINATION_ID="iphonesimulator_5.1_2" RUN_TARGET_PROJECT_NAME="UltraCalc" RUN_TARGET_NAME="UltraCalc" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <method>
+        <option name="com.jetbrains.cidr.execution.BuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.StopCurrentSessionBeforeRunTaskProvider$StopCurrentSessionBeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="false" name="UltraCalc" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="UltraCalc" PROJECT_NAME="UltraCalc" TARGET_NAME="UltraCalc" CONFIG_NAME="Debug" DESTINATION_ID="iphonesimulator_5.1_2" RUN_TARGET_PROJECT_NAME="UltraCalc" RUN_TARGET_NAME="UltraCalc" DEBUGGER="GDB" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <RunnerSettings RunnerId="AppRunner" />
+      <ConfigurationWrapper RunnerId="AppRunner" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Application.UltraCalc" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1333586480237</created>
+      <updated>1333586480237</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="38" y="125" width="768" height="464" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24966443" sideWeight="0.2918919" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24966443" sideWeight="0.35945946" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24966443" sideWeight="0.37027028" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/UltraCalc/AnswerCellModel.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="30" selection-start="357" selection-end="357" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UltraCalc/ViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="29" selection-start="628" selection-end="628" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UltraCalc/ViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="228" column="53" selection-start="6813" selection-end="6813" vertical-scroll-proportion="1.2884616">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

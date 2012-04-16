@@ -9,10 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "AnswerCellModel.h"
 @interface AnswerTableModel : NSObject
-
+{
+    NSMutableArray *cellArray;
+}
 
 -(void)addNewCell:(AnswerCellModel*) cell;
--(void)cellCount;
+-(int)cellCount;
+-(AnswerCellModel*)cellModelAtIndex:(int)index;
+
+-(void)removeCellAtIndex:(int)index;
+
++(AnswerTableModel*)sharedModel;
+
 
 
 @end
