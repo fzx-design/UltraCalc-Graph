@@ -44,8 +44,8 @@
     NSMutableDictionary * variables = [NSMutableDictionary dictionary];//useless
     
 	NSString * string = brain.calculateString;
-    
-    [inputScrollViewController setText:string];
+    NSLog(@"calculate string:%@",string);
+    //[inputScrollViewController setText:string];
     
     
 	NSError *error = nil;
@@ -82,6 +82,7 @@
 	if (error != nil) {
 		NSLog(@"error: %@", error);
 		[resultLabel setTextColor:[UIColor redColor]];
+        [resultLabel setText:@"Error"];
 	}
 	
 	//[variableList reloadData];		
@@ -282,6 +283,7 @@
     
     answerTableView.allowsMultipleSelectionDuringEditing = YES;
     
+    
     if(brain == nil)
         brain = [Brain sharedBrain];
     
@@ -311,6 +313,7 @@
     resultLabel = nil;
     editAnswerPressedIndicator = nil;
     inputView = nil;
+    answerTableEditDeleteButton = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -344,6 +347,8 @@
     [brain clearQueue];
     
     [self syncInputLabel];
+    
+    resultLabel.text = @"";
 }
 -(IBAction)operatorPressed:(id)sender
 {
@@ -611,6 +616,13 @@
 	UILabel *cellExpressionLabel = (UILabel *)[cell viewWithTag:102];
 	cellExpressionLabel.text = cellModel.expression;
     
+    cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_hover_bg.png"]];
+    
+    
+    //cellResultLabel.highlightedTextColor = [UIColor redColor];
+    //cellExpressionLabel.highlightedTextColor =  [UIColor redColor];
+    
+    
 	UIImageView * noteImageView = (UIImageView *)[cell viewWithTag:103];
     if(cellModel.note)
     {
@@ -634,12 +646,64 @@
     
 }
 
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
+{
+    NSLog(@"actionSheet:%d",buttonIndex);
+    switch (buttonIndex) {
+        case 0://copy
+            ;
+            break;
+        case 1://use result
+            ;
+            break;
+        case 2://Edit note
+            break;
+        case 3://Delete
+            //answerTableView.
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)showCellActionListForCell:(UITableViewCell*)cell
+{
+    UIActionSheet *popupSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                            delegate:self 
+                                                   cancelButtonTitle:nil 
+                                              destructiveButtonTitle:@"Copy" 
+                                                   otherButtonTitles:@"Use Result", @"Edit Note",@"Delete", nil];
+    
+    popupSheet.destructiveButtonIndex = 3;
+    
+    popupSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    //UILabel * expressionLabel = (UILabel *)cell.gestur;
+    
+    [popupSheet showFromRect:cell.bounds inView:cell animated:YES];
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+    
+    if (!tableView.isEditing) {
+        [self showCellActionListForCell:cell];
+    }
+    
+    
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete)
 	{
 		[[AnswerTableModel sharedModel] removeCellAtIndex:indexPath.row];
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
 	}
 }
 
@@ -649,6 +713,7 @@
 {
     BOOL isEditing = answerTableView.editing;
     [answerTableView setEditing:!isEditing animated:YES];
+    answerTableEditDeleteButton.hidden = isEditing;
     float expectAlpha = isEditing?0:1;
     [UIView animateWithDuration:0.1f animations:^{
         editAnswerPressedIndicator.alpha = expectAlpha;

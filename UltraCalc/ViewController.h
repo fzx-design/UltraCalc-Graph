@@ -16,7 +16,7 @@
 
 @class DDMathEvaluator;
 
-@interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource>
+@interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource,UIActionSheetDelegate>
 {
     DDMathEvaluator *evaluator;
     Brain *brain;
@@ -58,6 +58,7 @@
     
     __weak IBOutlet UIButton *editAnswerTableBtn;
     __weak IBOutlet UIImageView *editAnswerPressedIndicator;
+    __weak IBOutlet UIButton *answerTableEditDeleteButton;
     
 }
 

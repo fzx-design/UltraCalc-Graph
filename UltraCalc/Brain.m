@@ -104,6 +104,9 @@ static Brain* instance = nil;
     {
         return @"0";
     }
+    [s replaceOccurrencesOfString:@"*" withString:@"×" options:NSCaseInsensitiveSearch range:NSMakeRange(0, s.length)];
+    [s replaceOccurrencesOfString:@"/" withString:@"÷" options:NSCaseInsensitiveSearch range:NSMakeRange(0, s.length)];
+    
     return s;
 }
 
