@@ -74,4 +74,7 @@
 
 
 -(IBAction)editAnswerTable:(id)sender;
+
+-(IBAction)deleteTableCells:(id)sender;
+
 @end

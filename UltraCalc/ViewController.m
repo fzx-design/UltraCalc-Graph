@@ -708,7 +708,6 @@
 }
 
 
-
 -(IBAction)editAnswerTable:(id)sender
 {
     BOOL isEditing = answerTableView.editing;
@@ -720,5 +719,18 @@
     }];
 }
 
+-(IBAction)deleteTableCells:(id)sender
+{
+    NSArray* cellsToDelete = [answerTableView indexPathsForSelectedRows];
+
+    for(NSIndexPath *path in cellsToDelete)
+    {
+        NSInteger row = path.row;
+        //NSInteger section = path.section;
+        [[AnswerTableModel sharedModel] removeCellAtIndex:row];
+    }
+    
+    [answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationRight];
+}
 
 @end
