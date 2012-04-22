@@ -25,8 +25,8 @@
     [inputScrollViewController setText:brain.displayString];
     
     [inputScrollViewController clearAllRect];
-    [inputScrollViewController showRectFromCharIndex:0 toIndex:5];
-    [inputScrollViewController showRectFromCharIndex:2 toIndex:4];
+//    [inputScrollViewController showRectFromCharIndex:0 toIndex:5];
+//    [inputScrollViewController showRectFromCharIndex:2 toIndex:4];
 }
 
 
@@ -72,7 +72,7 @@
                 
                 NSArray *indexArray = [NSArray arrayWithObjects:path1,nil];
                 
-                [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationLeft];
+                [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationTop];
 			}
 		}
 	} else {
@@ -264,8 +264,8 @@
     [resultLabel setFont:[UIFont fontWithName:@"Eurostile" size:32]];
     resultLabel.shadowColor = nil;
     resultLabel.shadowOffset = CGSizeMake(0.0f, 2.0f);
-    resultLabel.shadowColor = [UIColor colorWithRed:158/255.0 green:1 blue:1 alpha:0.8];  
-    resultLabel.shadowBlur = 3.0f;
+    resultLabel.shadowColor = [UIColor colorWithRed:58/255.0 green:250.0/255.0 blue:213.0/255.0 alpha:0.57];   
+    resultLabel.shadowBlur = 5.0f;
 }
 
 - (void)viewDidLoad
@@ -279,9 +279,6 @@
     [self initResultLabel];
     
     answerTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell_bg.png"]];
-
-    
-    answerTableView.allowsMultipleSelectionDuringEditing = YES;
     
     
     if(brain == nil)
@@ -319,7 +316,13 @@
 }
 
 
-
+-(void)setNotEditingWhenPressedOtherButton
+{
+    if(answerTableView.isEditing)
+    {
+        [self editAnswerTable:nil];
+    }
+}
 
 -(IBAction)digitPressed:(id)sender
 {
@@ -329,6 +332,7 @@
     [brain appendDigit:[NSString stringWithFormat:@"%d",btn.tag]];
     
     [self syncInputLabel];
+    [self setNotEditingWhenPressedOtherButton];
 }
 
 
@@ -339,6 +343,8 @@
     [brain removeLastToken];
     
     [self syncInputLabel];
+    [self setNotEditingWhenPressedOtherButton];
+
 }
 
 -(IBAction)allClearPressed:(id)sender
@@ -349,6 +355,8 @@
     [self syncInputLabel];
     
     resultLabel.text = @"";
+    [self setNotEditingWhenPressedOtherButton];
+
 }
 -(IBAction)operatorPressed:(id)sender
 {
@@ -373,19 +381,25 @@
     [brain appendOperator:op];
     
     [self syncInputLabel];
+    [self setNotEditingWhenPressedOtherButton];
+
     
 }
 -(IBAction)positiveMinusPressed:(id)sender
 {
     NSLog(@"positiveMinusPressed");
     
-    
+    [self setNotEditingWhenPressedOtherButton];
+
 }
 -(IBAction)dotPressed:(id)sender
 {
     NSLog(@"dotPressed");
     [brain appendDot:@"."];
     [self syncInputLabel];
+    
+    [self setNotEditingWhenPressedOtherButton];
+
 }
 
 -(IBAction)leftParenthesePressed:(id)sender
@@ -393,6 +407,9 @@
     [brain appendLeftParenthese];
     
     [self syncInputLabel];
+    
+    [self setNotEditingWhenPressedOtherButton];
+
 }
 
 -(IBAction)rightParenthesePressed:(id)sender
@@ -401,12 +418,17 @@
     
     [self syncInputLabel];
 
+    [self setNotEditingWhenPressedOtherButton];
+
 }
 
 -(IBAction)goPressed:(id)sender
 {
     NSLog(@"goPressed");
     [self evaluate];
+    
+    [self setNotEditingWhenPressedOtherButton];
+
 }
 
 -(BOOL)MultipleButtonNeedSendBackAfterTouch:(MultipleButtonViewController*)button
@@ -593,6 +615,9 @@
     [brain appendFunction:[NSString stringWithFormat:@"%@",identifier]];
     
     [self syncInputLabel];
+    
+    [self setNotEditingWhenPressedOtherButton];
+
 }
 
 
@@ -618,6 +643,9 @@
     
     cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_hover_bg.png"]];
     
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [cell addGestureRecognizer:longPress];
     
     //cellResultLabel.highlightedTextColor = [UIColor redColor];
     //cellExpressionLabel.highlightedTextColor =  [UIColor redColor];
@@ -684,17 +712,58 @@
 }
 
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //wierd i can only write it here...
+    return 68;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(tableView.isEditing)//high light text when multi select.
+    {
+        UITableViewCell *cell = [answerTableView cellForRowAtIndexPath:indexPath];
+        UILabel *cellResultLabel = (UILabel *)[cell viewWithTag:101];
+        [cellResultLabel setHighlighted:YES];
         
-    
-    if (!tableView.isEditing) {
-        [self showCellActionListForCell:cell];
+        UILabel *cellExpressionLabel = (UILabel *)[cell viewWithTag:102];
+        [cellExpressionLabel setHighlighted:YES];
     }
+    else {
+        UITableViewCell *cell = [answerTableView cellForRowAtIndexPath:indexPath];
+        
+        if (!answerTableView.isEditing) {
+            [self showCellActionListForCell:cell];
+            [answerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+
+    }
+}
+
+-(void) handleLongPress: (UIGestureRecognizer *)longPress {
+    if (longPress.state==UIGestureRecognizerStateBegan) {
+        //CGPoint pressPoint = [longPress locationInView:answerTableView];
+        //NSIndexPath *indexPath = [answerTableView indexPathForRowAtPoint:pressPoint];
+//        UITableViewCell *cell = [answerTableView cellForRowAtIndexPath:indexPath];
+//        
+//        if (!answerTableView.isEditing) {
+//            [self showCellActionListForCell:cell];
+//            [answerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+//        }
+    }
+}
+
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView 
+		   editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    if(answerTableView.isEditing)
+    {
+        return UITableViewCellEditingStyleDelete;
+    }
+    return UITableViewCellEditingStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -702,11 +771,16 @@
 	if (editingStyle == UITableViewCellEditingStyleDelete)
 	{
 		[[AnswerTableModel sharedModel] removeCellAtIndex:indexPath.row];
-		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
         
 	}
 }
 
+- (void)tableView:(UITableView *)tableView 
+didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView reloadData];
+}
 
 -(IBAction)editAnswerTable:(id)sender
 {
@@ -719,18 +793,21 @@
     }];
 }
 
+
 -(IBAction)deleteTableCells:(id)sender
 {
     NSArray* cellsToDelete = [answerTableView indexPathsForSelectedRows];
 
+    NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] init];
     for(NSIndexPath *path in cellsToDelete)
     {
-        NSInteger row = path.row;
-        //NSInteger section = path.section;
-        [[AnswerTableModel sharedModel] removeCellAtIndex:row];
+        NSInteger row = path.row;;
+        [indexSet addIndex:row];
     }
-    
-    [answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationRight];
+    [[AnswerTableModel sharedModel] removeCellsAtIndexSet:indexSet];
+        
+    [answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationBottom];
+    [answerTableView reloadData];
 }
 
 @end

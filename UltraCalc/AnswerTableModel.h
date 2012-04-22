@@ -19,6 +19,8 @@
 
 -(void)removeCellAtIndex:(int)index;
 
+-(void)removeCellsAtIndexSet:(NSIndexSet*)set;
+
 +(AnswerTableModel*)sharedModel;
 
 

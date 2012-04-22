@@ -36,18 +36,19 @@
     
     CGRect rect= inputLabel.frame;
     rect.size.width = (size.width > minWidth) ? size.width  :  minWidth;
+    //rect.size.width += 10;
     inputLabel.frame = rect;
     inputLabel.text = string;
     
     CGSize inputSize = inputLabel.bounds.size;;
-    //size.width += 300;
+    inputSize.width += 5;
     scrollView.contentSize = inputSize;
 
     CGRect visibleRect = rect;
     visibleRect.origin.x += rect.size.width - minWidth;
     
     
-    [scrollView scrollRectToVisible:visibleRect animated:YES];
+    [scrollView scrollRectToVisible:visibleRect animated:NO];
 }
 
 -(NSString*)text
@@ -63,7 +64,9 @@
     
     inputLabel.shadowColor = nil;
     inputLabel.shadowOffset = CGSizeMake(0.0f, 2.0f);
-    inputLabel.shadowColor = [UIColor colorWithRed:158/255.0 green:1 blue:1 alpha:0.7];  
+    inputLabel.textColor = [UIColor colorWithRed:158/255.0 green:254.0/255.0 blue:1 alpha:0.7];  
+    inputLabel.shadowColor = [UIColor colorWithRed:58/255.0 green:250.0/255.0 blue:213.0/255.0 alpha:0.57];  
+    
     inputLabel.shadowBlur = 5.0f;
     
     CGRect rect= inputLabel.frame;
@@ -151,10 +154,50 @@
 }
 
 
+-(void)updateIndicator
+{
+    float leftEdge = scrollView.contentOffset.x;
+    if (leftEdge <= 0) {
+        leftIndicator.hidden = YES;
+    }
+    else {
+        leftIndicator.hidden = NO;
+    }
+    
+//    if(scrollView.contentSize.width > minWidth && !leftIndicator.hidden)
+//    {
+//        rightIndicator.hidden = YES;   
+//    }
+//    else {
+//        rightIndicator.hidden = NO;
+//    }
+    
+    
+    CGRect visibleRect = inputLabel.frame;
+    visibleRect.origin.x += inputLabel.frame.size.width - minWidth;
+    
+    //float rightEdge = scrollView.contentOffset.x + scrollView.contentSize.width;
+    if (scrollView.contentOffset.x + 5 >= visibleRect.origin.x) {
+        rightIndicator.hidden = YES;
+    }
+    else {
+        rightIndicator.hidden = NO;
+    }
+   
+}
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self updateIndicator];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initLabel];
+    leftIndicator.hidden = YES;
+    rightIndicator.hidden = YES;
     
     rectArray = [NSMutableArray array];
 
@@ -165,6 +208,8 @@
 {
     scrollView = nil;
     inputLabel = nil;
+    leftIndicator = nil;
+    rightIndicator = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

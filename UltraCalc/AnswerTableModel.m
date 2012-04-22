@@ -26,6 +26,11 @@ static AnswerTableModel* instance = nil;
     [cellArray removeObjectAtIndex:index];
 }
 
+-(void)removeCellsAtIndexSet:(NSIndexSet*)set
+{
+    [cellArray removeObjectsAtIndexes:set];
+}
+
 - (id)init
 {
    if(self = [super init])
