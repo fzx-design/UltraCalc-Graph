@@ -263,7 +263,7 @@
 {
     [resultLabel setFont:[UIFont fontWithName:@"Eurostile" size:32]];
     resultLabel.shadowColor = nil;
-    resultLabel.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    resultLabel.shadowOffset = CGSizeMake(0.0f, 0.0f);
     resultLabel.shadowColor = [UIColor colorWithRed:58/255.0 green:250.0/255.0 blue:213.0/255.0 alpha:0.57];   
     resultLabel.shadowBlur = 5.0f;
 }

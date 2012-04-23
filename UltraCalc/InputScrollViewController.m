@@ -63,7 +63,7 @@
     [inputLabel setFont:font];
     
     inputLabel.shadowColor = nil;
-    inputLabel.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    inputLabel.shadowOffset = CGSizeMake(0.0f, 0.0f);
     inputLabel.textColor = [UIColor colorWithRed:158/255.0 green:254.0/255.0 blue:1 alpha:0.7];  
     inputLabel.shadowColor = [UIColor colorWithRed:58/255.0 green:250.0/255.0 blue:213.0/255.0 alpha:0.57];  
     
