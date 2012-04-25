@@ -793,9 +793,19 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     if([[AnswerTableModel sharedModel] cellCount] == 0)
     {
         noRecordPlaceHolder.hidden = NO;
+        [UIView animateWithDuration:0.1f animations:^{
+            noRecordPlaceHolder.alpha = 1.0;
+        }];
     }
     else {
-        noRecordPlaceHolder.hidden = YES;
+        [UIView animateWithDuration:0.1f animations:^{
+            noRecordPlaceHolder.alpha = 0; 
+        } 
+                         completion:^(BOOL finish)
+        {
+            noRecordPlaceHolder.hidden = YES; 
+        }
+       ];
     }
 }
 

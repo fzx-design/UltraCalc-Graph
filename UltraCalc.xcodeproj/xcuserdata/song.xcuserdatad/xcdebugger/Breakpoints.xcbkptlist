@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UltraCalc/ViewController.m"
-         timestampString = "357036969.538614"
+         timestampString = "357051553.227275"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "818"
-         endingLineNumber = "818"
+         startingLineNumber = "828"
+         endingLineNumber = "828"
          landmarkName = "-deleteTableCells:"
          landmarkType = "5">
       </FileBreakpoint>
