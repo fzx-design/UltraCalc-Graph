@@ -43,14 +43,17 @@
         if(i == 0)
         {
             [self setButton:mainBtn attributeFromDictionary:dict];
+            mainBtn.tag = 0;
         }
         else if(i == 1)
         {
             [self setButton:appendixBtn1 attributeFromDictionary:dict];
+            appendixBtn1.tag = 1;
         }
         else if(i == 2)
         {
             [self setButton:appendixBtn2 attributeFromDictionary:dict];
+            appendixBtn2.tag = 2;
         }
     }
 
@@ -147,29 +150,56 @@
     return [dict objectForKey:@"id"];
 }
 
+
+-(void)swapButton:(UIButton*)btn1 With:(UIButton*)btn2
+{
+    int tag1 = btn1.tag;
+    int tag2 = btn2.tag;
+    
+    btn1.tag = 10;
+    btn2.tag = tag1;
+    btn1.tag = tag2;
+    
+    NSDictionary *dict = [datasource MultipleButton:self ButtonAttributeAtIndex:btn1.tag];
+    [self setButton:btn1 attributeFromDictionary:dict];
+    
+    dict = [datasource MultipleButton:self ButtonAttributeAtIndex:btn2.tag];
+    [self setButton:btn2 attributeFromDictionary:dict];
+    
+}
+
 -(void)doPressedStuff:(CGPoint) location
 {
+    UIButton *pressedButton = nil;
     if(CGRectContainsPoint(mainBtn.frame, location))
     {
         //[mainBtn setHighlighted:YES];
         NSLog(@"no0 button pressed");
-        [datasource pressedButtonWithIdentifier:[self getIdentiferAtIndex:0]];
+        [datasource pressedButtonWithIdentifier:[self getIdentiferAtIndex:mainBtn.tag]];
+        pressedButton = mainBtn;
     }
     else if(CGRectContainsPoint(appendixBtn1.frame, location))
     {
         //[appendixBtn1 setHighlighted:YES];
         NSLog(@"no1 button pressed");
-        [datasource pressedButtonWithIdentifier:[self getIdentiferAtIndex:1]];
-        
+        [datasource pressedButtonWithIdentifier:[self getIdentiferAtIndex:appendixBtn1.tag]];
+        pressedButton = appendixBtn1;
     }
     else if(CGRectContainsPoint(appendixBtn2.frame, location))
     {
         //[appendixBtn2 setHighlighted:YES];
         NSLog(@"no2 button pressed");
-        [datasource pressedButtonWithIdentifier:[self getIdentiferAtIndex:2]];
+        [datasource pressedButtonWithIdentifier:[self getIdentiferAtIndex:appendixBtn2.tag]];
+        pressedButton = appendixBtn2;
     }
     else {
         NSLog(@"nothing pressed");
+    }
+    
+
+    if(mainBtn.tag != pressedButton.tag)
+    {
+        [self swapButton:mainBtn With:pressedButton];
     }
 }
 
