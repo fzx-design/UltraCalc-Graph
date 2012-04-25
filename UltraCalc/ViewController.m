@@ -811,6 +811,10 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 
 -(IBAction)editAnswerTable:(id)sender
 {
+    if([[AnswerTableModel sharedModel] cellCount] == 0)
+    {
+        return;
+    }
     BOOL isEditing = answerTableView.editing;
     [answerTableView setEditing:!isEditing animated:YES];
     answerTableEditDeleteButton.hidden = isEditing;
