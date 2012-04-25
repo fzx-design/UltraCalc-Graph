@@ -57,11 +57,13 @@
 			NSNumber * result = [expression evaluateWithSubstitutions:variables evaluator:eval error:&error];
 			if (error == nil) {
 				[resultLabel setTextColor:[UIColor whiteColor]];
-				[resultLabel setText:[result description]];
+                
+                NSLog(@"result:%@",[result description]);
+				[resultLabel setText:[NSString stringWithFormat:@"%.7g",[result doubleValue]]];
                 
                 //TODO add to answer table
                 AnswerCellModel *newCell = [[AnswerCellModel alloc] init];
-                newCell.result = resultLabel.text;
+                newCell.result = [result description];
                 newCell.note = nil;
                 newCell.expression = brain.displayString;
                 
@@ -73,6 +75,8 @@
                 NSArray *indexArray = [NSArray arrayWithObjects:path1,nil];
                 
                 [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationTop];
+                
+                [self updateNoRecordPlaceHolder];
 			}
 		}
 	} else {
@@ -311,6 +315,7 @@
     editAnswerPressedIndicator = nil;
     inputView = nil;
     answerTableEditDeleteButton = nil;
+    noRecordPlaceHolder = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -782,6 +787,18 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView reloadData];
 }
 
+
+-(void)updateNoRecordPlaceHolder
+{
+    if([[AnswerTableModel sharedModel] cellCount] == 0)
+    {
+        noRecordPlaceHolder.hidden = NO;
+    }
+    else {
+        noRecordPlaceHolder.hidden = YES;
+    }
+}
+
 -(IBAction)editAnswerTable:(id)sender
 {
     BOOL isEditing = answerTableView.editing;
@@ -808,6 +825,15 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
         
     [answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationBottom];
     [answerTableView reloadData];
+    
+    if([[AnswerTableModel sharedModel] cellCount] == 0)
+    {
+        if(answerTableView.isEditing)
+        {
+            [self editAnswerTable:nil];
+        }
+        [self updateNoRecordPlaceHolder];
+    }
 }
 
 @end

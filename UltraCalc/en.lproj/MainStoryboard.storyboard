@@ -34,11 +34,11 @@
                                 </connections>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="screen_arrow_l.png" id="TDI-we-JJH" userLabel="leftScrollIndicator">
-                                <rect key="frame" x="3" y="10" width="11" height="18"/>
+                                <rect key="frame" x="-2" y="9" width="11" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="screen_arrow_r.png" id="qHz-AF-J7M" userLabel="rightScrollIndicator">
-                                <rect key="frame" x="226" y="10" width="11" height="18"/>
+                                <rect key="frame" x="229" y="9" width="11" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -163,9 +163,18 @@
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="134" sectionHeaderHeight="22" sectionFooterHeight="22" id="faM-AZ-DoD">
-                                        <rect key="frame" x="352" y="71" width="220" height="645"/>
+                                        <rect key="frame" x="352" y="71" width="220" height="633"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <label key="tableFooterView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="No Record" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="AbE-zm-bmq">
+                                            <rect key="frame" x="0.0" y="90" width="220" height="549"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <size key="shadowOffset" width="0.0" height="1"/>
+                                        </label>
                                         <prototypes>
                                             <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="answerCell" rowHeight="68" id="n5y-eh-GbR">
                                                 <rect key="frame" x="0.0" y="22" width="220" height="68"/>
@@ -218,6 +227,10 @@
                                             <outlet property="delegate" destination="2" id="ZF1-8h-naq"/>
                                         </connections>
                                     </tableView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="records_tableview_bottom.png" id="EUt-nh-2lI">
+                                        <rect key="frame" x="352" y="670" width="220" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <view contentMode="scaleToFill" id="eYR-eM-Lhk" userLabel="functionBar">
                                         <rect key="frame" x="33" y="51" width="266" height="287"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -645,7 +658,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="page_line_top.png" id="eeP-6c-nj1">
-                                        <rect key="frame" x="561" y="30" width="23.5" height="636"/>
+                                        <rect key="frame" x="561" y="24.5" width="23.5" height="693"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -666,6 +679,7 @@
                         <outlet property="inputView" destination="4rV-a2-CUl" id="rWK-QV-vt2"/>
                         <outlet property="leftView" destination="LJo-qm-ooJ" id="B5N-wC-OtV"/>
                         <outlet property="logView" destination="rDJ-sE-HfB" id="mDx-D5-580"/>
+                        <outlet property="noRecordPlaceHolder" destination="AbE-zm-bmq" id="HuD-Ob-V1h"/>
                         <outlet property="resultLabel" destination="WqZ-Hy-zRl" id="dbq-DB-oTC"/>
                         <outlet property="rightView" destination="dtP-vA-8q4" id="mID-XL-cuk"/>
                         <outlet property="sinView" destination="kgS-9K-F0Q" id="lBq-6U-zeM"/>
@@ -692,6 +706,7 @@
         <image name="launchimage.png" width="1024" height="748"/>
         <image name="numpad_up.png" width="264" height="146"/>
         <image name="page_line_top.png" width="6" height="693"/>
+        <image name="records_tableview_bottom.png" width="220" height="26"/>
         <image name="screen_arrow_l.png" width="11" height="18"/>
         <image name="screen_arrow_r.png" width="11" height="18"/>
     </resources>
@@ -740,6 +755,7 @@
                 <relationship kind="outlet" name="inputView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="leftView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="logView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="noRecordPlaceHolder" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="resultLabel" candidateClass="FXLabel"/>
                 <relationship kind="outlet" name="rightView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="sinView" candidateClass="UIView"/>

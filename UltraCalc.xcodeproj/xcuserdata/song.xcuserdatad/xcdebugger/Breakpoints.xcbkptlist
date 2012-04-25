@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UltraCalc/ViewController.m"
-         timestampString = "356602198.135398"
+         timestampString = "357036969.538614"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "762"
-         endingLineNumber = "762"
+         startingLineNumber = "767"
+         endingLineNumber = "767"
          landmarkName = "-tableView:editingStyleForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UltraCalc/ViewController.m"
-         timestampString = "356602198.135398"
+         timestampString = "357036969.538614"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "801"
-         endingLineNumber = "801"
+         startingLineNumber = "818"
+         endingLineNumber = "818"
          landmarkName = "-deleteTableCells:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UltraCalc/ViewController.m"
-         timestampString = "356602198.135398"
+         timestampString = "357036969.538614"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "771"
-         endingLineNumber = "771"
+         startingLineNumber = "776"
+         endingLineNumber = "776"
          landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UltraCalc/ViewController.m"
-         timestampString = "356602198.135398"
+         timestampString = "357036969.538614"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "782"
-         endingLineNumber = "782"
+         startingLineNumber = "787"
+         endingLineNumber = "787"
          landmarkName = "-tableView:didEndEditingRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>

@@ -59,6 +59,7 @@
     __weak IBOutlet UIButton *editAnswerTableBtn;
     __weak IBOutlet UIImageView *editAnswerPressedIndicator;
     __weak IBOutlet UIButton *answerTableEditDeleteButton;
+    __weak IBOutlet UILabel *noRecordPlaceHolder;
     
 }
 
