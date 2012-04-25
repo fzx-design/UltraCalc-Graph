@@ -157,20 +157,24 @@
 -(void)updateIndicator
 {
     float leftEdge = scrollView.contentOffset.x;
+    
+    UIFont *myFont = font;
+    // Get the width of a string ...
+    CGSize size = [inputLabel.text sizeWithFont:myFont];
+    
+    if(size.width <= minWidth)//if smaller than min width, then don't scroll
+    {
+        leftIndicator.hidden = YES;
+        rightIndicator.hidden = YES;
+        return;
+    }
+    
     if (leftEdge <= 0) {
         leftIndicator.hidden = YES;
     }
     else {
         leftIndicator.hidden = NO;
     }
-    
-//    if(scrollView.contentSize.width > minWidth && !leftIndicator.hidden)
-//    {
-//        rightIndicator.hidden = YES;   
-//    }
-//    else {
-//        rightIndicator.hidden = NO;
-//    }
     
     
     CGRect visibleRect = inputLabel.frame;
