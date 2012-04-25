@@ -174,21 +174,21 @@
     if(CGRectContainsPoint(mainBtn.frame, location))
     {
         //[mainBtn setHighlighted:YES];
-        NSLog(@"no0 button pressed");
+        NSLog(@"mainBtn button pressed");
         [datasource pressedButtonWithIdentifier:[self getIdentiferAtIndex:mainBtn.tag]];
         pressedButton = mainBtn;
     }
     else if(CGRectContainsPoint(appendixBtn1.frame, location))
     {
         //[appendixBtn1 setHighlighted:YES];
-        NSLog(@"no1 button pressed");
+        NSLog(@"appendixBtn1 button pressed");
         [datasource pressedButtonWithIdentifier:[self getIdentiferAtIndex:appendixBtn1.tag]];
         pressedButton = appendixBtn1;
     }
     else if(CGRectContainsPoint(appendixBtn2.frame, location))
     {
         //[appendixBtn2 setHighlighted:YES];
-        NSLog(@"no2 button pressed");
+        NSLog(@"appendixBtn2 button pressed");
         [datasource pressedButtonWithIdentifier:[self getIdentiferAtIndex:appendixBtn2.tag]];
         pressedButton = appendixBtn2;
     }
