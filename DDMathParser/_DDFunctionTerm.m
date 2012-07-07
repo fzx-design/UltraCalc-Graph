@@ -49,7 +49,7 @@
                     DD_RELEASE(parameterGroup);
                 } else {
                     // there's only one term in this parameter; no need to group it in parentheses
-                    [newSubterms addObject:[parameterGroupTerms objectAtIndex:0]];
+                    [newSubterms addObject:parameterGroupTerms[0]];
                 }
                 
                 subrange.location = NSMaxRange(subrange)+1;
@@ -69,7 +69,7 @@
             [newSubterms addObject:parameterGroup];
             DD_RELEASE(parameterGroup);
         } else if (rangeOfLastParameter.length == 1) {
-            [newSubterms addObject:[[self subterms] objectAtIndex:rangeOfLastParameter.location]];
+            [newSubterms addObject:[self subterms][rangeOfLastParameter.location]];
         }
         
         [self _setSubterms:newSubterms];

@@ -42,18 +42,19 @@
         for (_DDOperatorInfo *info in operators) {
             NSString *key = [info function];
             
-            NSMutableArray *value = [_operatorLookup objectForKey:key];
+            NSMutableArray *value = _operatorLookup[key];
             if (value == nil) {
                 value = [NSMutableArray array];
-                [_operatorLookup setObject:value forKey:key];
+                _operatorLookup[key] = value;
             }
             [value addObject:info];
         }
         
         // this is to make sure all of the operators are defined correctly
+        _DDOperatorInfo *baseInfo = nil;
         for (NSString *functionName in _operatorLookup) {
-            NSArray *operatorInfos = [_operatorLookup objectForKey:functionName];
-            _DDOperatorInfo *baseInfo = [operatorInfos lastObject];
+            NSArray *operatorInfos = _operatorLookup[functionName];
+            baseInfo = [operatorInfos lastObject];
             for (_DDOperatorInfo *info in operatorInfos) {
                 NSAssert([info precedence] == [baseInfo precedence], @"mismatched operator precedences");
                 NSAssert([info arity] == [baseInfo arity], @"mismatched operator arity");
@@ -61,7 +62,7 @@
             }
         }
     });
-    return [_operatorLookup objectForKey:operator];
+    return _operatorLookup[operator];
 }
 
 + (NSArray *)infosForOperatorToken:(NSString *)token {
@@ -73,15 +74,15 @@
         NSArray *operators = [self allOperators];
         for (_DDOperatorInfo *info in operators) {
             
-            NSMutableArray *value = [_operatorLookup objectForKey:[info token]];
+            NSMutableArray *value = _operatorLookup[[info token]];
             if (value == nil) {
                 value = [NSMutableArray array];
-                [_operatorLookup setObject:value forKey:[info token]];
+                _operatorLookup[[info token]] = value;
             }
             [value addObject:info];
         }
     });
-    return [_operatorLookup objectForKey:token];
+    return _operatorLookup[token];
 }
 
 #if !DD_HAS_ARC

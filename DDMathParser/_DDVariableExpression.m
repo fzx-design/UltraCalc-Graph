@@ -56,7 +56,7 @@
 - (NSNumber *) evaluateWithSubstitutions:(NSDictionary *)substitutions evaluator:(DDMathEvaluator *)evaluator error:(NSError **)error {
 	if (evaluator == nil) { evaluator = [DDMathEvaluator sharedMathEvaluator]; }
 	
-	id variableValue = [substitutions objectForKey:[self variable]];
+	id variableValue = substitutions[[self variable]];
 	if ([variableValue isKindOfClass:[DDExpression class]]) {
 		return [variableValue evaluateWithSubstitutions:substitutions evaluator:evaluator error:error];
 	}
@@ -69,10 +69,8 @@
 	if (error != nil) {
         *error = [NSError errorWithDomain:DDMathParserErrorDomain 
                                      code:DDErrorCodeUnresolvedVariable 
-                                 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                           [NSString stringWithFormat:@"unable to resolve variable: %@", self], NSLocalizedDescriptionKey,
-                                           [self variable], DDUnknownVariableKey,
-                                           nil]];
+                                 userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"unable to resolve variable: %@", self],
+                                           DDUnknownVariableKey: [self variable]}];
 	}
 	return nil;
 }

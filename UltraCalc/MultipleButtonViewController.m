@@ -26,10 +26,10 @@
 
 -(void)setButton:(UIButton*)btn attributeFromDictionary:(NSDictionary*)dictionary
 {
-    NSString *normalPic = [dictionary objectForKey:@"normal"];
+    NSString *normalPic = dictionary[@"normal"];
     UIImage *normal = [UIImage imageNamed:normalPic];
     [btn setImage:normal forState:UIControlStateNormal];
-    NSString *highlightPic = [dictionary objectForKey:@"highlight"];
+    NSString *highlightPic = dictionary[@"highlight"];
     [btn setImage:[UIImage imageNamed:highlightPic] forState:UIControlStateHighlighted];
     
     [btn setBackgroundImage:[UIImage imageNamed:@"button_hover.png"] forState:UIControlStateHighlighted];
@@ -147,7 +147,7 @@
 -(NSString*)getIdentiferAtIndex:(int)index
 {
     NSDictionary *dict = [datasource MultipleButton:self ButtonAttributeAtIndex:index];
-    return [dict objectForKey:@"id"];
+    return dict[@"id"];
 }
 
 

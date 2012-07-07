@@ -108,7 +108,7 @@
 
 - (UIColor *)gradientStartColor
 {
-    return [gradientColors count]? [gradientColors objectAtIndex:0]: nil;
+    return [gradientColors count]? gradientColors[0]: nil;
 }
 
 - (void)setGradientStartColor:(UIColor *)color
@@ -119,12 +119,12 @@
     }
     else if ([gradientColors count] < 2)
     {
-        self.gradientColors = [NSArray arrayWithObjects:color, color, nil];
+        self.gradientColors = @[color, color];
     }
-    else if ([gradientColors objectAtIndex:0] != color)
+    else if (gradientColors[0] != color)
     {
         NSMutableArray *colors = [gradientColors mutableCopy];
-        [colors replaceObjectAtIndex:0 withObject:color];
+        colors[0] = color;
         self.gradientColors = colors;
         AH_RELEASE(colors);
     }
@@ -143,12 +143,12 @@
     }
     else if ([gradientColors count] < 2)
     {
-        self.gradientColors = [NSArray arrayWithObjects:color, color, nil];
+        self.gradientColors = @[color, color];
     }
     else if ([gradientColors lastObject] != color)
     {
         NSMutableArray *colors = [gradientColors mutableCopy];
-        [colors replaceObjectAtIndex:[colors count] - 1 withObject:color];
+        colors[[colors count] - 1] = color;
         self.gradientColors = colors;
         AH_RELEASE(colors);
     }

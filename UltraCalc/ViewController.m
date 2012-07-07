@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "DDMathParser.h"
 #import "MultipleButtonDataSource.h"
 #import "MultipleButtonViewController.h"
 #import "InputScrollViewController.h"
@@ -24,73 +23,121 @@
 {
     [inputScrollViewController setText:brain.displayString];
     
-    [inputScrollViewController clearAllRect];
-//    [inputScrollViewController showRectFromCharIndex:0 toIndex:5];
-//    [inputScrollViewController showRectFromCharIndex:2 toIndex:4];
+    //[inputScrollViewController clearAllRect];
+
 }
 
+- (void)clearResultLabel
+{
+    if(![resultLabel.text isEqualToString:@"0"])
+        resultLabel.text = @"";
+}
 
-- (DDMathEvaluator *)evaluator {
-    if (evaluator == nil) {
-       
-        evaluator = [[DDMathEvaluator alloc] init];
-                    
+- (void)updateUndoRedoIndicator
+{
+    
+    if(![brain.undoManager canUndo])
+    {
+        [UIView animateWithDuration:0.3f animations:^
+         {
+             canUndoIndicator.alpha = 0.0;
+         }
+         ];
     }
-    return evaluator;
+    else {
+        [UIView animateWithDuration:0.3f animations:^
+         {
+             canUndoIndicator.alpha = 1.0;
+         }
+         ];
+    }
+    
+    if(![brain.undoManager canRedo])
+    {
+        [UIView animateWithDuration:0.3f animations:^
+         {
+             canRedoIndicator.alpha = 0.0;
+         }
+         ];
+    }
+    else {
+        [UIView animateWithDuration:0.3f animations:^
+         {
+             canRedoIndicator.alpha = 1.0;
+         }
+         ];
+    }
 }
+
+-(IBAction)undoPressed:(id)sender
+{
+    [brain.undoManager undo];
+    
+    [self syncInputLabel];
+    
+    [self setNotEditingWhenPressedOtherButton];
+    [self updateUndoRedoIndicator];
+    
+    [self clearResultLabel];
+    justPressedAC = NO;
+}
+
+-(IBAction)redoPressed:(id)sender
+{
+    [brain.undoManager redo];
+    
+    [self syncInputLabel];
+    
+    [self setNotEditingWhenPressedOtherButton];
+    [self updateUndoRedoIndicator];
+    [self clearResultLabel];
+    justPressedAC = NO;
+}
+
+
 
 - (void) evaluate {
-    DDMathEvaluator *eval = [self evaluator];
-    NSMutableDictionary * variables = [NSMutableDictionary dictionary];//useless
-    
-	NSString * string = brain.calculateString;
-    NSLog(@"calculate string:%@",string);
-    //[inputScrollViewController setText:string];
-    
-    
-	NSError *error = nil;
-	if ([string length] > 0) {
-		DDExpression * expression = [DDExpression expressionFromString:string error:&error];
-		if (error == nil) {
-			NSLog(@"parsed: %@", expression);
-			//[self updateVariablesWithExpression:expression];
-			NSNumber * result = [expression evaluateWithSubstitutions:variables evaluator:eval error:&error];
-			if (error == nil) {
-				[resultLabel setTextColor:[UIColor whiteColor]];
-                
-                NSLog(@"result:%@",[result description]);
-				[resultLabel setText:[NSString stringWithFormat:@"%.7g",[result doubleValue]]];
-                
-                //TODO add to answer table
-                AnswerCellModel *newCell = [[AnswerCellModel alloc] init];
-                newCell.result = [result description];
-                newCell.note = nil;
-                newCell.expression = brain.displayString;
-                
-                [[AnswerTableModel sharedModel] addNewCell:newCell];
-                //[answerTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
-                //[answerTableView reloadData];
-                NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
-                
-                NSArray *indexArray = [NSArray arrayWithObjects:path1,nil];
-                
-                [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationTop];
-                
-                [self updateNoRecordPlaceHolder];
-			}
-		}
-	} else {
-		[resultLabel setText:@""];
-		[variables removeAllObjects];
+
+    NSNumber *result = [brain evaluate];
+    if(result != nil)
+    {
+        [resultLabel setTextColor:[UIColor whiteColor]];
+        
+        [resultLabel setText:brain.resultString];
+        
+        //add to answer table
+        AnswerCellModel *newCell = [[AnswerCellModel alloc] init];
+        newCell.result = [result description];
+        newCell.note = nil;
+        newCell.expression = brain.calculateString;
+        
+        [[AnswerTableModel sharedModel] addNewCell:newCell];
+        //[answerTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
+        //[answerTableView reloadData];
+        NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        NSArray *indexArray = @[path1];
+        
+        [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationTop];
+        
+        [self updateNoRecordPlaceHolder];
+    }
+    else {
+        [resultLabel setText:brain.resultString];
+        if(brain.errorOccured)
+        {
+            [resultLabel setTextColor:[UIColor redColor]];
+        }
+		else {
+            [resultLabel setTextColor:[UIColor whiteColor]];
+        }
 	}
-	if (error != nil) {
-		NSLog(@"error: %@", error);
-		[resultLabel setTextColor:[UIColor redColor]];
-        [resultLabel setText:@"Error"];
-	}
-	
-	//[variableList reloadData];		
 }
+
+
+
+
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     NSLog(@"should rotate");
@@ -162,11 +209,13 @@
 - (void)loadInputScrollView
 {
     inputScrollViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"InputScrollView"];
+    inputScrollViewController.ancenster = self;
     [inputView addSubview:inputScrollViewController.view];
     
     CGRect rect= inputView.frame;
+    rect.size.height = 40;
+    rect.size.width = 248;
     [[inputScrollViewController view] setFrame:rect];
-    
 }
 
 
@@ -282,8 +331,11 @@
     
     [self initResultLabel];
     
+    [self updateUndoRedoIndicator];
+    
     answerTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell_bg.png"]];
     
+    justPressedAC = NO;
     
     if(brain == nil)
         brain = [Brain sharedBrain];
@@ -316,6 +368,8 @@
     inputView = nil;
     answerTableEditDeleteButton = nil;
     noRecordPlaceHolder = nil;
+    canUndoIndicator = nil;
+    canRedoIndicator = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -338,6 +392,9 @@
     
     [self syncInputLabel];
     [self setNotEditingWhenPressedOtherButton];
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
 }
 
 
@@ -349,20 +406,32 @@
     
     [self syncInputLabel];
     [self setNotEditingWhenPressedOtherButton];
-
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
 }
 
 -(IBAction)allClearPressed:(id)sender
 {
     NSLog(@"allClearPressed");
-    [brain clearQueue];
-    
-    [self syncInputLabel];
-    
-    resultLabel.text = @"";
-    [self setNotEditingWhenPressedOtherButton];
-
+    if(!justPressedAC)
+    {
+        [brain clearQueue];
+        
+        [self syncInputLabel];
+        
+        [self clearResultLabel];
+        [self setNotEditingWhenPressedOtherButton];
+        [self updateUndoRedoIndicator];
+        justPressedAC = YES;
+    }
+    else {
+        [brain.undoManager removeAllActions];
+        [self syncInputLabel];
+        [self updateUndoRedoIndicator];
+    }
 }
+
 -(IBAction)operatorPressed:(id)sender
 {
     NSLog(@"operatorPressed");
@@ -387,16 +456,19 @@
     
     [self syncInputLabel];
     [self setNotEditingWhenPressedOtherButton];
-
-    
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
 }
 -(IBAction)positiveMinusPressed:(id)sender
 {
     NSLog(@"positiveMinusPressed");
     
     [self setNotEditingWhenPressedOtherButton];
-
+    justPressedAC = NO;
+    [self clearResultLabel];
 }
+
 -(IBAction)dotPressed:(id)sender
 {
     NSLog(@"dotPressed");
@@ -404,7 +476,9 @@
     [self syncInputLabel];
     
     [self setNotEditingWhenPressedOtherButton];
-
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
 }
 
 -(IBAction)leftParenthesePressed:(id)sender
@@ -414,7 +488,9 @@
     [self syncInputLabel];
     
     [self setNotEditingWhenPressedOtherButton];
-
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
 }
 
 -(IBAction)rightParenthesePressed:(id)sender
@@ -424,16 +500,50 @@
     [self syncInputLabel];
 
     [self setNotEditingWhenPressedOtherButton];
-
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
 }
+
+-(IBAction)piPressed:(id)sender
+{
+    [brain appendPI];
+    
+    [self syncInputLabel];
+    
+    [self setNotEditingWhenPressedOtherButton];
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
+}
+
+-(IBAction)percentPressed:(id)sender
+{
+    [brain appendPercent];
+    
+    [self syncInputLabel];
+    
+    [self setNotEditingWhenPressedOtherButton];
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
+}
+
 
 -(IBAction)goPressed:(id)sender
 {
     NSLog(@"goPressed");
+    [brain appendACompoundString:@"#"];
+    
+    [self syncInputLabel];
+    
     [self evaluate];
     
     [self setNotEditingWhenPressedOtherButton];
-
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    
+    [inputScrollViewController removePopover];
 }
 
 -(BOOL)MultipleButtonNeedSendBackAfterTouch:(MultipleButtonViewController*)button
@@ -451,25 +561,25 @@
         if(index == 0)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_log.png" forKey:@"normal"];
-            [dict setObject:@"button_log.png" forKey:@"highlight"];
-            [dict setObject:@"log" forKey:@"id"];
+            dict[@"normal"] = @"button_log.png";
+            dict[@"highlight"] = @"button_log.png";
+            dict[@"id"] = @"log";
             return dict;
         }
         else if(index == 1)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_ln.png" forKey:@"normal"];
-            [dict setObject:@"button_ln.png" forKey:@"highlight"];
-            [dict setObject:@"ln" forKey:@"id"];
+            dict[@"normal"] = @"button_ln.png";
+            dict[@"highlight"] = @"button_ln.png";
+            dict[@"id"] = @"ln";
             return dict;
         }
         else if(index == 2)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_logxy.png" forKey:@"normal"];
-            [dict setObject:@"button_logxy.png" forKey:@"highlight"];
-            [dict setObject:@"logxy" forKey:@"id"];
+            dict[@"normal"] = @"button_logxy.png";
+            dict[@"highlight"] = @"button_logxy.png";
+            dict[@"id"] = @"logxy";
             return dict;
         }
     }
@@ -478,25 +588,25 @@
         if(index == 0)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_root.png" forKey:@"normal"];
-            [dict setObject:@"button_root.png" forKey:@"highlight"];
-            [dict setObject:@"root" forKey:@"id"];
+            dict[@"normal"] = @"button_root.png";
+            dict[@"highlight"] = @"button_root.png";
+            dict[@"id"] = @"root";
             return dict;
         }
         else if(index == 1)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_root3.png" forKey:@"normal"];
-            [dict setObject:@"button_root3.png" forKey:@"highlight"];
-            [dict setObject:@"root3" forKey:@"id"];
+            dict[@"normal"] = @"button_root3.png";
+            dict[@"highlight"] = @"button_root3.png";
+            dict[@"id"] = @"root3";
             return dict;
         }
         else if(index == 2)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_rootx.png" forKey:@"normal"];
-            [dict setObject:@"button_rootx.png" forKey:@"highlight"];
-            [dict setObject:@"rootx" forKey:@"id"];
+            dict[@"normal"] = @"button_rootx.png";
+            dict[@"highlight"] = @"button_rootx.png";
+            dict[@"id"] = @"rootx";
             return dict;
         }
     }
@@ -505,25 +615,25 @@
         if(index == 0)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_sin.png" forKey:@"normal"];
-            [dict setObject:@"button_sin.png" forKey:@"highlight"];
-            [dict setObject:@"sin" forKey:@"id"];
+            dict[@"normal"] = @"button_sin.png";
+            dict[@"highlight"] = @"button_sin.png";
+            dict[@"id"] = @"sin";
             return dict;
         }
         else if(index == 1)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_cos.png" forKey:@"normal"];
-            [dict setObject:@"button_cos.png" forKey:@"highlight"];
-            [dict setObject:@"cos" forKey:@"id"];
+            dict[@"normal"] = @"button_cos.png";
+            dict[@"highlight"] = @"button_cos.png";
+            dict[@"id"] = @"cos";
             return dict;
         }
         else if(index == 2)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_tan.png" forKey:@"normal"];
-            [dict setObject:@"button_tan.png" forKey:@"highlight"];
-            [dict setObject:@"tan" forKey:@"id"];
+            dict[@"normal"] = @"button_tan.png";
+            dict[@"highlight"] = @"button_tan.png";
+            dict[@"id"] = @"tan";
             return dict;
         }
     }
@@ -532,25 +642,25 @@
         if(index == 0)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_arcsin.png" forKey:@"normal"];
-            [dict setObject:@"button_arcsin.png" forKey:@"highlight"];
-            [dict setObject:@"arcsin" forKey:@"id"];
+            dict[@"normal"] = @"button_arcsin.png";
+            dict[@"highlight"] = @"button_arcsin.png";
+            dict[@"id"] = @"arcsin";
             return dict;
         }
         else if(index == 1)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_arccos.png" forKey:@"normal"];
-            [dict setObject:@"button_arccos.png" forKey:@"highlight"];
-            [dict setObject:@"arccos" forKey:@"id"];
+            dict[@"normal"] = @"button_arccos.png";
+            dict[@"highlight"] = @"button_arccos.png";
+            dict[@"id"] = @"arccos";
             return dict;
         }
         else if(index == 2)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_arctan.png" forKey:@"normal"];
-            [dict setObject:@"button_arctan.png" forKey:@"highlight"];
-            [dict setObject:@"arctan" forKey:@"id"];
+            dict[@"normal"] = @"button_arctan.png";
+            dict[@"highlight"] = @"button_arctan.png";
+            dict[@"id"] = @"arctan";
             return dict;
         }
     }
@@ -559,25 +669,25 @@
         if(index == 0)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_sinh.png" forKey:@"normal"];
-            [dict setObject:@"button_sinh.png" forKey:@"highlight"];
-            [dict setObject:@"sinh" forKey:@"id"];
+            dict[@"normal"] = @"button_sinh.png";
+            dict[@"highlight"] = @"button_sinh.png";
+            dict[@"id"] = @"sinh";
             return dict;
         }
         else if(index == 1)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_cosh.png" forKey:@"normal"];
-            [dict setObject:@"button_cosh.png" forKey:@"highlight"];
-            [dict setObject:@"cosh" forKey:@"id"];
+            dict[@"normal"] = @"button_cosh.png";
+            dict[@"highlight"] = @"button_cosh.png";
+            dict[@"id"] = @"cosh";
             return dict;
         }
         else if(index == 2)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_tanh.png" forKey:@"normal"];
-            [dict setObject:@"button_tanh.png" forKey:@"highlight"];
-            [dict setObject:@"tanh" forKey:@"id"];
+            dict[@"normal"] = @"button_tanh.png";
+            dict[@"highlight"] = @"button_tanh.png";
+            dict[@"id"] = @"tanh";
             return dict;
         }
     }
@@ -586,25 +696,25 @@
         if(index == 0)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_x2.png" forKey:@"normal"];
-            [dict setObject:@"button_x2.png" forKey:@"highlight"];
-            [dict setObject:@"x2" forKey:@"id"];
+            dict[@"normal"] = @"button_x2.png";
+            dict[@"highlight"] = @"button_x2.png";
+            dict[@"id"] = @"x2";
             return dict;
         }
         else if(index == 1)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_x3.png" forKey:@"normal"];
-            [dict setObject:@"button_x3.png" forKey:@"highlight"];
-            [dict setObject:@"x3" forKey:@"id"];
+            dict[@"normal"] = @"button_x3.png";
+            dict[@"highlight"] = @"button_x3.png";
+            dict[@"id"] = @"x3";
             return dict;
         }
         else if(index == 2)
         {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setObject:@"button_xy.png" forKey:@"normal"];
-            [dict setObject:@"button_xy.png" forKey:@"highlight"];
-            [dict setObject:@"xy" forKey:@"id"];
+            dict[@"normal"] = @"button_xy.png";
+            dict[@"highlight"] = @"button_xy.png";
+            dict[@"id"] = @"xy";
             return dict;
         }
     }
@@ -617,12 +727,38 @@
 {
     NSLog(@"%@",identifier);
     
-    [brain appendFunction:[NSString stringWithFormat:@"%@",identifier]];
+    if([identifier isEqualToString:@"x2"])
+    {
+        [brain appendFixPower:@"^2"];
+    }
+    else if([identifier isEqualToString:@"x3"])
+    {
+        [brain appendFixPower:@"^3"];
+    }
+    else if([identifier isEqualToString:@"xy"])
+    {
+        [brain appendACompoundString:@"x(I)"];
+    }
+    else if([identifier isEqualToString:@"rootx"])
+    {
+        [brain appendACompoundString:@"R(I)(T)"];
+    }
+    else if([identifier isEqualToString:@"logxy"])
+    {
+        [brain appendACompoundString:@"logxy(I)(T)"];
+    }
+    else
+    {
+        [brain appendFunction:[NSString stringWithFormat:@"%@",identifier]];
+        
+    }
     
     [self syncInputLabel];
     
     [self setNotEditingWhenPressedOtherButton];
-
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
 }
 
 
@@ -698,6 +834,8 @@
         default:
             break;
     }
+    NSIndexPath* selected = [answerTableView indexPathForSelectedRow];
+    [answerTableView deselectRowAtIndexPath:selected animated:YES];
 }
 
 - (void)showCellActionListForCell:(UITableViewCell*)cell
@@ -760,8 +898,10 @@
 }
 
 
+#pragma mark answer table and its datasource and delegate
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView 
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
 		   editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(answerTableView.isEditing)
@@ -776,7 +916,7 @@
 	if (editingStyle == UITableViewCellEditingStyleDelete)
 	{
 		[[AnswerTableModel sharedModel] removeCellAtIndex:indexPath.row];
-		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
         
 	}
 }
@@ -811,7 +951,7 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 
 -(IBAction)editAnswerTable:(id)sender
 {
-    if([[AnswerTableModel sharedModel] cellCount] == 0)
+    if([[AnswerTableModel sharedModel] cellCount] == 0 && !answerTableView.isEditing)
     {
         return;
     }
@@ -822,6 +962,7 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     [UIView animateWithDuration:0.1f animations:^{
         editAnswerPressedIndicator.alpha = expectAlpha;
     }];
+    justPressedAC = NO;
 }
 
 
@@ -837,8 +978,8 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     }
     [[AnswerTableModel sharedModel] removeCellsAtIndexSet:indexSet];
         
-    [answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationBottom];
-    [answerTableView reloadData];
+    [answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationTop];
+    //[answerTableView reloadData];
     
     if([[AnswerTableModel sharedModel] cellCount] == 0)
     {
@@ -849,5 +990,62 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
         [self updateNoRecordPlaceHolder];
     }
 }
+
+#pragma mark Navigate Popover Protocal
+-(void)leftButtonPressed:(id)sender
+{
+    NSLog(@"navigate left button pressed");
+    
+    [brain previousPressed];
+    
+    [self syncInputLabel];
+    [self setNotEditingWhenPressedOtherButton];
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
+    
+}
+
+-(void)rightButtonPressed:(id)sender
+{
+    NSLog(@"navigate right button pressed");
+    [brain nextPressed];
+    [self syncInputLabel];
+    [self setNotEditingWhenPressedOtherButton];
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
+}
+
+-(void)centerButtonPressed:(id)sender
+{
+    NSLog(@"navigate center button pressed");
+    NSNumber *number = (NSNumber *)sender;
+    int num = [number intValue];
+    int mode = num / 10;
+    int position = num % 10;
+    if(mode == 1)
+    {
+        [brain okPressed];
+    }
+    else
+    {
+        if(position == 1)
+        {
+            [brain cancelPressed];
+        }
+        else
+        {
+            [brain okPressed];
+        }
+    }
+    [self syncInputLabel];
+    [self setNotEditingWhenPressedOtherButton];
+    [self updateUndoRedoIndicator];
+    justPressedAC = NO;
+    [self clearResultLabel];
+}
+
+
 
 @end

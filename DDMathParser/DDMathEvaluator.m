@@ -76,7 +76,7 @@ static DDMathEvaluator * _sharedEvaluator = nil;
     
     _DDFunctionContainer *container = [[_DDFunctionContainer alloc] initWithFunction:function name:name];
     [functions addObject:container];
-    [functionMap setObject:container forKey:name];
+    functionMap[name] = container;
     DD_RELEASE(container);
 	
 	return YES;
@@ -96,7 +96,7 @@ static DDMathEvaluator * _sharedEvaluator = nil;
 
 - (_DDFunctionContainer *)functionContainerWithName:(NSString *)functionName {
     NSString *name = [_DDFunctionContainer normalizedAlias:functionName];
-    _DDFunctionContainer *container = [functionMap objectForKey:name];
+    _DDFunctionContainer *container = functionMap[name];
     return container;
 }
 
@@ -118,10 +118,8 @@ static DDMathEvaluator * _sharedEvaluator = nil;
 	if (error) {
         *error = [NSError errorWithDomain:DDMathParserErrorDomain 
                                      code:DDErrorCodeUnresolvedFunction 
-                                 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                           [NSString stringWithFormat:@"unable to resolve function: %@", functionName], NSLocalizedDescriptionKey,
-                                           functionName, DDUnknownFunctionKey,
-                                           nil]];
+                                 userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"unable to resolve function: %@", functionName],
+                                           DDUnknownFunctionKey: functionName}];
 	}
 	return NO;
 }
@@ -134,7 +132,7 @@ static DDMathEvaluator * _sharedEvaluator = nil;
     _DDFunctionContainer *container = [self functionContainerWithName:functionName];
     alias = [_DDFunctionContainer normalizedAlias:alias];
     [container addAlias:alias];
-    [functionMap setObject:container forKey:alias];
+    functionMap[alias] = container;
     
     return YES;
 }
@@ -208,6 +206,7 @@ static DDMathEvaluator * _sharedEvaluator = nil;
                            @"average", @"avg",
                            @"average", @"mean",
                            @"floor", @"trunc",
+                           @"mod", @"modulo",
                            @"pi", @"\u03C0", // π
                            @"pi", @"tau_2",
                            @"tau", @"\u03C4", // τ
@@ -284,7 +283,7 @@ static DDMathEvaluator * _sharedEvaluator = nil;
 			if (function != nil) {
                 _DDFunctionContainer *container = [[_DDFunctionContainer alloc] initWithFunction:function name:functionName];
                 [functions addObject:container];
-                [functionMap setObject:container forKey:functionName];
+                functionMap[functionName] = container;
                 DD_RELEASE(container);
 			} else {
                 // this would only happen when a function name has been misspelled = programmer error = raise an exception
@@ -295,7 +294,7 @@ static DDMathEvaluator * _sharedEvaluator = nil;
 	
 	NSDictionary *aliases = [[self class] _standardAliases];
 	for (NSString *alias in aliases) {
-		NSString *function = [aliases objectForKey:alias];
+		NSString *function = aliases[alias];
 		(void)[self addAlias:alias forFunctionName:function];
 	}
 }
@@ -307,7 +306,7 @@ static DDMathEvaluator * _sharedEvaluator = nil;
     
     NSDictionary *templates = [[self class] _standardRewriteRules];
     for (NSString *template in templates) {
-        NSString *replacement = [templates objectForKey:template];
+        NSString *replacement = templates[template];
         
         [self addRewriteRule:replacement forExpressionsMatchingTemplate:template condition:nil];
     }

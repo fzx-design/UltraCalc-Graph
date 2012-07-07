@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class DDMathEvaluator;
+
 @interface Brain : NSObject
 {
     NSMutableArray  *expressionQueue;
@@ -16,10 +18,26 @@
     
     NSMutableString* displayString;
     NSMutableString* calculateString;
+    
+    DDMathEvaluator *evaluator;
+    
+    NSUndoManager *undoManager;
+    
+    
+    BOOL errorOccured;
+    NSString* resultString;
+
+    BOOL justEvaluated;
+    
+    NSNumber *lastResult;
 }
 
 @property (nonatomic,readonly) NSString* displayString;
 @property (nonatomic,readonly) NSString* calculateString;
+@property (nonatomic,readonly) NSString* resultString;
+@property (nonatomic,readonly) BOOL errorOccured;
+@property (nonatomic,readonly) NSUndoManager *undoManager;
+
 
 + (Brain*)sharedBrain;
 
@@ -29,9 +47,22 @@
 - (void)appendFunction:(NSString*)str;
 - (void)appendLeftParenthese;
 - (void)appendRightParenthese;
+- (void)appendPI;
+- (void)appendPercent;
+- (void)appendACompoundString:(NSString*)str;
+- (void)appendFixPower:(NSString*)str;
 
 - (void)removeLastToken;
 
 - (void)clearQueue;
+
+- (NSNumber*) evaluate;
+
+
+- (void)previousPressed;
+- (void)nextPressed;
+- (void)cancelPressed;
+- (void)okPressed;
+
 
 @end

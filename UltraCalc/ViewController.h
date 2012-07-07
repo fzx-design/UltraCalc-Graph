@@ -14,14 +14,12 @@
 #import "Brain.h"
 #import "AnswerTableModel.h"
 
-@class DDMathEvaluator;
+#import "NavigatePopoverProtocal.h"
 
-@interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource,UIActionSheetDelegate>
+
+@interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource,UIActionSheetDelegate,NavigatePopoverProtocal>
 {
-    DDMathEvaluator *evaluator;
     Brain *brain;
-    
-    
     
     __weak IBOutlet UIImageView *backgroundImageView;
     __weak IBOutlet UIView *leftView;
@@ -61,6 +59,10 @@
     __weak IBOutlet UIButton *answerTableEditDeleteButton;
     __weak IBOutlet UILabel *noRecordPlaceHolder;
     
+    __weak IBOutlet UIImageView *canUndoIndicator;
+    __weak IBOutlet UIImageView *canRedoIndicator;
+    
+    BOOL justPressedAC;
 }
 
 -(IBAction)digitPressed:(id)sender;
@@ -72,10 +74,14 @@
 -(IBAction)goPressed:(id)sender;
 -(IBAction)leftParenthesePressed:(id)sender;
 -(IBAction)rightParenthesePressed:(id)sender;
-
+-(IBAction)piPressed:(id)sender;
+-(IBAction)percentPressed:(id)sender;
 
 -(IBAction)editAnswerTable:(id)sender;
 
 -(IBAction)deleteTableCells:(id)sender;
+
+-(IBAction)undoPressed:(id)sender;
+-(IBAction)redoPressed:(id)sender;
 
 @end

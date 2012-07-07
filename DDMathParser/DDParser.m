@@ -26,7 +26,7 @@ static inline void DDOperatorSetAssociativity(NSString *o, DDOperatorAssociativi
 
 static inline DDOperatorAssociativity DDOperatorGetAssociativity(NSString *o) {
     NSArray *ops = [_DDOperatorInfo infosForOperatorFunction:o];
-    _DDOperatorInfo *info = [ops objectAtIndex:0];
+    _DDOperatorInfo *info = ops[0];
     return [info defaultAssociativity];
 }
 

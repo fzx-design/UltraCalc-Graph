@@ -8,23 +8,37 @@
 
 #import <UIKit/UIKit.h>
 #import "FXLabel.h"
+#import "NavigatePopoverController.h"
+#import "NavigatePopoverProtocal.h"
+
+#define NORMAL_STARTER 'v'
+#define UPPER_STARTER 'u'
+#define LOWER_STARTER 'w'
+#define INSERT_POINTER 'I'
+#define ANOTHER_INSERT_POINTER 'T'
+
+
 @interface InputScrollViewController : UIViewController<UIScrollViewDelegate>
 {
     __weak IBOutlet UIScrollView *scrollView;
-    __weak IBOutlet FXLabel *inputLabel;
-    UIFont *font;
-    float minWidth;
     __weak IBOutlet UIImageView *leftIndicator;
     __weak IBOutlet UIImageView *rightIndicator;
     
-    NSMutableArray *rectArray;
+    NSString* text;
+    
+    NavigatePopoverController *popover;
+    
+    float cursorPosition;
+    BOOL needPopover;
+    CGPoint popoverPosition;
 }
 
--(void)setText:(NSString*)string;
--(NSString*)text;
+@property (weak, nonatomic) IBOutlet UIView *inputView;
 
--(void)showRectFromCharIndex:(int)startIndex toIndex:(int)endIndex;
+@property (nonatomic) NSString* text;
 
--(void)clearAllRect;
+@property (nonatomic) id<NavigatePopoverProtocal> ancenster;
+
+-(void)removePopover;
 
 @end

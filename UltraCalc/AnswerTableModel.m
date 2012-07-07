@@ -52,7 +52,7 @@ static AnswerTableModel* instance = nil;
 
 -(AnswerCellModel*)cellModelAtIndex:(int)index
 {
-    return [cellArray objectAtIndex:index];
+    return cellArray[index];
 }
 
 @end

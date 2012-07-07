@@ -34,7 +34,7 @@
                 DD_RELEASE(self);
                 return nil;
             } else if ([matching count] == 1) {
-                operatorInfo = DD_RETAIN([matching objectAtIndex:0]);
+                operatorInfo = DD_RETAIN(matching[0]);
             } else {
                 ambiguous = YES;
             }
@@ -127,7 +127,7 @@
     NSArray *matching = [_DDOperatorInfo infosForOperatorFunction:operator];
     if ([matching count] > 0) {
         ambiguous = NO;
-        operatorInfo = DD_RETAIN([matching objectAtIndex:0]);
+        operatorInfo = DD_RETAIN(matching[0]);
     }
 }
 
