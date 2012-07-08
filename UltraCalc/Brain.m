@@ -340,13 +340,17 @@ static Brain* instance = nil;
         NSMutableString *lastStr = [[expressionQueue lastObject] mutableCopy];
         if([lastStr rangeOfString:@"I"].length > 0)
         {
-            NSRange r = [lastStr rangeOfString:@"I"];
-            
-            ///FIXME: error when del
-            if(r.location > 1)
+            NSMutableString *remaining = [[lastStr substringFromIndex:[lastStr rangeOfString:@"("].location + 1] mutableCopy];
+            NSString *funcname = [lastStr substringToIndex:[lastStr rangeOfString:@"("].location];
+            remaining = [[remaining substringToIndex:remaining.length - 1] mutableCopy];
+
+            NSRange r = [remaining rangeOfString:@"I"];
+           ///FIXME: fuck...i can del sin to si = =...
+            if(r.location > 0)
             {
-                //[lastStr replaceCharactersInRange:NSMakeRange(r.location - 1, 1) withString:@""];
+                [remaining replaceCharactersInRange:NSMakeRange(r.location - 1, 1) withString:@""];
             }
+            lastStr = [NSString stringWithFormat:@"%@(%@)",funcname,remaining];
             
             [expressionQueue removeLastObject];
             [expressionQueue addObject:lastStr];
@@ -393,6 +397,24 @@ static Brain* instance = nil;
     [s replaceOccurrencesOfString:@"x" withString:@"^" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
     return s;
 }
+
+
+- (BOOL) isRToDFunction:(NSString*)str
+{
+    BOOL result = NO;
+    
+    NSArray *dict = @[@"sin",@"cos",@"tan"];
+    
+    for(NSString* i in dict)
+    {
+        if([i isEqualToString:str])
+        {
+            result = YES;
+        }
+    }
+    return result;
+}
+
 
 
 - (BOOL) isTriangleFunction:(NSString*)str
@@ -548,20 +570,39 @@ static Brain* instance = nil;
         NSString *str = a[i];
         if([self isFunctionNeedExtendParenthese:str])
         {
-            if(i + 1 < a.count)
+            if([self isRToDFunction:str])
             {
-                NSString *nextStr = a[i + 1];
-                if([nextStr isEqualToString:@"("])
+                [a insertObject:@"(" atIndex:i + 1];
+                [a insertObject:@"(" atIndex:i + 2];
+                
+                int anotherParenthesePosition = [self termRecognizerWithQueue:a andStartFrom:i + 3];
+                
+                if(anotherParenthesePosition >=0 )
                 {
-                    continue;
+                    [a insertObject:@")" atIndex:anotherParenthesePosition];
+                    [a insertObject:@"°" atIndex:anotherParenthesePosition + 1];
+                    [a insertObject:@")" atIndex:anotherParenthesePosition + 2];
                 }
+
             }
-            [a insertObject:@"(" atIndex:i + 1];
-            
-            int anotherParenthesePosition = [self termRecognizerWithQueue:a andStartFrom:i + 2];
-            if(anotherParenthesePosition >=0 )
+            else
             {
-                [a insertObject:@")" atIndex:anotherParenthesePosition];
+                if(i + 1 < a.count)
+                {
+                    NSString *nextStr = a[i + 1];
+                    if([nextStr isEqualToString:@"("])
+                    {
+                        continue;
+                    }
+                }
+                [a insertObject:@"(" atIndex:i + 1];
+                
+                int anotherParenthesePosition = [self termRecognizerWithQueue:a andStartFrom:i + 2];
+                if(anotherParenthesePosition >=0 )
+                {
+                    [a insertObject:@")" atIndex:anotherParenthesePosition];
+                }
+
             }
         }
     }
@@ -691,9 +732,9 @@ static Brain* instance = nil;
 
 -(NSMutableArray*)extendParentheseForString:(NSString*)str
 {
-    NSArray *a = @[ @"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",@".",@"+",@"-",@"*",@"/",@"arcsin",@"arccos",@"arctan",@"sinh",@"cosh",@"tanh",@"sin",@"cos",@"tan" ];
+    NSArray *a = @[ @"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",@".",@"+",@"-",@"*",@"/",@"arcsin",@"arccos",@"arctan",@"sinh",@"cosh",@"tanh",@"sin",@"cos",@"tan",@"logxy",@"log",@"ln",@"root",@"I",@"T",];
     
-    NSLog(@"%@",str);
+    NSLog(@"extend par: %@",str);
     
     return nil;
 }
@@ -709,6 +750,10 @@ static Brain* instance = nil;
         NSString *str = a[i];
         if([str hasPrefix:@"x"])//x^y
         {
+            //FIXME: = =|||
+            [self extendParentheseForString:[str substringFromIndex:1]];
+            
+            
             str = [NSString stringWithFormat:@"^%@",[str substringFromIndex:1]];
             a[i] = str;
         }
