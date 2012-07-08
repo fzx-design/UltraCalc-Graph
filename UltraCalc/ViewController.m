@@ -741,11 +741,11 @@
     }
     else if([identifier isEqualToString:@"rootx"])
     {
-        [brain appendACompoundString:@"R(I)(T)"];
+        [brain appendACompoundString:@"Rootx(I,T)"];
     }
     else if([identifier isEqualToString:@"logxy"])
     {
-        [brain appendACompoundString:@"logxy(I)(T)"];
+        [brain appendACompoundString:@"logxy(I,T)"];
     }
     else
     {
@@ -1030,7 +1030,7 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     }
     else
     {
-        if(position == 1)
+        if(position != mode)
         {
             [brain cancelPressed];
         }

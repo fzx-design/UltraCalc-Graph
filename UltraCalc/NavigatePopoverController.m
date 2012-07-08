@@ -48,26 +48,33 @@
 {
     if(blankCount == 1)
     {
-        [centerButton setTitle:@"OK" forState:UIControlStateNormal];
-        [centerButton setTitle:@"OK" forState:UIControlStateHighlighted];
+        [centerButton setTitle:@"Done" forState:UIControlStateNormal];
+        [centerButton setTitle:@"Done" forState:UIControlStateHighlighted];
         
         [leftButton setEnabled:NO];
         [rightButton setEnabled:NO];
     }
-    else if(blankCount == 2)
+    else if(blankCount > 1)
     {
-        if(cursor == 1)
+        if(cursor < blankCount)
         {
             [centerButton setTitle:@"Cancel" forState:UIControlStateNormal];
             [centerButton setTitle:@"Cancel" forState:UIControlStateHighlighted];
             
-            [leftButton setEnabled:NO];
+            if(cursor != 1)
+            {
+                [leftButton setEnabled:YES];
+            }
+            else
+            {
+                [leftButton setEnabled:NO];
+            }
             [rightButton setEnabled:YES];
         }
-        else if(cursor == 2)
+        else
         {
-            [centerButton setTitle:@"OK" forState:UIControlStateNormal];
-            [centerButton setTitle:@"OK" forState:UIControlStateHighlighted];
+            [centerButton setTitle:@"Done" forState:UIControlStateNormal];
+            [centerButton setTitle:@"Done" forState:UIControlStateHighlighted];
             
             [leftButton setEnabled:YES];
             [rightButton setEnabled:NO];

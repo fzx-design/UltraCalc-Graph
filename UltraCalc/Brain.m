@@ -22,12 +22,44 @@
 
 @synthesize displayString,calculateString,errorOccured,resultString,justEvaluated,undoManager;
 
+-(void)customFunctions
+{
+    {
+        DDMathFunction function = ^ DDExpression* (NSArray *args, NSDictionary *variables, DDMathEvaluator *evaluator, NSError **error) {
+            if ([args count] != 2) {
+                //fill in *error and return nil
+            }
+            NSString *string = [NSString stringWithFormat:@"log(%@)/log(%@)",args[1],args[0]];
+            DDExpression *expression = [DDExpression expressionFromString:string error:error];
+            NSNumber * n = [expression evaluateWithSubstitutions:variables evaluator:self.evaluator error:error];
+            return [DDExpression numberExpressionWithNumber:n];
+        };
+        [self.evaluator registerFunction:function forName:@"logxy"];
+    }
+    
+    {
+        DDMathFunction function2 = ^ DDExpression* (NSArray *args, NSDictionary *variables, DDMathEvaluator *evaluator, NSError **error) {
+            if ([args count] != 2) {
+                //fill in *error and return nil
+            }
+            NSString *string = [NSString stringWithFormat:@"nthroot(%@,%@)",args[1],args[0]];
+            DDExpression *expression = [DDExpression expressionFromString:string error:error];
+            NSNumber * n = [expression evaluateWithSubstitutions:variables evaluator:self.evaluator error:error];
+            return [DDExpression numberExpressionWithNumber:n];
+        };
+        [self.evaluator  registerFunction:function2 forName:@"Rootx"];
+    }
+}
+
+
+
 - (id)init
 {
     if(self  =  [super init])
     {
         expressionQueue = [[NSMutableArray alloc] init];
         undoManager = [[NSUndoManager alloc] init];
+        [self customFunctions];
     }
     return self;
 }
@@ -44,14 +76,26 @@ static Brain* instance = nil;
 }
 
 
+
+
 - (void)append:(NSString*)str
 {
     NSString *lastStr = [expressionQueue lastObject];
     if([lastStr rangeOfString:@"I"].length > 0)
     {
+        if([str rangeOfString:@"I"].length > 0)
+        {
+            str = [str stringByReplacingOccurrencesOfString:@"I" withString:@"K"];
+        }
         NSString *leftPart = [lastStr substringToIndex:[lastStr rangeOfString:@"I"].location];
         NSString *rightPart = [lastStr substringFromIndex:[lastStr rangeOfString:@"I"].location];
         NSString *strToAdd = [NSString stringWithFormat:@"%@%@%@",leftPart,str,rightPart];
+        
+        if([str rangeOfString:@"K"].length > 0)
+        {
+            strToAdd = [strToAdd stringByReplacingOccurrencesOfString:@"I" withString:@"T"];
+            strToAdd = [strToAdd stringByReplacingOccurrencesOfString:@"K" withString:@"I"];
+        }        
         [expressionQueue removeLastObject];
         [expressionQueue addObject:strToAdd];
     }
@@ -64,11 +108,26 @@ static Brain* instance = nil;
 - (void)previousPressed
 {
     NSMutableString *lastStr = [[expressionQueue lastObject] mutableCopy];
-    if([lastStr rangeOfString:@"I"].length > 0 && [lastStr rangeOfString:@"T"].length > 0)
+    
+    int lastTPos = -1;
+    int iPos = -1;
+    for(int i = 0; i < lastStr.length ; i++)
     {
-        [lastStr replaceOccurrencesOfString:@"I" withString:@"K" options:NSLiteralSearch range:NSMakeRange(0, lastStr.length)];
-        [lastStr replaceOccurrencesOfString:@"T" withString:@"I" options:NSLiteralSearch range:NSMakeRange(0, lastStr.length)];
-        [lastStr replaceOccurrencesOfString:@"K" withString:@"T" options:NSLiteralSearch range:NSMakeRange(0, lastStr.length)];
+        if([lastStr characterAtIndex:i] == 'T')
+        {
+            lastTPos = i;
+        }
+        else if([lastStr characterAtIndex:i] == 'I')
+        {
+            iPos = i;
+            break;
+        }
+    }
+    if(lastTPos != -1)
+    {
+        [lastStr replaceCharactersInRange:NSMakeRange(lastTPos, 1) withString:@"I"];
+        [lastStr replaceCharactersInRange:NSMakeRange(iPos, 1) withString:@"T"];
+        
         [expressionQueue removeLastObject];
         [expressionQueue addObject:lastStr];
     }
@@ -76,7 +135,31 @@ static Brain* instance = nil;
 
 - (void)nextPressed
 {
-    [self previousPressed];
+    NSMutableString *lastStr = [[expressionQueue lastObject] mutableCopy];
+    
+    int lastTPos = -1;
+    int iPos = -1;
+    for(int i = lastStr.length - 1; i >=0 ; i--)
+    {
+        if([lastStr characterAtIndex:i] == 'T')
+        {
+            lastTPos = i;
+        }
+        else if([lastStr characterAtIndex:i] == 'I')
+        {
+            iPos = i;
+            break;
+        }
+    }
+    if(lastTPos != -1)
+    {
+        [lastStr replaceCharactersInRange:NSMakeRange(lastTPos, 1) withString:@"I"];
+        [lastStr replaceCharactersInRange:NSMakeRange(iPos, 1) withString:@"T"];
+        
+        [expressionQueue removeLastObject];
+        [expressionQueue addObject:lastStr];
+    }
+
 }
 
 - (void)cancelPressed
@@ -282,20 +365,19 @@ static Brain* instance = nil;
     NSMutableString *s = [NSMutableString stringWithFormat:@""];
     NSMutableArray *displayExpressionQueue = [NSMutableArray arrayWithArray:expressionQueue];
     
-    displayExpressionQueue = [self handleCompoundExpressionsForDisplay:displayExpressionQueue];
+    NSLog(@"expressionQueue: %@",expressionQueue);
     
-    NSLog(@"%@",displayExpressionQueue);
+    displayExpressionQueue = [self handleCompoundExpressionsForDisplay:displayExpressionQueue];
+    //NSLog(@"displayExpressionQueue: %@",displayExpressionQueue);
     
     displayExpressionQueue = [self addParentheseToPowerForDisplay:displayExpressionQueue];
+    //NSLog(@"displayExpressionQueue: %@",displayExpressionQueue);
     
-     NSLog(@"%@",displayExpressionQueue);
     displayExpressionQueue = [self addParentheseToFunctionsForDisplay:displayExpressionQueue];
-
-     NSLog(@"%@",displayExpressionQueue);
+    //NSLog(@"displayExpressionQueue: %@",displayExpressionQueue);
     
     displayExpressionQueue = [self makeGreyBoxAroundInsertPoint:displayExpressionQueue];
-    
-     NSLog(@"%@",displayExpressionQueue);
+    NSLog(@"displayExpressionQueue: %@",displayExpressionQueue);
     
     for (NSString *str in displayExpressionQueue)
     {
@@ -308,7 +390,7 @@ static Brain* instance = nil;
     
     [s replaceOccurrencesOfString:@"root3" withString:@"B" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
     [s replaceOccurrencesOfString:@"root" withString:@"A" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
-    
+    [s replaceOccurrencesOfString:@"x" withString:@"^" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
     return s;
 }
 
@@ -519,7 +601,6 @@ static Brain* instance = nil;
         [a addObject:str];
     }
     
-    
     return a;
 }
 
@@ -534,63 +615,27 @@ static Brain* instance = nil;
         NSString *str = a[i];
         if([str hasPrefix:@"x"])//x^y
         {
-            str = [NSString stringWithFormat:@"u[%@]v",[str substringFromIndex:1]];
+            str = [str substringFromIndex:1];
+            str = [str substringToIndex:str.length - 1];
+            str = [NSString stringWithFormat:@"u[ %@ ]v",[str substringFromIndex:1]];
             a[i] = str;
         }
         else if([str hasPrefix:@"logxy"])
         {
-            NSString *remaining = [str substringFromIndex:5];
-            NSMutableString *leftPart = [@"" mutableCopy];
-            NSMutableString *rightPart = [@"" mutableCopy];
-            int parenthese = 0;
-            int k;
-            for(k = 0; k < remaining.length; k++)
-            {
-                [leftPart appendString:[remaining substringWithRange:NSMakeRange(k, 1)]];
-                if([remaining characterAtIndex:k] == '(')
-                {
-                    parenthese++;
-                }
-                else if([remaining characterAtIndex:k] == ')')
-                {
-                    parenthese--;
-                    if(parenthese == 0)
-                    {
-                        break;
-                    }
-                }
-            }
-            rightPart = [[remaining substringFromIndex:k + 1] mutableCopy];
+            NSMutableString *leftPart;
+            NSMutableString *rightPart;
+            [self doubleArguementExtraction:str leftPart_p:&leftPart rightPart_p:&rightPart];
             
-            str = [NSString stringWithFormat:@"logw[%@]v[%@]",leftPart,rightPart];
+            str = [NSString stringWithFormat:@"logw[ %@ ]v[ %@ ]",leftPart,rightPart];
             a[i] = str;
         }
-        else if([str hasPrefix:@"R"])
+        else if([str hasPrefix:@"Rootx"])
         {
-            NSString *remaining = [str substringFromIndex:1];
-            NSMutableString *leftPart = [@"" mutableCopy];
-            NSMutableString *rightPart = [@"" mutableCopy];
-            int parenthese = 0;
-            int k;
-            for(k = 0; k < remaining.length; k++)
-            {
-                [leftPart appendString:[remaining substringWithRange:NSMakeRange(k, 1)]];
-                if([remaining characterAtIndex:k] == '(')
-                {
-                    parenthese++;
-                }
-                else if([remaining characterAtIndex:k] == ')')
-                {
-                    parenthese--;
-                    if(parenthese == 0)
-                    {
-                        break;
-                    }
-                }
-            }
-            rightPart = [[remaining substringFromIndex:k + 1] mutableCopy];
+            NSMutableString *leftPart;
+            NSMutableString *rightPart;
+            [self doubleArguementExtraction:str leftPart_p:&leftPart rightPart_p:&rightPart];
             
-            str = [NSString stringWithFormat:@"[%@]A[%@]",leftPart,rightPart];
+            str = [NSString stringWithFormat:@"[ %@ ]A[ %@ ]",leftPart,rightPart];
             a[i] = str;
         }
 
@@ -598,6 +643,61 @@ static Brain* instance = nil;
     
     return a;
 }
+
+
+- (void)doubleArguementExtraction:(NSString *)str leftPart_p:(NSMutableString **)leftPart_p rightPart_p:(NSMutableString **)rightPart_p
+{
+    NSString *remaining = [str substringFromIndex:[str rangeOfString:@"("].location + 1];
+    *leftPart_p = [@"" mutableCopy];
+    *rightPart_p = [@"" mutableCopy];
+    remaining = [remaining substringToIndex:remaining.length - 1];
+    int parenthese = 0;
+    int k;
+    BOOL commaFound = NO;
+    for(k = 0; k < remaining.length; k++)
+    {
+        if([remaining characterAtIndex:k] == '(')
+        {
+            parenthese++;
+        }
+        else if([remaining characterAtIndex:k] == ')')
+        {
+            parenthese--;
+        }
+        else if([remaining characterAtIndex:k] == ',')
+        {
+            if(parenthese == 0)
+            {
+                commaFound = YES;
+                break;
+            }
+        }
+        [*leftPart_p appendString:[remaining substringWithRange:NSMakeRange(k, 1)]];
+    }
+    if(commaFound)
+    {
+        *rightPart_p = [[remaining substringFromIndex:k + 1] mutableCopy];
+    }
+    else//parenthese don't pair
+    {
+        if([remaining rangeOfString:@","].length > 0)
+        {
+            *leftPart_p = [[remaining substringToIndex:[remaining rangeOfString:@","].location ] mutableCopy];
+            *rightPart_p = [[remaining substringFromIndex:[remaining rangeOfString:@","].location + 1] mutableCopy];
+        }
+    }
+}
+
+
+-(NSMutableArray*)extendParentheseForString:(NSString*)str
+{
+    NSArray *a = @[ @"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",@".",@"+",@"-",@"*",@"/",@"arcsin",@"arccos",@"arctan",@"sinh",@"cosh",@"tanh",@"sin",@"cos",@"tan" ];
+    
+    NSLog(@"%@",str);
+    
+    return nil;
+}
+
 
 
 - (NSMutableArray*)handleCompoundExpressionsForCalc:(NSMutableArray*)array
@@ -614,56 +714,25 @@ static Brain* instance = nil;
         }
         else if([str hasPrefix:@"logxy"])
         {
-            NSString *remaining = [str substringFromIndex:5];
-            NSMutableString *leftPart = [@"" mutableCopy];
-            NSMutableString *rightPart = [@"" mutableCopy];
-            int parenthese = 0;
-            int k;
-            for(k = 0; k < remaining.length; k++)
-            {
-                [leftPart appendString:[remaining substringWithRange:NSMakeRange(k, 1)]];
-                if([remaining characterAtIndex:k] == '(')
-                {
-                    parenthese++;
-                }
-                else if([remaining characterAtIndex:k] == ')')
-                {
-                    parenthese--;
-                    if(parenthese == 0)
-                    {
-                        break;
-                    }
-                }
-            }
-            rightPart = [[remaining substringFromIndex:k + 1] mutableCopy];
+            NSMutableString *leftPart;
+            NSMutableString *rightPart;
+            [self doubleArguementExtraction:str leftPart_p:&leftPart rightPart_p:&rightPart];
+            
+            [self extendParentheseForString:leftPart];
+            [self extendParentheseForString:rightPart];
+            
             
             str = [NSString stringWithFormat:@"(log(%@)/log(%@))",rightPart,leftPart];
             a[i] = str;
         }
-        else if([str hasPrefix:@"R"])
+        else if([str hasPrefix:@"Rootx"])
         {
-            NSString *remaining = [str substringFromIndex:1];
-            NSMutableString *leftPart = [@"" mutableCopy];
-            NSMutableString *rightPart = [@"" mutableCopy];
-            int parenthese = 0;
-            int k;
-            for(k = 0; k < remaining.length; k++)
-            {
-                [leftPart appendString:[remaining substringWithRange:NSMakeRange(k, 1)]];
-                if([remaining characterAtIndex:k] == '(')
-                {
-                    parenthese++;
-                }
-                else if([remaining characterAtIndex:k] == ')')
-                {
-                    parenthese--;
-                    if(parenthese == 0)
-                    {
-                        break;
-                    }
-                }
-            }
-            rightPart = [[remaining substringFromIndex:k + 1] mutableCopy];
+            NSMutableString *leftPart;
+            NSMutableString *rightPart;
+            [self doubleArguementExtraction:str leftPart_p:&leftPart rightPart_p:&rightPart];
+            
+            [self extendParentheseForString:leftPart];
+            [self extendParentheseForString:rightPart];
             
             str = [NSString stringWithFormat:@"(nthroot((%@),(%@)))",rightPart,leftPart];
             a[i] = str;
@@ -874,6 +943,8 @@ static Brain* instance = nil;
     [s replaceOccurrencesOfString:@"T" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
     [s replaceOccurrencesOfString:@"I" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
     [s replaceOccurrencesOfString:@"#" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, s.length)];
+    [s replaceOccurrencesOfString:@"x" withString:@"**" options:NSCaseInsensitiveSearch range:NSMakeRange(0, s.length)];
+    [s replaceOccurrencesOfString:@"^" withString:@"**" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
     [s replaceOccurrencesOfString:@"arcsin" withString:@"asin" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
     [s replaceOccurrencesOfString:@"arccos" withString:@"acos" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
     [s replaceOccurrencesOfString:@"arctan" withString:@"atan" options:NSLiteralSearch range:NSMakeRange(0, s.length)];
@@ -941,6 +1012,7 @@ static Brain* instance = nil;
     NSMutableDictionary * variables = [NSMutableDictionary dictionary];//useless
     
 	NSString * string = self.calculateString;
+        
     NSLog(@"calculate string:%@",string);
     //[inputScrollViewController setText:string];
     

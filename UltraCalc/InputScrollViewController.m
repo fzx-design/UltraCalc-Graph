@@ -179,7 +179,7 @@
     else
     {
         str = [self beautifulStr:str withSpace:NO];
-        cursorPosition += [self addText:str atPosition:CGPointMake(cursorPosition, 0) withOffset:CGPointMake(0, -5) andFontSize:17].width;
+        cursorPosition += [self addText:str atPosition:CGPointMake(cursorPosition, 0) withOffset:CGPointMake(0, -5) andFontSize:16].width;
     }
     
     [self syncContentWidth];
@@ -202,7 +202,7 @@
     else
     {
         str = [self beautifulStr:str withSpace:NO];
-        cursorPosition += [self addText:str atPosition:CGPointMake(cursorPosition, 0) withOffset:CGPointMake(0, 10) andFontSize:17].width;
+        cursorPosition += [self addText:str atPosition:CGPointMake(cursorPosition, 0) withOffset:CGPointMake(0, 10) andFontSize:16].width;
     }
     [self syncContentWidth];
 }
@@ -441,8 +441,8 @@
     BOOL needRecordNextPositionToStartGreyFramePosition = NO;
     
     
-    int anotherInsertPointOccured = -1;
-    int insertPointerChanged = -1;
+    int waitingInsertingCount = 0;
+    int insertIndex = -1;
         
     for (int i = 0; i < newText.length; i++) {
         if([newText characterAtIndex:i] == UPPER_STARTER )
@@ -462,15 +462,13 @@
         }
         else if([newText characterAtIndex:i] == ANOTHER_INSERT_POINTER)
         {
-            anotherInsertPointOccured = i;
+            waitingInsertingCount++;
             continue;
         }
         else if([newText characterAtIndex:i] == INSERT_POINTER)
         {
-            if(insertPointerChanged >= 0)
-            {
-                NSLog(@"Multiple insert point error!");
-            }
+            waitingInsertingCount++;
+            insertIndex = waitingInsertingCount;
             CGPoint offset;
             offset.x = 0;
             switch (state) {
@@ -486,7 +484,6 @@
                     break;
             }
             [self addPopoverAtPosition:CGPointMake(cursorPosition, 0) withOffset:offset];
-            insertPointerChanged = i;
             continue;
         }
         else if([newText characterAtIndex:i] == '[')
@@ -607,23 +604,9 @@
     }
     [self updateIndicator];
     
-    if(insertPointerChanged >= 0)
+    if(insertIndex >= 0)
     {
-        if(anotherInsertPointOccured == -1)
-        {
-            [self setPopoverModeWithBlankCount:1 andCurrentPosition:1];
-        }
-        else
-        {
-            if(insertPointerChanged < anotherInsertPointOccured)
-            {
-                [self setPopoverModeWithBlankCount:2 andCurrentPosition:1];
-            }
-            else
-            {
-                [self setPopoverModeWithBlankCount:2 andCurrentPosition:2];
-            }
-        }
+        [self setPopoverModeWithBlankCount:waitingInsertingCount andCurrentPosition:insertIndex];
     }
     
     text = newText;
