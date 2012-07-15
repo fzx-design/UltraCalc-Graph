@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1480" systemVersion="12A256" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AnswerTableResult" representedClassName="AnswerTableResult" syncable="YES">
+        <attribute name="calc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="result" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tableToNoteRelation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="calculationOwner" inverseEntity="Note" syncable="YES"/>
+    </entity>
+    <entity name="CanvasResult" representedClassName="CanvasResult" syncable="YES">
+        <attribute name="result" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="canvasToNoteRelation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="canvasOwner" inverseEntity="Note" syncable="YES"/>
+    </entity>
+    <entity name="Note" representedClassName="Note" syncable="YES">
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="calculationOwner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AnswerTableResult" inverseName="tableToNoteRelation" inverseEntity="AnswerTableResult" syncable="YES"/>
+        <relationship name="canvasOwner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CanvasResult" inverseName="canvasToNoteRelation" inverseEntity="CanvasResult" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AnswerTableResult" positionX="358" positionY="225" width="128" height="88"/>
+        <element name="Note" positionX="171" positionY="81" width="128" height="88"/>
+        <element name="CanvasResult" positionX="-20" positionY="234" width="128" height="73"/>
+    </elements>
+</model>

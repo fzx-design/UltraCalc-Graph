@@ -19,6 +19,199 @@
 @implementation ViewController
 
 
+#pragma mark - Life Cycle and inits
+
+- (void)loadInputScrollView
+{
+    inputScrollViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"InputScrollView"];
+    inputScrollViewController.ancenster = self;
+    [inputView addSubview:inputScrollViewController.view];
+    
+    CGRect rect= inputView.frame;
+    rect.size.height = 40;
+    rect.size.width = 248;
+    [[inputScrollViewController view] setFrame:rect];
+}
+
+
+
+- (void)initResultLabel
+{
+    [resultLabel setFont:[UIFont fontWithName:@"Eurostile" size:32]];
+    resultLabel.shadowColor = nil;
+    resultLabel.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    resultLabel.shadowColor = [UIColor colorWithRed:58/255.0 green:250.0/255.0 blue:213.0/255.0 alpha:0.57];   
+    resultLabel.shadowBlur = 5.0f;
+}
+
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    NSLog(@"should rotate");
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+        return YES;
+    else 
+        return NO;
+    //    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+    //        //动画开始之前，frame有一个值
+    //        
+    //        [UIView beginAnimations:nil context:UIGraphicsGetCurrentContext()];
+    //        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    //        
+    //        [UIView setAnimationDuration:0.2];
+    //        //设置动画时间
+    //        //[UIView setAnimationDelegate:self];
+    //        //[UIView setAnimationDidStopSelector:@selector(FireworkAnimationStep_3)];
+    //        //如果需要设置回调，这两句话分别交代了回调的对象和具体的回调方法
+    //        //[leftView setCenter:CGPointMake(290, 375.0f)];
+    //        
+    //        leftView.frame = CGRectMake(0,0 ,1024 ,748);
+    //        //xxx.frame = CGRectMake(, , , );
+    //        //这个才是动画的目的，你最终希望是什么样，比如你的需求是，希望frame刚好占满屏幕
+    //        [UIView commitAnimations];
+    //        //设置好了，开始执行
+    //
+    //        
+    //        [rightView setCenter:CGPointMake(290.0f + 600.0f, 375.0f)];
+    //        [rightView setUserInteractionEnabled:YES];
+    //        //UIImage *bg = [UIImage imageNamed:@"Default-Landscape.png"];
+    ////        [backgroundView setImage:bg]; 
+    ////        [UIView animateWithDuration:0.0 animations:^{
+    ////			shadowView.alpha = 0.0;
+    ////		}];
+    //    }
+    //    else {
+    //        [leftView setCenter:CGPointMake(768.0f/2, 1024.0f/2)];
+    //        
+    //        
+    //        //动画开始之前，frame有一个值
+    //        
+    //        [UIView beginAnimations:nil context:UIGraphicsGetCurrentContext()];
+    //        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    //        
+    //        [UIView setAnimationDuration:0.2];
+    //        //设置动画时间
+    //        //[UIView setAnimationDelegate:self];
+    //        //[UIView setAnimationDidStopSelector:@selector(FireworkAnimationStep_3)];
+    //        //如果需要设置回调，这两句话分别交代了回调的对象和具体的回调方法
+    //        //[leftView setCenter:CGPointMake(768.0f/2, 1024.0f/2)];
+    //        leftView.frame = CGRectMake(0,0 ,768 ,1024);
+    //        //xxx.frame = CGRectMake(, , , );
+    //        //这个才是动画的目的，你最终希望是什么样，比如你的需求是，希望frame刚好占满屏幕
+    //        [UIView commitAnimations];
+    //        //设置好了，开始执行
+    //        
+    //        
+    //        [rightView setCenter:CGPointMake(768.0f/2 + 491.0f, 1024.0f/2)];
+    //        [rightView setUserInteractionEnabled:NO];
+    //        //UIImage *bg = [UIImage imageNamed:@"Default-Portrait.png"];
+    ////        [backgroundView setImage:bg];
+    ////		[UIView animateWithDuration:0.5 animations:^{
+    ////			shadowView.alpha = 1.0;
+    ////		}];
+    //    }
+    //return YES;
+}
+
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self loadMultipleButtons];
+    
+    [self loadInputScrollView];
+    
+    [self initResultLabel];
+    
+    [self updateUndoRedoIndicator];
+    
+    answerTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell_bg.png"]];
+    
+    justPressedAC = NO;
+    
+    if(brain == nil)
+        brain = [Brain sharedBrain];
+    
+    //    for( NSString *familyName in [UIFont familyNames] ) {
+    //        for( NSString *fontName in [UIFont fontNamesForFamilyName:familyName] ) {
+    //            NSLog(@"%@", fontName);
+    //        }
+    //    }
+    
+    // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewDidUnload
+{
+    backgroundImageView = nil;
+    leftView = nil;
+    rightView = nil;
+    logView = nil;
+    sqrtView = nil;
+    sinView = nil;
+    arcsinView = nil;
+    sinhView = nil;
+    xyView = nil;
+    //inputLabel = nil;
+    answerTableView = nil;
+    editAnswerTableBtn = nil;
+    resultLabel = nil;
+    editAnswerPressedIndicator = nil;
+    inputView = nil;
+    answerTableEditDeleteButton = nil;
+    noRecordPlaceHolder = nil;
+    canUndoIndicator = nil;
+    canRedoIndicator = nil;
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+}
+
+#pragma mark - Helper Methods
+
+
+- (void) evaluate {
+    
+    NSNumber *result = [brain evaluate];
+    if(result != nil)
+    {
+        [resultLabel setTextColor:[UIColor whiteColor]];
+        
+        [resultLabel setText:brain.resultString];
+        
+        //add to answer table
+        AnswerCellModel *newCell = [[AnswerCellModel alloc] init];
+        newCell.result = [result description];
+        newCell.note = nil;
+        newCell.expression = brain.calculateString;
+        
+        [[AnswerTableModel sharedModel] addNewCell:newCell];
+        //[answerTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
+        //[answerTableView reloadData];
+        NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        NSArray *indexArray = @[path1];
+        
+        [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationTop];
+        
+        [self updateNoRecordPlaceHolder];
+    }
+    else {
+        [resultLabel setText:brain.resultString];
+        if(brain.errorOccured)
+        {
+            [resultLabel setTextColor:[UIColor redColor]];
+        }
+		else {
+            [resultLabel setTextColor:[UIColor whiteColor]];
+        }
+	}
+}
+
+
+
+
 - (void)syncInputLabel
 {
     [inputScrollViewController setText:brain.displayString];
@@ -69,6 +262,21 @@
     }
 }
 
+
+
+-(void)setNotEditingWhenPressedOtherButton
+{
+    if(answerTableView.isEditing)
+    {
+        [self editAnswerTable:nil];
+    }
+}
+
+
+
+#pragma mark - Handle simple key press
+
+
 -(IBAction)undoPressed:(id)sender
 {
     [brain.undoManager undo];
@@ -95,293 +303,6 @@
 }
 
 
-
-- (void) evaluate {
-
-    NSNumber *result = [brain evaluate];
-    if(result != nil)
-    {
-        [resultLabel setTextColor:[UIColor whiteColor]];
-        
-        [resultLabel setText:brain.resultString];
-        
-        //add to answer table
-        AnswerCellModel *newCell = [[AnswerCellModel alloc] init];
-        newCell.result = [result description];
-        newCell.note = nil;
-        newCell.expression = brain.calculateString;
-        
-        [[AnswerTableModel sharedModel] addNewCell:newCell];
-        //[answerTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
-        //[answerTableView reloadData];
-        NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
-        
-        NSArray *indexArray = @[path1];
-        
-        [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationTop];
-        
-        [self updateNoRecordPlaceHolder];
-    }
-    else {
-        [resultLabel setText:brain.resultString];
-        if(brain.errorOccured)
-        {
-            [resultLabel setTextColor:[UIColor redColor]];
-        }
-		else {
-            [resultLabel setTextColor:[UIColor whiteColor]];
-        }
-	}
-}
-
-
-
-
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    NSLog(@"should rotate");
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-        return YES;
-    else 
-        return NO;
-//    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-//        //动画开始之前，frame有一个值
-//        
-//        [UIView beginAnimations:nil context:UIGraphicsGetCurrentContext()];
-//        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-//        
-//        [UIView setAnimationDuration:0.2];
-//        //设置动画时间
-//        //[UIView setAnimationDelegate:self];
-//        //[UIView setAnimationDidStopSelector:@selector(FireworkAnimationStep_3)];
-//        //如果需要设置回调，这两句话分别交代了回调的对象和具体的回调方法
-//        //[leftView setCenter:CGPointMake(290, 375.0f)];
-//        
-//        leftView.frame = CGRectMake(0,0 ,1024 ,748);
-//        //xxx.frame = CGRectMake(, , , );
-//        //这个才是动画的目的，你最终希望是什么样，比如你的需求是，希望frame刚好占满屏幕
-//        [UIView commitAnimations];
-//        //设置好了，开始执行
-//
-//        
-//        [rightView setCenter:CGPointMake(290.0f + 600.0f, 375.0f)];
-//        [rightView setUserInteractionEnabled:YES];
-//        //UIImage *bg = [UIImage imageNamed:@"Default-Landscape.png"];
-////        [backgroundView setImage:bg]; 
-////        [UIView animateWithDuration:0.0 animations:^{
-////			shadowView.alpha = 0.0;
-////		}];
-//    }
-//    else {
-//        [leftView setCenter:CGPointMake(768.0f/2, 1024.0f/2)];
-//        
-//        
-//        //动画开始之前，frame有一个值
-//        
-//        [UIView beginAnimations:nil context:UIGraphicsGetCurrentContext()];
-//        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-//        
-//        [UIView setAnimationDuration:0.2];
-//        //设置动画时间
-//        //[UIView setAnimationDelegate:self];
-//        //[UIView setAnimationDidStopSelector:@selector(FireworkAnimationStep_3)];
-//        //如果需要设置回调，这两句话分别交代了回调的对象和具体的回调方法
-//        //[leftView setCenter:CGPointMake(768.0f/2, 1024.0f/2)];
-//        leftView.frame = CGRectMake(0,0 ,768 ,1024);
-//        //xxx.frame = CGRectMake(, , , );
-//        //这个才是动画的目的，你最终希望是什么样，比如你的需求是，希望frame刚好占满屏幕
-//        [UIView commitAnimations];
-//        //设置好了，开始执行
-//        
-//        
-//        [rightView setCenter:CGPointMake(768.0f/2 + 491.0f, 1024.0f/2)];
-//        [rightView setUserInteractionEnabled:NO];
-//        //UIImage *bg = [UIImage imageNamed:@"Default-Portrait.png"];
-////        [backgroundView setImage:bg];
-////		[UIView animateWithDuration:0.5 animations:^{
-////			shadowView.alpha = 1.0;
-////		}];
-//    }
-    //return YES;
-}
-
-- (void)loadInputScrollView
-{
-    inputScrollViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"InputScrollView"];
-    inputScrollViewController.ancenster = self;
-    [inputView addSubview:inputScrollViewController.view];
-    
-    CGRect rect= inputView.frame;
-    rect.size.height = 40;
-    rect.size.width = 248;
-    [[inputScrollViewController view] setFrame:rect];
-}
-
-
-- (void)loadMultipleButtons
-{
-    logMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
-    
-    [logMultipleButton setDataSource:self];
-    
-    CGRect rect= logView.frame;
-    rect.origin.x = -14;
-    rect.origin.y = -108;
-    rect.size.height *= 3;
-    [[logMultipleButton view] setFrame:rect];
-    
-    [logView addSubview: logMultipleButton.view];
-
-    
-    
-    sqrtMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
-    
-    [sqrtMultipleButton setDataSource:self];
-    
-    rect= sqrtView.frame;
-    rect.origin.x = -14;
-    rect.origin.y = -108;
-    rect.size.height *= 3;
-
-    [[sqrtMultipleButton view] setFrame:rect];
-    
-    [sqrtView addSubview: sqrtMultipleButton.view];
-    
-    
-    
-    
-    sinMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
-    
-    [sinMultipleButton setDataSource:self];
-    
-    rect= sinView.frame;
-    rect.origin.x = -14;
-    rect.origin.y = -108;
-    rect.size.height *= 3;
-
-    [[sinMultipleButton view] setFrame:rect];
-    
-    [sinView addSubview: sinMultipleButton.view];
- 
-    
-    
-    arcsinMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
-    
-    [arcsinMultipleButton setDataSource:self];
-    
-    rect= arcsinView.frame;
-    rect.origin.x = -14;
-    rect.origin.y = -108;
-    rect.size.height *= 3;
-
-    [[arcsinMultipleButton view] setFrame:rect];
-    
-    [arcsinView addSubview: arcsinMultipleButton.view];
-
-    
-    
-    
-    
-    sinhMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
-    
-    [sinhMultipleButton setDataSource:self];
-    
-    rect= sinhView.frame;
-    rect.origin.x = -14;
-    rect.origin.y = -108;
-    rect.size.height *= 3;
-
-    [[sinhMultipleButton view] setFrame:rect];
-    
-    [sinhView addSubview: sinhMultipleButton.view];
-
-    
-    
-    xyMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
-    
-    [xyMultipleButton setDataSource:self];
-    
-    rect= xyView.frame;
-    rect.origin.x = -14;
-    rect.origin.y = -108;
-    rect.size.height *= 3;
-
-    [[xyMultipleButton view] setFrame:rect];
-    
-    [xyView addSubview: xyMultipleButton.view];
-}
-
-- (void)initResultLabel
-{
-    [resultLabel setFont:[UIFont fontWithName:@"Eurostile" size:32]];
-    resultLabel.shadowColor = nil;
-    resultLabel.shadowOffset = CGSizeMake(0.0f, 0.0f);
-    resultLabel.shadowColor = [UIColor colorWithRed:58/255.0 green:250.0/255.0 blue:213.0/255.0 alpha:0.57];   
-    resultLabel.shadowBlur = 5.0f;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-        
-    [self loadMultipleButtons];
-
-    [self loadInputScrollView];
-    
-    [self initResultLabel];
-    
-    [self updateUndoRedoIndicator];
-    
-    answerTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell_bg.png"]];
-    
-    justPressedAC = NO;
-    
-    if(brain == nil)
-        brain = [Brain sharedBrain];
-    
-//    for( NSString *familyName in [UIFont familyNames] ) {
-//        for( NSString *fontName in [UIFont fontNamesForFamilyName:familyName] ) {
-//            NSLog(@"%@", fontName);
-//        }
-//    }
-    
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)viewDidUnload
-{
-    backgroundImageView = nil;
-    leftView = nil;
-    rightView = nil;
-    logView = nil;
-    sqrtView = nil;
-    sinView = nil;
-    arcsinView = nil;
-    sinhView = nil;
-    xyView = nil;
-    //inputLabel = nil;
-    answerTableView = nil;
-    editAnswerTableBtn = nil;
-    resultLabel = nil;
-    editAnswerPressedIndicator = nil;
-    inputView = nil;
-    answerTableEditDeleteButton = nil;
-    noRecordPlaceHolder = nil;
-    canUndoIndicator = nil;
-    canRedoIndicator = nil;
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-
--(void)setNotEditingWhenPressedOtherButton
-{
-    if(answerTableView.isEditing)
-    {
-        [self editAnswerTable:nil];
-    }
-}
 
 -(IBAction)digitPressed:(id)sender
 {
@@ -545,6 +466,104 @@
     
     [inputScrollViewController removePopover];
 }
+
+
+#pragma mark - Handle complex key press
+
+- (void)loadMultipleButtons
+{
+    logMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
+    
+    [logMultipleButton setDataSource:self];
+    
+    CGRect rect= logView.frame;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+    [[logMultipleButton view] setFrame:rect];
+    
+    [logView addSubview: logMultipleButton.view];
+    
+    
+    
+    sqrtMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
+    
+    [sqrtMultipleButton setDataSource:self];
+    
+    rect= sqrtView.frame;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+    
+    [[sqrtMultipleButton view] setFrame:rect];
+    
+    [sqrtView addSubview: sqrtMultipleButton.view];
+    
+    
+    
+    
+    sinMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
+    
+    [sinMultipleButton setDataSource:self];
+    
+    rect= sinView.frame;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+    
+    [[sinMultipleButton view] setFrame:rect];
+    
+    [sinView addSubview: sinMultipleButton.view];
+    
+    
+    
+    arcsinMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
+    
+    [arcsinMultipleButton setDataSource:self];
+    
+    rect= arcsinView.frame;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+    
+    [[arcsinMultipleButton view] setFrame:rect];
+    
+    [arcsinView addSubview: arcsinMultipleButton.view];
+    
+    
+    
+    
+    
+    sinhMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
+    
+    [sinhMultipleButton setDataSource:self];
+    
+    rect= sinhView.frame;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+    
+    [[sinhMultipleButton view] setFrame:rect];
+    
+    [sinhView addSubview: sinhMultipleButton.view];
+    
+    
+    
+    xyMultipleButton = (MultipleButtonViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MultipleBtn"];
+    
+    [xyMultipleButton setDataSource:self];
+    
+    rect= xyView.frame;
+    rect.origin.x = -14;
+    rect.origin.y = -108;
+    rect.size.height *= 3;
+    
+    [[xyMultipleButton view] setFrame:rect];
+    
+    [xyView addSubview: xyMultipleButton.view];
+}
+
+
 
 -(BOOL)MultipleButtonNeedSendBackAfterTouch:(MultipleButtonViewController*)button
 {
@@ -762,6 +781,102 @@
 }
 
 
+
+
+#pragma mark - Answer table and its datasource and delegate
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
+		   editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(answerTableView.isEditing)
+    {
+        return UITableViewCellEditingStyleDelete;
+    }
+    return UITableViewCellEditingStyleNone;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (editingStyle == UITableViewCellEditingStyleDelete)
+	{
+		[[AnswerTableModel sharedModel] removeCellAtIndex:indexPath.row];
+		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+        
+	}
+}
+
+- (void)tableView:(UITableView *)tableView 
+didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView reloadData];
+}
+
+
+-(void)updateNoRecordPlaceHolder
+{
+    if([[AnswerTableModel sharedModel] cellCount] == 0)
+    {
+        noRecordPlaceHolder.hidden = NO;
+        [UIView animateWithDuration:0.1f animations:^{
+            noRecordPlaceHolder.alpha = 1.0;
+        }];
+    }
+    else {
+        [UIView animateWithDuration:0.1f animations:^{
+            noRecordPlaceHolder.alpha = 0; 
+        } 
+                         completion:^(BOOL finish)
+        {
+            noRecordPlaceHolder.hidden = YES; 
+        }
+       ];
+    }
+}
+
+-(IBAction)editAnswerTable:(id)sender
+{
+    if([[AnswerTableModel sharedModel] cellCount] == 0 && !answerTableView.isEditing)
+    {
+        return;
+    }
+    BOOL isEditing = answerTableView.editing;
+    [answerTableView setEditing:!isEditing animated:YES];
+    answerTableEditDeleteButton.hidden = isEditing;
+    float expectAlpha = isEditing?0:1;
+    [UIView animateWithDuration:0.1f animations:^{
+        editAnswerPressedIndicator.alpha = expectAlpha;
+    }];
+    justPressedAC = NO;
+}
+
+
+-(IBAction)deleteTableCells:(id)sender
+{
+    NSArray* cellsToDelete = [answerTableView indexPathsForSelectedRows];
+
+    NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] init];
+    for(NSIndexPath *path in cellsToDelete)
+    {
+        NSInteger row = path.row;;
+        [indexSet addIndex:row];
+    }
+    [[AnswerTableModel sharedModel] removeCellsAtIndexSet:indexSet];
+        
+    [answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationTop];
+    //[answerTableView reloadData];
+    
+    if([[AnswerTableModel sharedModel] cellCount] == 0)
+    {
+        if(answerTableView.isEditing)
+        {
+            [self editAnswerTable:nil];
+        }
+        [self updateNoRecordPlaceHolder];
+    }
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [[AnswerTableModel sharedModel] cellCount];
@@ -880,118 +995,15 @@
             [self showCellActionListForCell:cell];
             [answerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
-
-    }
-}
-
--(void) handleLongPress: (UIGestureRecognizer *)longPress {
-    if (longPress.state==UIGestureRecognizerStateBegan) {
-        //CGPoint pressPoint = [longPress locationInView:answerTableView];
-        //NSIndexPath *indexPath = [answerTableView indexPathForRowAtPoint:pressPoint];
-//        UITableViewCell *cell = [answerTableView cellForRowAtIndexPath:indexPath];
-//        
-//        if (!answerTableView.isEditing) {
-//            [self showCellActionListForCell:cell];
-//            [answerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-//        }
-    }
-}
-
-
-#pragma mark answer table and its datasource and delegate
-
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
-		   editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if(answerTableView.isEditing)
-    {
-        return UITableViewCellEditingStyleDelete;
-    }
-    return UITableViewCellEditingStyleNone;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	if (editingStyle == UITableViewCellEditingStyleDelete)
-	{
-		[[AnswerTableModel sharedModel] removeCellAtIndex:indexPath.row];
-		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
         
-	}
-}
-
-- (void)tableView:(UITableView *)tableView 
-didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [tableView reloadData];
-}
-
-
--(void)updateNoRecordPlaceHolder
-{
-    if([[AnswerTableModel sharedModel] cellCount] == 0)
-    {
-        noRecordPlaceHolder.hidden = NO;
-        [UIView animateWithDuration:0.1f animations:^{
-            noRecordPlaceHolder.alpha = 1.0;
-        }];
-    }
-    else {
-        [UIView animateWithDuration:0.1f animations:^{
-            noRecordPlaceHolder.alpha = 0; 
-        } 
-                         completion:^(BOOL finish)
-        {
-            noRecordPlaceHolder.hidden = YES; 
-        }
-       ];
     }
 }
 
--(IBAction)editAnswerTable:(id)sender
-{
-    if([[AnswerTableModel sharedModel] cellCount] == 0 && !answerTableView.isEditing)
-    {
-        return;
-    }
-    BOOL isEditing = answerTableView.editing;
-    [answerTableView setEditing:!isEditing animated:YES];
-    answerTableEditDeleteButton.hidden = isEditing;
-    float expectAlpha = isEditing?0:1;
-    [UIView animateWithDuration:0.1f animations:^{
-        editAnswerPressedIndicator.alpha = expectAlpha;
-    }];
-    justPressedAC = NO;
-}
 
 
--(IBAction)deleteTableCells:(id)sender
-{
-    NSArray* cellsToDelete = [answerTableView indexPathsForSelectedRows];
 
-    NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] init];
-    for(NSIndexPath *path in cellsToDelete)
-    {
-        NSInteger row = path.row;;
-        [indexSet addIndex:row];
-    }
-    [[AnswerTableModel sharedModel] removeCellsAtIndexSet:indexSet];
-        
-    [answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationTop];
-    //[answerTableView reloadData];
-    
-    if([[AnswerTableModel sharedModel] cellCount] == 0)
-    {
-        if(answerTableView.isEditing)
-        {
-            [self editAnswerTable:nil];
-        }
-        [self updateNoRecordPlaceHolder];
-    }
-}
 
-#pragma mark Navigate Popover Protocal
+#pragma mark - Navigate Popover Protocal
 -(void)leftButtonPressed:(id)sender
 {
     NSLog(@"navigate left button pressed");
@@ -1046,6 +1058,22 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     [self clearResultLabel];
 }
 
+
+
+#pragma mark - Depricated
+
+-(void) handleLongPress: (UIGestureRecognizer *)longPress {
+    if (longPress.state==UIGestureRecognizerStateBegan) {
+        //CGPoint pressPoint = [longPress locationInView:answerTableView];
+        //NSIndexPath *indexPath = [answerTableView indexPathForRowAtPoint:pressPoint];
+        //        UITableViewCell *cell = [answerTableView cellForRowAtIndexPath:indexPath];
+        //        
+        //        if (!answerTableView.isEditing) {
+        //            [self showCellActionListForCell:cell];
+        //            [answerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        //        }
+    }
+}
 
 
 @end
