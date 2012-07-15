@@ -8,38 +8,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UltraCalc/ViewController.m"
-         timestampString = "363102404.280424"
+         timestampString = "363932856.473897"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "927"
-         endingLineNumber = "927"
-         landmarkName = "-tableView:didEndEditingRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UltraCalc/Brain.m"
-         timestampString = "363441959.129479"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "737"
-         endingLineNumber = "737"
-         landmarkName = "-extendParentheseForString:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UltraCalc/Brain.m"
-         timestampString = "363441959.129479"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1021"
-         endingLineNumber = "1021"
-         landmarkName = "-calculateString"
+         startingLineNumber = "934"
+         endingLineNumber = "934"
+         landmarkName = "-updateNoRecordPlaceHolder"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
