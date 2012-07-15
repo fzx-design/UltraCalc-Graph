@@ -1,9 +1,9 @@
 //
 //  AnswerTableResult.m
-//  CoreDataTest
+//  UltraCalc
 //
 //  Created by Song  on 12-7-15.
-//  Copyright (c) 2012年 Song . All rights reserved.
+//
 //
 
 #import "AnswerTableResult.h"
@@ -12,8 +12,9 @@
 
 @implementation AnswerTableResult
 
-@dynamic result;
 @dynamic calc;
+@dynamic result;
+@dynamic datetime;
 @dynamic tableToNoteRelation;
 
 @end

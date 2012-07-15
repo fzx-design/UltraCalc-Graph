@@ -11,6 +11,7 @@
 #import "MultipleButtonViewController.h"
 #import "InputScrollViewController.h"
 #import "FXLabel.h"
+#import "MyDataStorage.h"
 
 @interface ViewController ()
 
@@ -18,6 +19,8 @@
 
 @implementation ViewController
 
+@synthesize managedObjectContext;
+@synthesize fetchedResultsController = _fetchedResultsController;
 
 #pragma mark - Life Cycle and inits
 
@@ -125,14 +128,26 @@
     
     [self initResultLabel];
     
-    [self updateUndoRedoIndicator];
-    
     answerTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell_bg.png"]];
     
     justPressedAC = NO;
     
     if(brain == nil)
         brain = [Brain sharedBrain];
+    
+    
+    dataStorage = [[MyDataStorage alloc] init];
+    self.managedObjectContext = dataStorage.managedObjectContext;
+    
+    NSError *error;
+	if (![[self fetchedResultsController] performFetch:&error]) {
+		// Update to handle the error appropriately.
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);  // Fail
+	}
+    
+    [self updateUndoRedoIndicator];
+    [self updateNoRecordPlaceHolder];
     
     //    for( NSString *familyName in [UIFont familyNames] ) {
     //        for( NSString *fontName in [UIFont fontNamesForFamilyName:familyName] ) {
@@ -180,22 +195,24 @@
         
         [resultLabel setText:brain.resultString];
         
-        //add to answer table
-        AnswerCellModel *newCell = [[AnswerCellModel alloc] init];
-        newCell.result = [result description];
-        newCell.note = nil;
-        newCell.expression = brain.calculateString;
         
-        [[AnswerTableModel sharedModel] addNewCell:newCell];
-        //[answerTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
-        //[answerTableView reloadData];
-        NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSManagedObjectContext *context = [self managedObjectContext];
+        AnswerTableResult *newResult = [NSEntityDescription
+                                          insertNewObjectForEntityForName:@"AnswerTableResult"
+                                          inManagedObjectContext:context];
+        newResult.result = [result description];
+        newResult.calc = brain.calculateString;
+        newResult.datetime = [NSDate date];
         
-        NSArray *indexArray = @[path1];
+        [dataStorage saveContext];
         
-        [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationTop];
         
-        [self updateNoRecordPlaceHolder];
+//        NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+//        
+//        NSArray *indexArray = @[path1];
+//        
+//        [answerTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationTop];
+        
     }
     else {
         [resultLabel setText:brain.resultString];
@@ -272,6 +289,41 @@
     }
 }
 
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    //AnswerCellModel *cellModel = [[AnswerTableModel sharedModel] cellModelAtIndex:indexPath.row];
+    
+    AnswerTableResult *info = [_fetchedResultsController objectAtIndexPath:indexPath];
+    
+    
+    UILabel *cellResultLabel = (UILabel *)[cell viewWithTag:101];
+	cellResultLabel.text = info.result;
+    
+	UILabel *cellExpressionLabel = (UILabel *)[cell viewWithTag:102];
+	cellExpressionLabel.text = info.calc;
+    
+    cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_hover_bg.png"]];
+    
+    
+    //UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    //[cell addGestureRecognizer:longPress];
+    
+    //cellResultLabel.highlightedTextColor = [UIColor redColor];
+    //cellExpressionLabel.highlightedTextColor =  [UIColor redColor];
+    
+    
+	UIImageView * noteImageView = (UIImageView *)[cell viewWithTag:103];
+    if(info.tableToNoteRelation)
+    {
+        noteImageView.hidden = NO;
+    }
+    else {
+        noteImageView.hidden = YES;
+    }
+    
+
+}
 
 
 #pragma mark - Handle simple key press
@@ -800,9 +852,9 @@
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete)
 	{
-		[[AnswerTableModel sharedModel] removeCellAtIndex:indexPath.row];
-		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
-        
+        NSManagedObject *objectToDelete = [_fetchedResultsController objectAtIndexPath:indexPath];
+        [managedObjectContext deleteObject:objectToDelete];
+        [dataStorage saveContext];
 	}
 }
 
@@ -815,7 +867,7 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 
 -(void)updateNoRecordPlaceHolder
 {
-    if([[AnswerTableModel sharedModel] cellCount] == 0)
+    if([self tableView:answerTableView numberOfRowsInSection:0] == 0)
     {
         noRecordPlaceHolder.hidden = NO;
         [UIView animateWithDuration:0.1f animations:^{
@@ -836,7 +888,7 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 
 -(IBAction)editAnswerTable:(id)sender
 {
-    if([[AnswerTableModel sharedModel] cellCount] == 0 && !answerTableView.isEditing)
+    if([self tableView:answerTableView numberOfRowsInSection:0] == 0 && !answerTableView.isEditing)
     {
         return;
     }
@@ -856,17 +908,23 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray* cellsToDelete = [answerTableView indexPathsForSelectedRows];
 
     NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] init];
+    //NSMutableSet *set = [NSMutableSet set];
+    
     for(NSIndexPath *path in cellsToDelete)
     {
         NSInteger row = path.row;;
         [indexSet addIndex:row];
-    }
-    [[AnswerTableModel sharedModel] removeCellsAtIndexSet:indexSet];
         
-    [answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationTop];
+        NSManagedObject *objectToDelete = [_fetchedResultsController objectAtIndexPath:path];
+        [managedObjectContext deleteObject:objectToDelete];
+    }
+       
+    [dataStorage saveContext];
+    
+    //[answerTableView deleteRowsAtIndexPaths:cellsToDelete withRowAnimation:UITableViewRowAnimationTop];
     //[answerTableView reloadData];
     
-    if([[AnswerTableModel sharedModel] cellCount] == 0)
+    if([self tableView:answerTableView numberOfRowsInSection:0] == 0)
     {
         if(answerTableView.isEditing)
         {
@@ -879,7 +937,9 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[AnswerTableModel sharedModel] cellCount];
+    id  sectionInfo =
+    [[_fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 
@@ -889,34 +949,9 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:@"answerCell"];
-	AnswerCellModel *cellModel = [[AnswerTableModel sharedModel] cellModelAtIndex:indexPath.row];
-    
-    UILabel *cellResultLabel = (UILabel *)[cell viewWithTag:101];
-	cellResultLabel.text = cellModel.result;
-    
-	UILabel *cellExpressionLabel = (UILabel *)[cell viewWithTag:102];
-	cellExpressionLabel.text = cellModel.expression;
-    
-    cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_hover_bg.png"]];
-    
-    
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    [cell addGestureRecognizer:longPress];
-    
-    //cellResultLabel.highlightedTextColor = [UIColor redColor];
-    //cellExpressionLabel.highlightedTextColor =  [UIColor redColor];
-    
-    
-	UIImageView * noteImageView = (UIImageView *)[cell viewWithTag:103];
-    if(cellModel.note)
-    {
-        noteImageView.hidden = NO;
-    }
-    else {
-        noteImageView.hidden = YES;
-    }
-    
-	
+
+    [self configureCell:cell atIndexPath:indexPath];
+
     return cell;
 }
 
@@ -934,23 +969,43 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
 {
     NSLog(@"actionSheet:%d",buttonIndex);
+    NSIndexPath* selected = [answerTableView indexPathForSelectedRow];
+    [answerTableView deselectRowAtIndexPath:selected animated:YES];
     switch (buttonIndex) {
         case 0://copy
-            ;
+        {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            AnswerTableResult *object = [_fetchedResultsController objectAtIndexPath:selected];
+            pasteboard.string = object.result;
+        }
             break;
         case 1://use result
-            ;
+        {
+            AnswerTableResult *object = [_fetchedResultsController objectAtIndexPath:selected];
+            [brain appendACompoundString:object.result];
+            
+            [self syncInputLabel];
+            
+            [self setNotEditingWhenPressedOtherButton];
+            [self updateUndoRedoIndicator];
+            justPressedAC = NO;
+            [self clearResultLabel];
+        }
             break;
         case 2://Edit note
             break;
         case 3://Delete
-            //answerTableView.
+        {
+            NSManagedObject *objectToDelete = [_fetchedResultsController objectAtIndexPath:selected];
+            [managedObjectContext deleteObject:objectToDelete];
+            [dataStorage saveContext];
+        }
             break;
         default:
             break;
     }
-    NSIndexPath* selected = [answerTableView indexPathForSelectedRow];
-    [answerTableView deselectRowAtIndexPath:selected animated:YES];
+    
+    
 }
 
 - (void)showCellActionListForCell:(UITableViewCell*)cell
@@ -1056,6 +1111,95 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     [self updateUndoRedoIndicator];
     justPressedAC = NO;
     [self clearResultLabel];
+}
+
+#pragma mark - NSFetchResultDelegate
+
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"AnswerTableResult" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc]
+                              initWithKey:@"datetime" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSFetchedResultsController *theFetchedResultsController =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                        managedObjectContext:managedObjectContext sectionNameKeyPath:nil
+                                                   cacheName:@"Root"];
+    self.fetchedResultsController = theFetchedResultsController;
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+    
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    [answerTableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = answerTableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self updateNoRecordPlaceHolder];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self updateNoRecordPlaceHolder];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [answerTableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            [self updateNoRecordPlaceHolder];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [answerTableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            [self updateNoRecordPlaceHolder];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [answerTableView endUpdates];
 }
 
 

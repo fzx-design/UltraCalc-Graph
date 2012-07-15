@@ -12,12 +12,17 @@
 #import "InputScrollViewController.h"
 #import "FXLabel.h"
 #import "Brain.h"
-#import "AnswerTableModel.h"
+//#import "AnswerTableModel.h"
 
 #import "NavigatePopoverProtocal.h"
 
+#import "Note.h"
+#import "AnswerTableResult.h"
+#import "CanvasResult.h"
 
-@interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource,UIActionSheetDelegate,NavigatePopoverProtocal>
+@class MyDataStorage;
+
+@interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource,UIActionSheetDelegate,NavigatePopoverProtocal,NSFetchedResultsControllerDelegate>
 {
     Brain *brain;
     
@@ -63,6 +68,8 @@
     __weak IBOutlet UIImageView *canRedoIndicator;
     
     BOOL justPressedAC;
+    
+    MyDataStorage *dataStorage;
 }
 
 -(IBAction)digitPressed:(id)sender;
@@ -83,5 +90,8 @@
 
 -(IBAction)undoPressed:(id)sender;
 -(IBAction)redoPressed:(id)sender;
+
+@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 @end
