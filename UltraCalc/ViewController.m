@@ -179,12 +179,71 @@
     noRecordPlaceHolder = nil;
     canUndoIndicator = nil;
     canRedoIndicator = nil;
+    sincosBackground = nil;
+    basicFunctionView = nil;
+    undoBtn = nil;
+    redoBtn = nil;
+    aggregateFunctionView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
-#pragma mark - Helper Methods
+#pragma mark - Move Shield
 
+
+- (void)moveUIView:(UIView*)view WithOffset:(CGPoint)offset
+{
+    CGRect rect = view.frame;
+    rect.origin.x += offset.x;
+    rect.origin.y += offset.y;
+    view.frame = rect;
+}
+
+
+- (void)moveShield:(BOOL)up
+{
+    int factor = up ? 1 : -1;
+    CGPoint offset = CGPointMake(0, factor * 110);
+    if(up)
+    {
+        aggregateFunctionView.hidden = !up;
+    }
+    aggregateFunctionView.alpha = up ? 0 : 1.0;
+    
+    [UIView animateWithDuration:0.3f animations:^(void){
+        [self moveUIView:sincosBackground WithOffset:offset];
+        [self moveUIView:canUndoIndicator WithOffset:offset];
+        [self moveUIView:canRedoIndicator WithOffset:offset];
+        [self moveUIView:undoBtn WithOffset:offset];
+        [self moveUIView:redoBtn WithOffset:offset];
+        [self moveUIView:basicFunctionView WithOffset:offset];
+        aggregateFunctionView.alpha = up ? 1.0 : 0;
+    } completion:^(BOOL finished){
+        if(finished)
+        {
+            [basicFunctionView setUserInteractionEnabled:!up];
+            [undoBtn setEnabled:!up];
+            [redoBtn setEnabled:!up];
+            aggregateFunctionView.hidden = !up;
+        }
+        
+    }];
+}
+
+
+
+- (void)moveShieldDown
+{
+    [self moveShield:NO];
+}
+
+- (void)moveShieldUp
+{
+    [self moveShield:YES];
+}
+
+
+#pragma mark - Helper Methods
 
 - (void) evaluate {
     
@@ -900,6 +959,16 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
         editAnswerPressedIndicator.alpha = expectAlpha;
     }];
     justPressedAC = NO;
+    
+    
+    if(isEditing)
+    {
+        [self moveShieldDown];
+    }
+    else
+    {
+        [self moveShieldUp];
+    }
 }
 
 

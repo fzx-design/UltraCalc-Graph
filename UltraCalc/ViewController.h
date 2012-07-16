@@ -67,6 +67,15 @@
     __weak IBOutlet UIImageView *canUndoIndicator;
     __weak IBOutlet UIImageView *canRedoIndicator;
     
+    __weak IBOutlet UIImageView *sincosBackground;
+    __weak IBOutlet UIView *basicFunctionView;
+    
+    
+    __weak IBOutlet UIButton *undoBtn;
+    __weak IBOutlet UIButton *redoBtn;
+    
+    __weak IBOutlet UIView *aggregateFunctionView;
+    
     BOOL justPressedAC;
     
     MyDataStorage *dataStorage;
