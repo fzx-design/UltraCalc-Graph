@@ -41,4 +41,7 @@
 
 -(void)removePopover;
 
+-(void)setInfoText:(NSString*) text;
+
+
 @end

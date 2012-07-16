@@ -21,6 +21,7 @@
 #import "CanvasResult.h"
 
 @class MyDataStorage;
+@class DragNumberViewController;
 
 @interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource,UIActionSheetDelegate,NavigatePopoverProtocal,NSFetchedResultsControllerDelegate>
 {
@@ -79,6 +80,8 @@
     BOOL justPressedAC;
     
     MyDataStorage *dataStorage;
+    
+    DragNumberViewController *dragView;
 }
 
 -(IBAction)digitPressed:(id)sender;
@@ -99,6 +102,12 @@
 
 -(IBAction)undoPressed:(id)sender;
 -(IBAction)redoPressed:(id)sender;
+
+-(IBAction)sumPressed:(id)sender;
+
+-(IBAction)avePressed:(id)sender;
+
+-(IBAction)stddevPressed:(id)sender;
 
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;

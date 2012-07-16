@@ -121,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOe-b6-S8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-598" y="-127"/>
+            <point key="canvasLocation" x="-424" y="-192"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="4">
@@ -693,6 +693,9 @@
                                                 <state key="highlighted" image="button_average_hover.png">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="avePressed:" destination="2" eventType="touchUpInside" id="RqP-qk-Itz"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="cJf-M0-InH">
                                                 <rect key="frame" x="96" y="42" width="72" height="44"/>
@@ -706,6 +709,9 @@
                                                 <state key="highlighted" image="button_summary_hover.png">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="sumPressed:" destination="2" eventType="touchUpInside" id="z1n-Kd-kmk"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="yTN-cB-x7Y">
                                                 <rect key="frame" x="170" y="42" width="72" height="44"/>
@@ -719,6 +725,9 @@
                                                 <state key="highlighted" image="button_variance_hover.png">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="stddevPressed:" destination="2" eventType="touchUpInside" id="LuI-PC-wW4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -759,6 +768,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-236" y="-218"/>
         </scene>
         <!--Navigate Popover Controller-->
         <scene sceneID="L97-cY-ewv">
@@ -835,7 +845,50 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pkn-28-GAq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="95" y="-431"/>
+            <point key="canvasLocation" x="200" y="-414"/>
+        </scene>
+        <!--Drag Number View Controller-->
+        <scene sceneID="RcD-wf-NAU">
+            <objects>
+                <viewController storyboardIdentifier="DragNumberView" autoresizesArchivedViewToFullSize="NO" id="TSN-Gn-LfP" customClass="DragNumberViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nPK-yb-qKE">
+                        <rect key="frame" x="0.0" y="0.0" width="248" height="56"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ondrag_bg_multiple.png" id="Amq-pc-wbl">
+                                <rect key="frame" x="23" y="7" width="205" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="number_snip_bg.png" id="afS-Qe-cHl">
+                                <rect key="frame" x="20" y="3" width="206" height="52"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" tag="101" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="9876" autoshrinkMode="minimumFontSize" id="eED-f1-8pL">
+                                <rect key="frame" x="36" y="12" width="152" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="highlightedColor" red="0.64313725489999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="background" destination="afS-Qe-cHl" id="Op9-af-ZcL"/>
+                        <outlet property="dragingShadow" destination="Amq-pc-wbl" id="sDN-Zs-k9W"/>
+                        <outlet property="resultLabel" destination="eED-f1-8pL" id="0DJ-17-AUP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xii-lI-YZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7" y="-254"/>
         </scene>
     </scenes>
     <resources>
@@ -864,89 +917,14 @@
         <image name="launchimage.png" width="1024" height="748"/>
         <image name="light_l.png" width="71" height="12"/>
         <image name="light_r.png" width="70" height="12"/>
+        <image name="number_snip_bg.png" width="206" height="52"/>
         <image name="numpad_up.png" width="264" height="146"/>
+        <image name="ondrag_bg_multiple.png" width="205" height="45"/>
         <image name="page_line_top.png" width="6" height="693"/>
         <image name="records_tableview_bottom.png" width="220" height="26"/>
         <image name="screen_arrow_l.png" width="11" height="18"/>
         <image name="screen_arrow_r.png" width="11" height="18"/>
     </resources>
-    <classes>
-        <class className="FXLabel" superclassName="UILabel">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FXLabel.h"/>
-        </class>
-        <class className="InputScrollViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InputScrollViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="inputView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="leftIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="rightIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="MultipleButtonViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MultipleButtonViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="appendixBtn1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="appendixBtn2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mainBtn" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="NavigatePopoverController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NavigatePopoverController.h"/>
-            <relationships>
-                <relationship kind="action" name="centerButtonPressed:"/>
-                <relationship kind="action" name="leftButtonPressed:"/>
-                <relationship kind="action" name="rightButtonPressed:"/>
-                <relationship kind="outlet" name="centerButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="leftButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="rightButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="allClearPressed:"/>
-                <relationship kind="action" name="delPressed:"/>
-                <relationship kind="action" name="deleteTableCells:"/>
-                <relationship kind="action" name="digitPressed:"/>
-                <relationship kind="action" name="dotPressed:"/>
-                <relationship kind="action" name="editAnswerTable:"/>
-                <relationship kind="action" name="goPressed:"/>
-                <relationship kind="action" name="leftParenthesePressed:"/>
-                <relationship kind="action" name="operatorPressed:"/>
-                <relationship kind="action" name="percentPressed:"/>
-                <relationship kind="action" name="piPressed:"/>
-                <relationship kind="action" name="positiveMinusPressed:"/>
-                <relationship kind="action" name="redoPressed:"/>
-                <relationship kind="action" name="rightParenthesePressed:"/>
-                <relationship kind="action" name="undoPressed:"/>
-                <relationship kind="outlet" name="aggregateFunctionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="answerTableEditDeleteButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="answerTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="arcsinView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="basicFunctionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="canRedoIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="canUndoIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="editAnswerPressedIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="editAnswerTableBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="inputView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="leftView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="logView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="noRecordPlaceHolder" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="redoBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="resultLabel" candidateClass="FXLabel"/>
-                <relationship kind="outlet" name="rightView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sinView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sincosBackground" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="sinhView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sqrtView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="undoBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="xyView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

@@ -273,6 +273,14 @@
 }
 
 
+-(void)setInfoText:(NSString*) aText
+{
+    [self cleanView];
+    cursorPosition = 0;
+    
+    [self appendNormalString:aText];
+}
+
 
 #pragma mark - Helper Methods
 -(NSString*)beautifulStr:(NSString*)str withSpace:(BOOL)space

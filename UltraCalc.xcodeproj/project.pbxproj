@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E4135EF815B41C8600A13B87 /* DragNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4135EF715B41C8600A13B87 /* DragNumberViewController.m */; };
 		E41ED90E151F6DCC00F4D87F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41ED90D151F6DCC00F4D87F /* UIKit.framework */; };
 		E41ED910151F6DCC00F4D87F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41ED90F151F6DCC00F4D87F /* Foundation.framework */; };
 		E41ED912151F6DCC00F4D87F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41ED911151F6DCC00F4D87F /* CoreGraphics.framework */; };
@@ -290,6 +291,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E4135EF615B41C8600A13B87 /* DragNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragNumberViewController.h; sourceTree = "<group>"; };
+		E4135EF715B41C8600A13B87 /* DragNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragNumberViewController.m; sourceTree = "<group>"; };
 		E41ED909151F6DCC00F4D87F /* UltraCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltraCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41ED90D151F6DCC00F4D87F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E41ED90F151F6DCC00F4D87F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -668,6 +671,8 @@
 				E41ED91F151F6DCC00F4D87F /* MainStoryboard.storyboard */,
 				E41ED922151F6DCC00F4D87F /* ViewController.h */,
 				E41ED923151F6DCC00F4D87F /* ViewController.m */,
+				E4135EF615B41C8600A13B87 /* DragNumberViewController.h */,
+				E4135EF715B41C8600A13B87 /* DragNumberViewController.m */,
 				E48918A115356CC300398B17 /* InputScrollViewController.h */,
 				E48918A215356CC300398B17 /* InputScrollViewController.m */,
 				E45F3A5715398923004CAC5B /* Brain.h */,
@@ -1404,6 +1409,7 @@
 				E426E8EE15B274E00038AC66 /* Note.m in Sources */,
 				E4C9B9EA15B2A1B200F0DB51 /* AnswerTableResult.m in Sources */,
 				E4C9B9ED15B2B04000F0DB51 /* CanvasResult.m in Sources */,
+				E4135EF815B41C8600A13B87 /* DragNumberViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

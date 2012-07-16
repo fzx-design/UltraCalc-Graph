@@ -13,6 +13,8 @@
 #import "FXLabel.h"
 #import "MyDataStorage.h"
 
+#import "DragNumberViewController.h"
+
 @interface ViewController ()
 
 @end
@@ -365,11 +367,8 @@
     cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_hover_bg.png"]];
     
     
-    //UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    //[cell addGestureRecognizer:longPress];
-    
-    //cellResultLabel.highlightedTextColor = [UIColor redColor];
-    //cellExpressionLabel.highlightedTextColor =  [UIColor redColor];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [cell addGestureRecognizer:longPress];
     
     
 	UIImageView * noteImageView = (UIImageView *)[cell viewWithTag:103];
@@ -578,6 +577,20 @@
     [inputScrollViewController removePopover];
 }
 
+-(IBAction)sumPressed:(id)sender
+{
+    [self sumFunction];
+}
+
+-(IBAction)avePressed:(id)sender
+{
+    [self aveFunction];
+}
+
+-(IBAction)stddevPressed:(id)sender
+{
+    [self stddevFunction];
+}
 
 #pragma mark - Handle complex key press
 
@@ -1272,20 +1285,96 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 
+#pragma mark - Aggreate Functions
 
-#pragma mark - Depricated
+
+- (void)aveFunction
+{
+    [self aggreateFunction:@"average" displayName:@"Mean"];
+}
+
+- (void)sumFunction
+{
+    [self aggreateFunction:@"sum" displayName:@"Sum"];
+}
+
+- (void)stddevFunction
+{
+    [self aggreateFunction:@"stddev" displayName:@"Standard deviation"];
+}
+
+
+- (void)aggreateFunction:(NSString*)functionName displayName:(NSString*)displayName;
+{
+    NSArray* cells = [answerTableView indexPathsForSelectedRows];
+    
+    
+    NSMutableString *str = [functionName mutableCopy];
+    
+    [str appendString:@"("];
+    
+    
+    for(int i = 0; i < cells.count; i++)
+    {
+        NSIndexPath *path = cells[i];
+        AnswerTableResult *object = [_fetchedResultsController objectAtIndexPath:path];
+        [str appendString:object.result];
+        if(i < cells.count - 1)
+        {
+            [str appendString:@","];
+        }
+    }
+    
+    [str appendString:@")"];
+    
+    [self allClearPressed:nil];
+
+    [brain appendACompoundString:str];
+    
+    [self goPressed:nil];
+    
+    [inputScrollViewController setInfoText:[NSString stringWithFormat:@"%@ of %d number%@",displayName, cells.count,cells.count > 1 ? @"s" : @"" ]];
+    
+}
+
+
+
+
+#pragma mark - Drag and Drop
 
 -(void) handleLongPress: (UIGestureRecognizer *)longPress {
     if (longPress.state==UIGestureRecognizerStateBegan) {
-        //CGPoint pressPoint = [longPress locationInView:answerTableView];
-        //NSIndexPath *indexPath = [answerTableView indexPathForRowAtPoint:pressPoint];
-        //        UITableViewCell *cell = [answerTableView cellForRowAtIndexPath:indexPath];
-        //        
-        //        if (!answerTableView.isEditing) {
-        //            [self showCellActionListForCell:cell];
-        //            [answerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-        //        }
+        if(answerTableView.isEditing)
+        {
+            CGPoint pressPoint = [longPress locationInView:answerTableView];
+            NSIndexPath *indexPath = [answerTableView indexPathForRowAtPoint:pressPoint];
+            
+            AnswerTableResult *result = [_fetchedResultsController objectAtIndexPath:indexPath];
+            
+            
+            dragView = [self.storyboard instantiateViewControllerWithIdentifier:@"DragNumberView"];
+            [dragView setResult:result.result];
+            
+//            CGRect rect = dragView.view.frame;
+//            rect.origin = pressPoint;
+//            rect.origin.x += answerTableView.frame.origin.x - 100;
+//            rect.origin.y += answerTableView.frame.origin.y;
+//            
+//            rect.size.width = 248;
+//            rect.size.height = 56;
+//            dragView.view.frame = rect;
+
+            CGPoint dragViewPosition = [longPress locationInView:self.view];
+            dragView.view.center = dragViewPosition;
+            
+            [self.view addSubview:dragView.view];
+        }
+        
     }
+//    else if(longPress.state==UIGestureRecognizerStateEnded)
+//    {
+//        [dragView removeFromParentViewController];
+//    }
 }
 
 
