@@ -12,6 +12,7 @@
 #import "InputScrollViewController.h"
 #import "FXLabel.h"
 #import "MyDataStorage.h"
+#import "AnswerTableCell.h"
 
 #import "DragNumberViewController.h"
 
@@ -351,18 +352,17 @@
 }
 
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath {
     
     //AnswerCellModel *cellModel = [[AnswerTableModel sharedModel] cellModelAtIndex:indexPath.row];
     
     AnswerTableResult *info = [_fetchedResultsController objectAtIndexPath:indexPath];
     
     
-    UILabel *cellResultLabel = (UILabel *)[cell viewWithTag:101];
-	cellResultLabel.text = info.result;
+    AnswerTableCell *cell = (AnswerTableCell*) aCell;
     
-	UILabel *cellExpressionLabel = (UILabel *)[cell viewWithTag:102];
-	cellExpressionLabel.text = info.calc;
+    cell.answerLabel.text = info.result;
+	cell.expressionLabel.text = info.calc;
     
     cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_hover_bg.png"]];
     
@@ -370,14 +370,12 @@
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     [cell addGestureRecognizer:longPress];
     
-    
-	UIImageView * noteImageView = (UIImageView *)[cell viewWithTag:103];
     if(info.tableToNoteRelation)
     {
-        noteImageView.hidden = NO;
+        cell.noteIndicator.hidden = NO;
     }
     else {
-        noteImageView.hidden = YES;
+        cell.noteIndicator.hidden = YES;
     }
     
 
@@ -1029,7 +1027,7 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *cell = [tableView
+    AnswerTableCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:@"answerCell"];
 
     [self configureCell:cell atIndexPath:indexPath];
@@ -1355,15 +1353,6 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
             dragView = [self.storyboard instantiateViewControllerWithIdentifier:@"DragNumberView"];
             [dragView setResult:result.result];
             
-//            CGRect rect = dragView.view.frame;
-//            rect.origin = pressPoint;
-//            rect.origin.x += answerTableView.frame.origin.x - 100;
-//            rect.origin.y += answerTableView.frame.origin.y;
-//            
-//            rect.size.width = 248;
-//            rect.size.height = 56;
-//            dragView.view.frame = rect;
-
             CGPoint dragViewPosition = [longPress locationInView:self.view];
             dragView.view.center = dragViewPosition;
             
