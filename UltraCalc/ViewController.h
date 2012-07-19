@@ -80,6 +80,10 @@
     
     __weak IBOutlet UIView *aggregateFunctionView;
     
+    __weak IBOutlet UIButton *avgBtn;
+    __weak IBOutlet UIButton *sumBtn;
+    __weak IBOutlet UIButton *stddevBtn;
+    
     BOOL justPressedAC;
     
     MyDataStorage *dataStorage;

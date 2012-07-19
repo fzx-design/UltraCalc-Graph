@@ -59,8 +59,9 @@
         
         CGAffineTransform trans = CGAffineTransformMakeRotation(degreesToRadians(-3.2));
         
-        self.view.transform = trans;
-        
+        [UIView animateWithDuration:0.2 animations:^(void){
+            self.view.transform = trans;
+        }];
     }
     else
     {
@@ -68,7 +69,9 @@
         
         CGAffineTransform trans = CGAffineTransformMakeRotation(0);
         
-        self.view.transform = trans;
+        [UIView animateWithDuration:0.2 animations:^(void){
+            self.view.transform = trans;
+        }];
     }
 }
 
@@ -91,12 +94,12 @@
 {
     NSLog(@"touch move");
 
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:self.view.superview];
+    //UITouch *touch = [[event allTouches] anyObject];
+    //CGPoint location = [touch locationInView:self.view.superview];
     
-    self.view.center = location;
+    //self.view.center = location;
     
-    [self setOnDrag:YES];
+    //[self setOnDrag:YES];
 }
 
 
@@ -106,7 +109,7 @@
     //UITouch *touch = [[event touchesForView:self.view] anyObject];
     //CGPoint location = [touch locationInView:touch.view];
     
-    [self.view removeFromSuperview];
+    //[self.view removeFromSuperview];
 }
 
 

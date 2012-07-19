@@ -188,6 +188,9 @@
     undoBtn = nil;
     redoBtn = nil;
     aggregateFunctionView = nil;
+    avgBtn = nil;
+    sumBtn = nil;
+    stddevBtn = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -1362,6 +1365,64 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 
 #pragma mark - Drag and Drop
 
+-(void)confirmAggreateFunctionState:(CGPoint)position
+{
+    CGPoint location = position;
+    location.y -= 230;
+    location.x -= 103;
+    
+    if(CGRectContainsPoint(sumBtn.frame, location))
+    {
+        [self sumPressed:nil];
+    }
+    
+    if(CGRectContainsPoint(avgBtn.frame, location))
+    {
+        [self avePressed:nil];
+    }
+    
+    if(CGRectContainsPoint(stddevBtn.frame, location))
+    {
+        [self stddevPressed:nil];
+    }
+}
+
+-(void)updateAggreateFunctionState:(CGPoint)position
+{
+    CGPoint location = position;
+    location.y -= 230;
+    location.x -= 103;
+    
+    if(CGRectContainsPoint(sumBtn.frame, location))
+    {
+        [sumBtn setHighlighted:YES];
+    }
+    else
+    {
+        [sumBtn setHighlighted:NO];
+    }
+    
+    if(CGRectContainsPoint(avgBtn.frame, location))
+    {
+        [avgBtn setHighlighted:YES];
+    }
+    else
+    {
+        [avgBtn setHighlighted:NO];
+    }
+    
+    if(CGRectContainsPoint(stddevBtn.frame, location))
+    {
+        [stddevBtn setHighlighted:YES];
+    }
+    else
+    {
+        [stddevBtn setHighlighted:NO];
+    }
+
+}
+
+
 -(void) handleLongPress: (UIGestureRecognizer *)longPress {
     if (longPress.state==UIGestureRecognizerStateBegan) {
         if(answerTableView.isEditing)
@@ -1370,7 +1431,6 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
             NSIndexPath *indexPath = [answerTableView indexPathForRowAtPoint:pressPoint];
             
             AnswerTableResult *result = [_fetchedResultsController objectAtIndexPath:indexPath];
-            
             
             dragView = [self.storyboard instantiateViewControllerWithIdentifier:@"DragNumberView"];
             [dragView setResult:result.result];
@@ -1382,10 +1442,22 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
         }
         
     }
-//    else if(longPress.state==UIGestureRecognizerStateEnded)
-//    {
-//        [dragView removeFromParentViewController];
-//    }
+    else if(longPress.state == UIGestureRecognizerStateChanged)
+    {
+        //move your views here.
+        //NSLog(@"UIGestureRecognizerStateChanged");
+        CGPoint dragViewPosition = [longPress locationInView:self.view];
+        dragView.view.center = dragViewPosition;
+        [dragView setOnDrag:YES];
+        
+        [self updateAggreateFunctionState:dragViewPosition];
+    }
+    else
+    {
+        CGPoint dragViewPosition = [longPress locationInView:self.view];
+        [self confirmAggreateFunctionState:dragViewPosition];
+        [dragView.view removeFromSuperview];
+    }
 }
 
 
