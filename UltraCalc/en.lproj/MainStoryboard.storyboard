@@ -206,6 +206,9 @@
                                                             <state key="highlighted">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="notePressed:" destination="n5y-eh-GbR" eventType="touchUpInside" id="EvY-hq-WvM"/>
+                                                            </connections>
                                                         </button>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="cell_seperator.png" id="khx-8U-7yB">
                                                             <rect key="frame" x="-35" y="60" width="268" height="15"/>
@@ -775,6 +778,68 @@
             </objects>
             <point key="canvasLocation" x="-236" y="-218"/>
         </scene>
+        <!--Create Note View Controller-->
+        <scene sceneID="LkS-5Z-a3w">
+            <objects>
+                <viewController storyboardIdentifier="createNote" autoresizesArchivedViewToFullSize="NO" id="aSL-BL-ose" customClass="CreateNoteViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="br5-v4-hcP">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view alpha="0.60000000000000009" contentMode="scaleToFill" id="wNz-03-SCV">
+                                <rect key="frame" x="0.0" y="-138" width="1024" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="evI-p3-GPT">
+                                <rect key="frame" x="254" y="0.0" width="516" height="300"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="FTa-Gw-xhk">
+                                        <rect key="frame" x="10" y="0.0" width="499" height="222"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="1SL-iA-9Jh">
+                                        <rect key="frame" x="414" y="236" width="72" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="okPressed:" destination="aSL-BL-ose" eventType="touchUpInside" id="pIz-8K-Ecu"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="greyCover" destination="wNz-03-SCV" id="dqb-lU-Bg7"/>
+                        <outlet property="inputView" destination="evI-p3-GPT" id="4TS-lN-IWc"/>
+                        <outlet property="noteTextView" destination="FTa-Gw-xhk" id="lc2-5F-f5K"/>
+                        <outlet property="okButton" destination="1SL-iA-9Jh" id="uGO-yc-g8d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5OA-8v-hwJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-538" y="879"/>
+        </scene>
         <!--Navigate Popover Controller-->
         <scene sceneID="L97-cY-ewv">
             <objects>
@@ -930,102 +995,6 @@
         <image name="screen_arrow_l.png" width="11" height="18"/>
         <image name="screen_arrow_r.png" width="11" height="18"/>
     </resources>
-    <classes>
-        <class className="AnswerTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AnswerTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="answerLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="expressionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="noteIndicator" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="DragNumberViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DragNumberViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="dragingShadow" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="resultLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="FXLabel" superclassName="UILabel">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FXLabel.h"/>
-        </class>
-        <class className="InputScrollViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InputScrollViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="inputView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="leftIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="rightIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="MultipleButtonViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MultipleButtonViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="appendixBtn1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="appendixBtn2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mainBtn" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="NavigatePopoverController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NavigatePopoverController.h"/>
-            <relationships>
-                <relationship kind="action" name="centerButtonPressed:"/>
-                <relationship kind="action" name="leftButtonPressed:"/>
-                <relationship kind="action" name="rightButtonPressed:"/>
-                <relationship kind="outlet" name="centerButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="leftButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="rightButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="allClearPressed:"/>
-                <relationship kind="action" name="avePressed:"/>
-                <relationship kind="action" name="delPressed:"/>
-                <relationship kind="action" name="deleteTableCells:"/>
-                <relationship kind="action" name="digitPressed:"/>
-                <relationship kind="action" name="dotPressed:"/>
-                <relationship kind="action" name="editAnswerTable:"/>
-                <relationship kind="action" name="goPressed:"/>
-                <relationship kind="action" name="leftParenthesePressed:"/>
-                <relationship kind="action" name="operatorPressed:"/>
-                <relationship kind="action" name="percentPressed:"/>
-                <relationship kind="action" name="piPressed:"/>
-                <relationship kind="action" name="positiveMinusPressed:"/>
-                <relationship kind="action" name="redoPressed:"/>
-                <relationship kind="action" name="rightParenthesePressed:"/>
-                <relationship kind="action" name="stddevPressed:"/>
-                <relationship kind="action" name="sumPressed:"/>
-                <relationship kind="action" name="undoPressed:"/>
-                <relationship kind="outlet" name="aggregateFunctionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="answerTableEditDeleteButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="answerTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="arcsinView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="basicFunctionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="canRedoIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="canUndoIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="editAnswerPressedIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="editAnswerTableBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="inputView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="leftView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="logView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="noRecordPlaceHolder" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="redoBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="resultLabel" candidateClass="FXLabel"/>
-                <relationship kind="outlet" name="rightView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sinView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sincosBackground" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="sinhView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sqrtView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="undoBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="xyView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

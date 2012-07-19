@@ -7,6 +7,9 @@
 //
 
 #import "AnswerTableCell.h"
+#import "ViewController.h"
+#import "Note.h"
+#import "AnswerTableResult.h"
 
 @implementation AnswerTableCell
 @synthesize answerLabel;
@@ -30,4 +33,10 @@
 }
 
 
+- (IBAction)notePressed:(id)sender
+{
+    AnswerTableResult *result = [self.ancenster.fetchedResultsController objectAtIndexPath:self.index];
+    Note *note = result.tableToNoteRelation;
+    NSLog(@"%@",note.note);
+}
 @end

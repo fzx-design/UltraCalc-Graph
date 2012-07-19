@@ -19,11 +19,14 @@
 #import "Note.h"
 #import "AnswerTableResult.h"
 #import "CanvasResult.h"
+#import "NoteEditingProtocal.h"
+
 
 @class MyDataStorage;
 @class DragNumberViewController;
+@class CreateNoteViewController;
 
-@interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource,UIActionSheetDelegate,NavigatePopoverProtocal,NSFetchedResultsControllerDelegate>
+@interface ViewController : UIViewController <MultipleButtonDataSource,UITableViewDataSource,UIActionSheetDelegate,NavigatePopoverProtocal,NSFetchedResultsControllerDelegate,NoteEditingProtocal>
 {
     Brain *brain;
     
@@ -82,6 +85,9 @@
     MyDataStorage *dataStorage;
     
     DragNumberViewController *dragView;
+    
+    CreateNoteViewController *createNote;
+    NSIndexPath* editingNoteIndex;
 }
 
 -(IBAction)digitPressed:(id)sender;
@@ -111,5 +117,5 @@
 
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-
+@property (nonatomic, retain) NSIndexPath* editingNoteIndex;
 @end

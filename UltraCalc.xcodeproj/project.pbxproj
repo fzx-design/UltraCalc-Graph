@@ -188,6 +188,7 @@
 		E4D1444E154151AC002F52D4 /* screen_arrow_l@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D1444A154151AB002F52D4 /* screen_arrow_l@2x.png */; };
 		E4D1444F154151AC002F52D4 /* screen_arrow_r.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D1444B154151AB002F52D4 /* screen_arrow_r.png */; };
 		E4D14450154151AC002F52D4 /* screen_arrow_r@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D1444C154151AC002F52D4 /* screen_arrow_r@2x.png */; };
+		E4D3C27315B81B4F00318B77 /* CreateNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D3C27115B81B4F00318B77 /* CreateNoteViewController.m */; };
 		E4DC754515A1D2340025FC1F /* bracket_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DC753D15A1D2340025FC1F /* bracket_edit.png */; };
 		E4DC754615A1D2340025FC1F /* bracket_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DC753E15A1D2340025FC1F /* bracket_edit@2x.png */; };
 		E4DC754715A1D2340025FC1F /* bracket_small_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DC753F15A1D2340025FC1F /* bracket_small_edit.png */; };
@@ -336,6 +337,7 @@
 		E468C4AE1547F45100F18D1B /* records_tableview_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "records_tableview_bottom@2x.png"; sourceTree = "<group>"; };
 		E48918A115356CC300398B17 /* InputScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputScrollViewController.h; sourceTree = "<group>"; };
 		E48918A215356CC300398B17 /* InputScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputScrollViewController.m; sourceTree = "<group>"; };
+		E48BC5A715B8234000FD3206 /* NoteEditingProtocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoteEditingProtocal.h; sourceTree = "<group>"; };
 		E49A759A1540096A005E50C6 /* cell_hover_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_hover_bg.png; sourceTree = "<group>"; };
 		E49A759B1540096A005E50C6 /* cell_hover_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_hover_bg@2x.png"; sourceTree = "<group>"; };
 		E49A759C1540096A005E50C6 /* button_rose_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_rose_bg.png; sourceTree = "<group>"; };
@@ -510,6 +512,8 @@
 		E4D1444A154151AB002F52D4 /* screen_arrow_l@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screen_arrow_l@2x.png"; sourceTree = "<group>"; };
 		E4D1444B154151AB002F52D4 /* screen_arrow_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_arrow_r.png; sourceTree = "<group>"; };
 		E4D1444C154151AC002F52D4 /* screen_arrow_r@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screen_arrow_r@2x.png"; sourceTree = "<group>"; };
+		E4D3C27115B81B4F00318B77 /* CreateNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNoteViewController.m; sourceTree = "<group>"; };
+		E4D3C27215B81B4F00318B77 /* CreateNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateNoteViewController.h; sourceTree = "<group>"; };
 		E4DC753D15A1D2340025FC1F /* bracket_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bracket_edit.png; sourceTree = "<group>"; };
 		E4DC753E15A1D2340025FC1F /* bracket_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bracket_edit@2x.png"; sourceTree = "<group>"; };
 		E4DC753F15A1D2340025FC1F /* bracket_small_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bracket_small_edit.png; sourceTree = "<group>"; };
@@ -633,9 +637,9 @@
 		E41ED8FE151F6DCC00F4D87F = {
 			isa = PBXGroup;
 			children = (
+				E41ED913151F6DCC00F4D87F /* UltraCalc */,
 				E4A4ADA51522062D006B5977 /* Resouces */,
 				E43B232A1535C74E00B7B52A /* FXLabel */,
-				E41ED913151F6DCC00F4D87F /* UltraCalc */,
 				E41ED931151F6DCD00F4D87F /* UltraCalcTests */,
 				E41ED90C151F6DCC00F4D87F /* Frameworks */,
 				E41ED90A151F6DCC00F4D87F /* Products */,
@@ -668,23 +672,9 @@
 			isa = PBXGroup;
 			children = (
 				E426E8DA15B274B40038AC66 /* DataStorage */,
-				E4CBDBE8152C850800521FB9 /* MultipleButton */,
-				E41ED91C151F6DCC00F4D87F /* AppDelegate.h */,
-				E41ED91D151F6DCC00F4D87F /* AppDelegate.m */,
-				E41ED91F151F6DCC00F4D87F /* MainStoryboard.storyboard */,
-				E461112315B6F1E300BA878C /* AnswerTableCell.h */,
-				E461112415B6F1E300BA878C /* AnswerTableCell.m */,
-				E41ED922151F6DCC00F4D87F /* ViewController.h */,
-				E41ED923151F6DCC00F4D87F /* ViewController.m */,
-				E4135EF615B41C8600A13B87 /* DragNumberViewController.h */,
-				E4135EF715B41C8600A13B87 /* DragNumberViewController.m */,
-				E48918A115356CC300398B17 /* InputScrollViewController.h */,
-				E48918A215356CC300398B17 /* InputScrollViewController.m */,
-				E45F3A5715398923004CAC5B /* Brain.h */,
-				E45F3A5815398923004CAC5B /* Brain.m */,
-				E4DC76E415A337F30025FC1F /* NavigatePopoverController.h */,
-				E4DC76E515A337F30025FC1F /* NavigatePopoverController.m */,
-				E4DC76E715A433DE0025FC1F /* NavigatePopoverProtocal.h */,
+				E48BC5AC15B829B300FD3206 /* UI */,
+				E48BC5AD15B829EC00FD3206 /* Model */,
+				E48BC5AE15B829F500FD3206 /* Other */,
 				E41ED914151F6DCC00F4D87F /* Supporting Files */,
 			);
 			path = UltraCalc;
@@ -751,6 +741,63 @@
 				E43B232C1535C74E00B7B52A /* FXLabel.m */,
 			);
 			path = FXLabel;
+			sourceTree = "<group>";
+		};
+		E48BC5AA15B8297400FD3206 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				E48BC5A715B8234000FD3206 /* NoteEditingProtocal.h */,
+				E4D3C27115B81B4F00318B77 /* CreateNoteViewController.m */,
+				E4D3C27215B81B4F00318B77 /* CreateNoteViewController.h */,
+			);
+			name = Note;
+			sourceTree = "<group>";
+		};
+		E48BC5AB15B829A200FD3206 /* NavigatePopover */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC76E415A337F30025FC1F /* NavigatePopoverController.h */,
+				E4DC76E515A337F30025FC1F /* NavigatePopoverController.m */,
+				E4DC76E715A433DE0025FC1F /* NavigatePopoverProtocal.h */,
+			);
+			name = NavigatePopover;
+			sourceTree = "<group>";
+		};
+		E48BC5AC15B829B300FD3206 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E4CBDBE8152C850800521FB9 /* MultipleButton */,
+				E48BC5AB15B829A200FD3206 /* NavigatePopover */,
+				E48BC5AA15B8297400FD3206 /* Note */,
+				E41ED91F151F6DCC00F4D87F /* MainStoryboard.storyboard */,
+				E461112315B6F1E300BA878C /* AnswerTableCell.h */,
+				E461112415B6F1E300BA878C /* AnswerTableCell.m */,
+				E41ED922151F6DCC00F4D87F /* ViewController.h */,
+				E41ED923151F6DCC00F4D87F /* ViewController.m */,
+				E4135EF615B41C8600A13B87 /* DragNumberViewController.h */,
+				E4135EF715B41C8600A13B87 /* DragNumberViewController.m */,
+				E48918A115356CC300398B17 /* InputScrollViewController.h */,
+				E48918A215356CC300398B17 /* InputScrollViewController.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		E48BC5AD15B829EC00FD3206 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E45F3A5715398923004CAC5B /* Brain.h */,
+				E45F3A5815398923004CAC5B /* Brain.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E48BC5AE15B829F500FD3206 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				E41ED91C151F6DCC00F4D87F /* AppDelegate.h */,
+				E41ED91D151F6DCC00F4D87F /* AppDelegate.m */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		E4A4ADA51522062D006B5977 /* Resouces */ = {
@@ -1416,6 +1463,7 @@
 				E4C9B9ED15B2B04000F0DB51 /* CanvasResult.m in Sources */,
 				E4135EF815B41C8600A13B87 /* DragNumberViewController.m in Sources */,
 				E461112515B6F1E300BA878C /* AnswerTableCell.m in Sources */,
+				E4D3C27315B81B4F00318B77 /* CreateNoteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

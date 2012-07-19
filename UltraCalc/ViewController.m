@@ -13,7 +13,7 @@
 #import "FXLabel.h"
 #import "MyDataStorage.h"
 #import "AnswerTableCell.h"
-
+#import "CreateNoteViewController.h"
 #import "DragNumberViewController.h"
 
 @interface ViewController ()
@@ -24,6 +24,7 @@
 
 @synthesize managedObjectContext;
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize editingNoteIndex;
 
 #pragma mark - Life Cycle and inits
 
@@ -363,7 +364,8 @@
     
     cell.answerLabel.text = info.result;
 	cell.expressionLabel.text = info.calc;
-    
+    cell.ancenster = self;
+    cell.index = indexPath;
     cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_hover_bg.png"]];
     
     
@@ -1073,6 +1075,12 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
         }
             break;
         case 2://Edit note
+        {
+            editingNoteIndex = selected;
+            createNote = [self.storyboard instantiateViewControllerWithIdentifier:@"createNote"];
+            createNote.delegate = self;
+            [self.view addSubview:createNote.view];
+        }
             break;
         case 3://Delete
         {
@@ -1335,7 +1343,21 @@ didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
 
+#pragma mark - Note Editing Protocal
 
+-(void)didFinishedNoteEditingWithText:(NSString*)str
+{
+    AnswerTableResult *info = [_fetchedResultsController objectAtIndexPath:editingNoteIndex];
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    Note *note = [NSEntityDescription
+                                    insertNewObjectForEntityForName:@"Note"
+                                    inManagedObjectContext:context];
+    note.note = str;
+    info.tableToNoteRelation = note;
+    [dataStorage saveContext];
+
+}
 
 
 #pragma mark - Drag and Drop
