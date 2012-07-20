@@ -42,6 +42,7 @@
 		E468C4AF1547F45100F18D1B /* records_tableview_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = E468C4AD1547F45100F18D1B /* records_tableview_bottom.png */; };
 		E468C4B01547F45100F18D1B /* records_tableview_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E468C4AE1547F45100F18D1B /* records_tableview_bottom@2x.png */; };
 		E48918A315356CC300398B17 /* InputScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48918A215356CC300398B17 /* InputScrollViewController.m */; };
+		E48BC5B515B99A6300FD3206 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = E48BC5B415B99A6300FD3206 /* UIImage+Alpha.m */; };
 		E49A759E1540096A005E50C6 /* cell_hover_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E49A759A1540096A005E50C6 /* cell_hover_bg.png */; };
 		E49A759F1540096A005E50C6 /* cell_hover_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E49A759B1540096A005E50C6 /* cell_hover_bg@2x.png */; };
 		E49A75A01540096A005E50C6 /* button_rose_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E49A759C1540096A005E50C6 /* button_rose_bg.png */; };
@@ -338,6 +339,8 @@
 		E48918A115356CC300398B17 /* InputScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputScrollViewController.h; sourceTree = "<group>"; };
 		E48918A215356CC300398B17 /* InputScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputScrollViewController.m; sourceTree = "<group>"; };
 		E48BC5A715B8234000FD3206 /* NoteEditingProtocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoteEditingProtocal.h; sourceTree = "<group>"; };
+		E48BC5B315B99A6300FD3206 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		E48BC5B415B99A6300FD3206 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		E49A759A1540096A005E50C6 /* cell_hover_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_hover_bg.png; sourceTree = "<group>"; };
 		E49A759B1540096A005E50C6 /* cell_hover_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_hover_bg@2x.png"; sourceTree = "<group>"; };
 		E49A759C1540096A005E50C6 /* button_rose_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_rose_bg.png; sourceTree = "<group>"; };
@@ -778,6 +781,8 @@
 				E4135EF715B41C8600A13B87 /* DragNumberViewController.m */,
 				E48918A115356CC300398B17 /* InputScrollViewController.h */,
 				E48918A215356CC300398B17 /* InputScrollViewController.m */,
+				E48BC5B315B99A6300FD3206 /* UIImage+Alpha.h */,
+				E48BC5B415B99A6300FD3206 /* UIImage+Alpha.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1464,6 +1469,7 @@
 				E4135EF815B41C8600A13B87 /* DragNumberViewController.m in Sources */,
 				E461112515B6F1E300BA878C /* AnswerTableCell.m in Sources */,
 				E4D3C27315B81B4F00318B77 /* CreateNoteViewController.m in Sources */,
+				E48BC5B515B99A6300FD3206 /* UIImage+Alpha.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

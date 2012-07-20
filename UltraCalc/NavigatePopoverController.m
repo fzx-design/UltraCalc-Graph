@@ -7,6 +7,7 @@
 //
 
 #import "NavigatePopoverController.h"
+#import "UIImage+Alpha.h"
 
 @interface NavigatePopoverController ()
 
@@ -26,9 +27,22 @@
     return self;
 }
 
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIImage *rightDisableImage = [UIImage imageNamed:@"button_next_white.png"];
+    rightDisableImage = [rightDisableImage imageByApplyingAlpha:0.3];
+    [rightButton setImage:rightDisableImage forState:UIControlStateDisabled];
+    
+    UIImage *leftDisableImage = [UIImage imageNamed:@"button_previous_white.png"];
+    leftDisableImage = [leftDisableImage imageByApplyingAlpha:0.3];
+    [leftButton setImage:leftDisableImage forState:UIControlStateDisabled];
+    
+    
 	// Do any additional setup after loading the view.
 }
 
